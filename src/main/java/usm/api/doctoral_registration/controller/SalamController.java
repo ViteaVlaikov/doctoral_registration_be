@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api")
 public class SalamController {
     @GetMapping("/salam")
-    public String salam(){
+    public String salam() {
         return "Salam!!!";
     }
 }
