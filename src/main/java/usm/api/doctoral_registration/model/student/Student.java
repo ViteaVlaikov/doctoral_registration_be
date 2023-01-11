@@ -2,6 +2,8 @@ package usm.api.doctoral_registration.model.student;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -29,9 +31,11 @@ public class Student {
     private String identNumber;
 
     @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(name = "citizenship")
+    @Enumerated(EnumType.STRING)
     private Citizenship citizenship;
 
     @Column(name = "diploma_series")
@@ -47,6 +51,7 @@ public class Student {
     private String phone_number;
 
     @Column(name = "registration_type")
+    @Enumerated(EnumType.STRING)
     private Registration registration;
 
     @Column(name = "registration_order_number")
@@ -65,9 +70,11 @@ public class Student {
     private Date end_studies;
 
     @Column(name = "study")
+    @Enumerated(EnumType.STRING)
     private Study study;
 
     @Column(name = "financing")
+    @Enumerated(EnumType.STRING)
     private Financing financing;
 
     @Column(name = "school")
