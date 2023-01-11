@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import usm.api.doctoral_registration.model.school.Speciality;
 
 import java.util.Date;
 
@@ -14,6 +16,7 @@ import java.util.Date;
 @Table(name = "student")
 @Data
 public class Student {
+
     @Id
     @Column(name = "corporate_email", nullable = false)
     private String corporateEmail;
@@ -61,7 +64,7 @@ public class Student {
     private Date order_date;
 
     @Column(name = "year_study")
-    private Date year_study;
+    private Integer year_study;
 
     @Column(name = "begin_studies")
     private Date begin_studies;
@@ -77,6 +80,6 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Financing financing;
 
-    @Column(name = "school")
-    private String school;
+    @OneToOne(mappedBy = "student", orphanRemoval = true)
+    private Speciality speciality;
 }
