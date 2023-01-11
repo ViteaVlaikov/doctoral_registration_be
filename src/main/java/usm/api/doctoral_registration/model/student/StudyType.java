@@ -1,8 +1,8 @@
 package usm.api.doctoral_registration.model.student;
 
-public enum Financing {
+public enum StudyType {
 
-    BUDGET,
+    FREQUENCY,
 
-    CONTRACT
+    LOW_FREQUENCY
 }

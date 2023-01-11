@@ -2,25 +2,18 @@ package usm.api.doctoral_registration.model.student;
 
 public enum Gender {
 
-    MASCULINE("M", "Masculin"),
+    MASCULINE("M"),
 
-    FEMININE("F", "Feminin");
-
-    private final String localTitle;
+    FEMININE("F");
 
     private final String code;
 
-    Gender(String code, String localTitle) {
+    Gender(String code) {
         this.code = code;
-        this.localTitle = localTitle;
     }
 
     @Override
     public String toString() {
         return code;
-    }
-
-    public String toDTO() {
-        return localTitle;
     }
 }

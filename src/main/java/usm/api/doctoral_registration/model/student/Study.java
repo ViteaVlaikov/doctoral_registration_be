@@ -1,14 +1,50 @@
 package usm.api.doctoral_registration.model.student;
 
-public enum Study {
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import usm.api.doctoral_registration.model.order.Order;
+import usm.api.doctoral_registration.model.sciences.Speciality;
 
-    FREQUENCY("Frecvență"),
+import java.time.LocalDate;
+import java.util.List;
 
-    LOW_FREQUENCY("Frecvență redusă");
+@Embeddable
+public class Study {
+    @Column(name = "registration_type")
+    @Enumerated(EnumType.STRING)
+    private Registration registration;
 
-    final String localTitle;
+    @OneToMany(mappedBy = "student",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Order> orders;
 
-    Study(String localTitle) {
-        this.localTitle = localTitle;
-    }
+    @Column(name = "year_study")
+    @Enumerated(EnumType.STRING)
+    private YearStudy yearStudy;
+
+    @Column(name = "begin_studies")
+    private LocalDate beginStudies;
+
+    @Column(name = "end_studies")
+    private LocalDate endStudies;
+
+    @Column(name = "study")
+    @Enumerated(EnumType.STRING)
+    private StudyType studyType;
+
+    @Column(name = "financing")
+    @Enumerated(EnumType.STRING)
+    private Financing financing;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "speciality",
+            referencedColumnName = "id")
+    private Speciality speciality;
 }

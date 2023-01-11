@@ -1,21 +1,33 @@
 package usm.api.doctoral_registration.model.student;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import usm.api.doctoral_registration.model.country.Country;
 
-import java.time.LocalDate;
-
+@Data
+@NoArgsConstructor
 @Entity
 @Table(name = "student")
-@Data
 public class Student {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
+    @SequenceGenerator(name = "student_seq")
+    @Column(name = "id", nullable = false)
+    private Long id;
+
     @Column(name = "corporate_email", nullable = false)
     private String corporateEmail;
 
@@ -38,8 +50,7 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "citizenship")
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Country citizenship;
 
     @Column(name = "diploma_series")
@@ -54,36 +65,8 @@ public class Student {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "registration_type")
-    @Enumerated(EnumType.STRING)
-    private Registration registration;
-
-    @Column(name = "registration_order_number")
-    private String orderNumber;
-
-    @Column(name = "registration_order_date")
-    private LocalDate orderDate;
-
-    @Column(name = "year_study")
-    private int yearStudy;
-
-    @Column(name = "begin_studies")
-    private LocalDate beginStudies;
-
-    @Column(name = "end_studies")
-    private LocalDate endStudies;
-
-    @Column(name = "study")
-    @Enumerated(EnumType.STRING)
-    private Study study;
-
-    @Column(name = "financing")
-    @Enumerated(EnumType.STRING)
-    private Financing financing;
-
-//    @OneToOne(mappedBy = "student", orphanRemoval = true)
-//    private Speciality speciality;
-
     @Column(name = "status")
     private Status status;
+    @Embedded
+    private Study study;
 }

@@ -1,8 +1,8 @@
-CREATE SEQUENCE IF NOT EXISTS hibernate_sequence START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS sciences_profile_sequence START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE sciences_profile
 (
-    id                 FLOAT NOT NULL,
+    id                 FLOAT NOT NULL default nextval('sciences_profile_sequence'),
     name               VARCHAR(255),
     sciences_branch_id FLOAT,
     CONSTRAINT pk_sciences_profile PRIMARY KEY (id)

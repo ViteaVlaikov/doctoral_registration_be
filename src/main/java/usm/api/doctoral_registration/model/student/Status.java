@@ -2,13 +2,7 @@ package usm.api.doctoral_registration.model.student;
 
 public enum Status {
 
-    ACTIVE("Activ"),
+    ACTIVE,
 
-    INACTIVE("Inactiv");
-
-    final String localeName;
-
-    Status(String localeName) {
-        this.localeName = localeName;
-    }
+    INACTIVE
 }

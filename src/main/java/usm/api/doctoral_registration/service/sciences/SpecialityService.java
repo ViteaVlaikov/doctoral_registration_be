@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.service;
+package usm.api.doctoral_registration.service.sciences;
 
 import usm.api.doctoral_registration.model.sciences.Speciality;
 

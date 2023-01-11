@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import usm.api.doctoral_registration.model.sciences.Speciality;
-import usm.api.doctoral_registration.service.SpecialityService;
+import usm.api.doctoral_registration.model.student.Supervisor;
+import usm.api.doctoral_registration.service.sciences.SpecialityService;
+import usm.api.doctoral_registration.service.sciences.SupervisorService;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
 @Slf4j
 public class SalamController {
     private final SpecialityService specialityService;
+    private final SupervisorService supervisorService;
 
     @GetMapping("/salam")
     public String salam() {
@@ -30,4 +33,6 @@ public class SalamController {
         return ResponseEntity.ok(specialityService.findAll());
     }
 
+    @GetMapping("/supervisors")
+    private ResponseEntity<List<Supervisor>> getSupervisors(){return ResponseEntity.ok(supervisorService.findAll());}
 }

@@ -1,12 +1,10 @@
-CREATE SEQUENCE IF NOT EXISTS hibernate_sequence START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS sciences_branch_sequence START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE sciences_branch
 (
-    id                 FLOAT NOT NULL,
+    id                 FLOAT NOT NULL default nextval('sciences_branch_sequence'),
     name               VARCHAR(255),
     sciences_domain_id FLOAT,
+    science_id         BIGINT default null,
     CONSTRAINT pk_sciences_branch PRIMARY KEY (id)
 );
-
-ALTER TABLE sciences_profile
-    ADD CONSTRAINT FK_SCIENCES_PROFILE_ON_SCIENCES_BRANCH FOREIGN KEY (sciences_branch_id) REFERENCES sciences_branch (id);

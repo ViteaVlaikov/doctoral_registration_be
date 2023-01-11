@@ -1,15 +1,9 @@
 package usm.api.doctoral_registration.model.student;
 
 public enum Registration {
-    ENROLLED("Inmatriculat"),
+    ENROLLED,
 
-    TRANSFERRED("Transferat"),
+    TRANSFERRED,
 
-    REINSTATED("Restabilit");
-
-    final String localTitle;
-
-    Registration(String localTitle) {
-        this.localTitle = localTitle;
-    }
+    REINSTATED
 }
