@@ -20,5 +20,6 @@ CREATE TABLE student
     study                     VARCHAR(20),
     financing                 VARCHAR(20),
     school                    VARCHAR(255),
+    status                    VARCHAR(10) DEFAULT 'ACTIVE',
     CONSTRAINT pk_student PRIMARY KEY (corporate_email)
 );

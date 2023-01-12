@@ -2,7 +2,6 @@ package usm.api.doctoral_registration.DTO.Student;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import usm.api.doctoral_registration.model.student.Registration;
 
 import java.util.Date;
 
@@ -52,4 +51,6 @@ public class StudentDTO {
     private String NumberSpeciality;
 
     private String Speciality;
+
+    private String status;
 }

@@ -82,4 +82,7 @@ public class Student {
 
     @OneToOne(mappedBy = "student", orphanRemoval = true)
     private Speciality speciality;
+
+    @Column(name = "status")
+    private Status status;
 }
