@@ -39,38 +39,38 @@ public class Student {
 
     @Column(name = "citizenship")
     @Enumerated(EnumType.STRING)
-    private Citizenship citizenship;
+    private Country citizenship;
 
     @Column(name = "diploma_series")
-    private String diploma_series;
+    private String diplomaSeries;
 
     @Column(name = "diploma_number")
-    private Long diploma_number;
+    private Long diplomaNumber;
 
     @Column(name = "personal_email")
     private String personalEmail;
 
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
 
     @Column(name = "registration_type")
     @Enumerated(EnumType.STRING)
     private Registration registration;
 
     @Column(name = "registration_order_number")
-    private Long order_number;
+    private Long orderNumber;
 
     @Column(name = "registration_order_date")
-    private Date order_date;
+    private Date orderDate;
 
     @Column(name = "year_study")
-    private Integer year_study;
+    private Integer yearStudy;
 
     @Column(name = "begin_studies")
-    private Date begin_studies;
+    private Date beginStudies;
 
     @Column(name = "end_studies")
-    private Date end_studies;
+    private Date endStudies;
 
     @Column(name = "study")
     @Enumerated(EnumType.STRING)

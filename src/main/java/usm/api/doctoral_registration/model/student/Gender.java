@@ -2,9 +2,13 @@ package usm.api.doctoral_registration.model.student;
 
 public enum Gender {
 
-    MASCULINE,
+    MASCULINE("Masculin"),
 
-    FEMININE,
+    FEMININE("Feminin");
 
-    UNKNOWN,
+    final String localTitle;
+
+    Gender(String localTitle) {
+        this.localTitle = localTitle;
+    }
 }
