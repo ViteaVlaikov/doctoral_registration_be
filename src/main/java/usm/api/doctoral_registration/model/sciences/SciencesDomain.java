@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.model.school;
+package usm.api.doctoral_registration.model.sciences;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,13 +13,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "doctoral_school")
+@Table(name = "sciences_domain")
 @Data
 public class SciencesDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Float id;
 
     @Column(name = "name")
     private String name;

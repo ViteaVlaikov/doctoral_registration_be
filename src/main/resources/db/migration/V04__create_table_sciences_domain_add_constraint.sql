@@ -1,12 +1,11 @@
 CREATE SEQUENCE IF NOT EXISTS hibernate_sequence START WITH 1 INCREMENT BY 1;
 
-CREATE TABLE doctoral_school
+CREATE TABLE sciences_domain
 (
-    id   BIGINT NOT NULL,
+    id   FLOAT NOT NULL,
     name VARCHAR(255),
-    CONSTRAINT pk_doctoral_school PRIMARY KEY (id)
+    CONSTRAINT pk_sciences_domain PRIMARY KEY (id)
 );
 
-
 ALTER TABLE sciences_branch
-    ADD CONSTRAINT FK_SCIENCES_BRANCH_ON_SCIENCES_DOMAIN FOREIGN KEY (sciences_domain_id) REFERENCES doctoral_school (id);
+    ADD CONSTRAINT FK_SCIENCES_BRANCH_ON_SCIENCES_DOMAIN FOREIGN KEY (sciences_domain_id) REFERENCES sciences_domain (id);

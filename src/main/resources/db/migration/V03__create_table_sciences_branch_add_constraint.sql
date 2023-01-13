@@ -2,9 +2,9 @@ CREATE SEQUENCE IF NOT EXISTS hibernate_sequence START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE sciences_branch
 (
-    id                 BIGINT NOT NULL,
+    id                 FLOAT NOT NULL,
     name               VARCHAR(255),
-    sciences_domain_id BIGINT,
+    sciences_domain_id FLOAT,
     CONSTRAINT pk_sciences_branch PRIMARY KEY (id)
 );
 

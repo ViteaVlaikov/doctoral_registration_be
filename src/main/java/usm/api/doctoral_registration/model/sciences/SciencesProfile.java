@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.model.school;
+package usm.api.doctoral_registration.model.sciences;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,13 +16,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "sciences_prodile")
+@Table(name = "sciences_profile")
 @Data
 public class SciencesProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Float id;
 
     @Column(name="name")
     private String name;

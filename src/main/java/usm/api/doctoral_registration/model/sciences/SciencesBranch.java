@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.model.school;
+package usm.api.doctoral_registration.model.sciences;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +21,7 @@ public class SciencesBranch {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Float id;
 
     @Column(name="name")
     private String name;
