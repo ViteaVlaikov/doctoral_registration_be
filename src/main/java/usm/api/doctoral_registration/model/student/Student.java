@@ -8,10 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
-import usm.api.doctoral_registration.model.school.Speciality;
+import usm.api.doctoral_registration.model.sciences.Speciality;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "student")

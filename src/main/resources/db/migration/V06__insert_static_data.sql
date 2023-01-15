@@ -23,7 +23,7 @@ VALUES (15, 'Științe geonomic', 1);
 insert into sciences_profile(id, name, sciences_branch_id)
 VALUES (153, 'Geografie', 15);
 insert into speciality(id, name, sciences_profile_id)
-VALUES (153.01,'Chimie ecologică',153);
+VALUES (153.05,'Meteorologie, climatologie, agroclimatologi',153);
 insert into sciences_profile(id, name, sciences_branch_id)
 VALUES (155, 'Pedologie', 15);
 insert into speciality(id, name, sciences_profile_id)
@@ -135,15 +135,15 @@ VALUES (551.01,'Teoria generală a dreptului',551);
 insert into sciences_profile(id, name, sciences_branch_id)
 VALUES (552, 'Drept public', 55);
 insert into speciality(id, name, sciences_profile_id)
-VALUES (552.01,'Teoria generală a dreptului',552);
+VALUES (552.01,'Drept constituțional',552);
 insert into speciality(id, name, sciences_profile_id)
-VALUES (552.02,'Teoria generală a dreptului',552);
+VALUES (552.02,'Drept administrativ',552);
 insert into speciality(id, name, sciences_profile_id)
-VALUES (552.03,'Teoria generală a dreptului',552);
+VALUES (552.03,'Drept financiar (bancar, fiscal, vamal)',552);
 insert into speciality(id, name, sciences_profile_id)
-VALUES (552.07,'Teoria generală a dreptului',552);
+VALUES (552.07,'Drept contravenţional',552);
 insert into speciality(id, name, sciences_profile_id)
-VALUES (552.08,'Teoria generală a dreptului',552);
+VALUES (552.08,'Drept internațional și european public',552);
 insert into sciences_profile(id, name, sciences_branch_id)
 VALUES (553, 'Drept privat', 55);
 insert into speciality(id, name, sciences_profile_id)
