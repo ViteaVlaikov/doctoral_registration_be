@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import usm.api.doctoral_registration.model.school.Speciality;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -30,6 +31,9 @@ public class Student {
     @Column(name = "patronymic_name")
     private String patronymicName;
 
+    @Column(name = "year_birth")
+    private int yearBirth;
+
     @Column(name = "ident_number")
     private String identNumber;
 
@@ -39,38 +43,38 @@ public class Student {
 
     @Column(name = "citizenship")
     @Enumerated(EnumType.STRING)
-    private Citizenship citizenship;
+    private Country citizenship;
 
     @Column(name = "diploma_series")
-    private String diploma_series;
+    private String diplomaSeries;
 
     @Column(name = "diploma_number")
-    private Long diploma_number;
+    private long diplomaNumber;
 
     @Column(name = "personal_email")
     private String personalEmail;
 
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
 
     @Column(name = "registration_type")
     @Enumerated(EnumType.STRING)
     private Registration registration;
 
     @Column(name = "registration_order_number")
-    private Long order_number;
+    private String orderNumber;
 
     @Column(name = "registration_order_date")
-    private Date order_date;
+    private LocalDate orderDate;
 
     @Column(name = "year_study")
-    private Integer year_study;
+    private int yearStudy;
 
     @Column(name = "begin_studies")
-    private Date begin_studies;
+    private LocalDate beginStudies;
 
     @Column(name = "end_studies")
-    private Date end_studies;
+    private LocalDate endStudies;
 
     @Column(name = "study")
     @Enumerated(EnumType.STRING)
@@ -82,4 +86,7 @@ public class Student {
 
     @OneToOne(mappedBy = "student", orphanRemoval = true)
     private Speciality speciality;
+
+    @Column(name = "status")
+    private Status status;
 }

@@ -2,7 +2,13 @@ package usm.api.doctoral_registration.model.student;
 
 public enum Study {
 
-    FREQUENCY,
+    FREQUENCY("Frecvență"),
 
-    LOW_FREQUENCY,
+    LOW_FREQUENCY("Frecvență redusă");
+
+    final String localTitle;
+
+    Study(String localTitle) {
+        this.localTitle = localTitle;
+    }
 }
