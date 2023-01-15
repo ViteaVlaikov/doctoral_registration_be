@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 import usm.api.doctoral_registration.model.school.Speciality;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -30,6 +31,9 @@ public class Student {
     @Column(name = "patronymic_name")
     private String patronymicName;
 
+    @Column(name = "year_birth")
+    private int yearBirth;
+
     @Column(name = "ident_number")
     private String identNumber;
 
@@ -45,7 +49,7 @@ public class Student {
     private String diplomaSeries;
 
     @Column(name = "diploma_number")
-    private Long diplomaNumber;
+    private long diplomaNumber;
 
     @Column(name = "personal_email")
     private String personalEmail;
@@ -58,19 +62,19 @@ public class Student {
     private Registration registration;
 
     @Column(name = "registration_order_number")
-    private Long orderNumber;
+    private String orderNumber;
 
     @Column(name = "registration_order_date")
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Column(name = "year_study")
-    private Integer yearStudy;
+    private int yearStudy;
 
     @Column(name = "begin_studies")
-    private Date beginStudies;
+    private LocalDate beginStudies;
 
     @Column(name = "end_studies")
-    private Date endStudies;
+    private LocalDate endStudies;
 
     @Column(name = "study")
     @Enumerated(EnumType.STRING)

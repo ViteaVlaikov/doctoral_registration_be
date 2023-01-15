@@ -6,9 +6,13 @@ public enum Financing {
 
     CONTRACT("Taxă");
 
-    final String localTitle;
+    private final String localTitle;
 
     Financing(String localTitle) {
         this.localTitle = localTitle;
+    }
+
+    public String toDTO() {
+        return localTitle;
     }
 }
