@@ -83,8 +83,8 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Financing financing;
 
-    @OneToOne(mappedBy = "student", orphanRemoval = true)
-    private Speciality speciality;
+//    @OneToOne(mappedBy = "student", orphanRemoval = true)
+//    private Speciality speciality;
 
     @Column(name = "status")
     private Status status;
