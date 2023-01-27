@@ -1,22 +1,26 @@
 package usm.api.doctoral_registration.security;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.core.OAuth2Error;
-import org.springframework.security.oauth2.core.OAuth2TokenValidator;
-import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
-import org.springframework.security.oauth2.jwt.Jwt;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
+
 @Component
-public class JwtTokenValidator implements OAuth2TokenValidator<Jwt> {
-    @Override
-    public OAuth2TokenValidatorResult validate(Jwt token) {
-        if (token.getAudience().contains("3290a8de-07b9-47b3-b0f3-1cab68ee6e8d")) {
-            return OAuth2TokenValidatorResult.success();
-        } else {
-            return OAuth2TokenValidatorResult.failure(
-                    new OAuth2Error("invalid_token", "The audience is not as expected, got " + token.getAudience(),
-                            null));
+public class JwtTokenValidator {
+
+    public void validate(String token) {
+        if (isEmpty(token) || !token.startsWith("Bearer ")) {
+            throw new RuntimeException();
         }
+        String accessToken = token.substring(7);
+        DecodedJWT decodedJWT = JWT.decode(accessToken);
+        Long expireDate = decodedJWT.getExpiresAt().getTime();
+        Long currentDate = new Date().getTime();
+        boolean isActive = (expireDate - currentDate) > 0;//(expireDate - currentDate) > 0
+        if (!isActive)
+            throw new RuntimeException();
     }
 }
