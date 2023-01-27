@@ -5,7 +5,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import usm.api.doctoral_registration.DTO.Student.StudentDTO;
+import usm.api.doctoral_registration.dto.Student.StudentDTO;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,11 +13,11 @@ import java.io.IOException;
 public class StudentExcelTools {
 
     public void read(String fileLocation) {
-        try(FileInputStream file = new FileInputStream(fileLocation)) {
+        try (FileInputStream file = new FileInputStream(fileLocation)) {
             Workbook workbook = new XSSFWorkbook(file);
             Sheet sheet = workbook.getSheetAt(0);
-            for(Row row: sheet) {
-                for(Cell cell: row) {
+            for (Row row : sheet) {
+                for (Cell cell : row) {
                     System.out.println(cell);
                 }
             }

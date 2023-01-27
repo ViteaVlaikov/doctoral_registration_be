@@ -23,7 +23,7 @@ public class SciencesBranch {
     @Column(name = "id", nullable = false)
     private Float id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "sciencesBranch", orphanRemoval = true)

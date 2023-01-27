@@ -11,7 +11,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-
 @Component
 @RequiredArgsConstructor
 public class JwtTokeFilter extends OncePerRequestFilter {
@@ -30,6 +29,4 @@ public class JwtTokeFilter extends OncePerRequestFilter {
         }
         chain.doFilter(request, response);
     }
-
-
 }

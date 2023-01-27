@@ -19,7 +19,7 @@ public class JwtTokenValidator {
         DecodedJWT decodedJWT = JWT.decode(accessToken);
         Long expireDate = decodedJWT.getExpiresAt().getTime();
         Long currentDate = new Date().getTime();
-        boolean isActive = (expireDate - currentDate) > 0;//(expireDate - currentDate) > 0
+        boolean isActive = (expireDate - currentDate) > 0;
         if (!isActive)
             throw new RuntimeException();
     }

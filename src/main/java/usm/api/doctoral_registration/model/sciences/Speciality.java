@@ -19,7 +19,7 @@ public class Speciality {
     @Column(name = "id", nullable = false)
     private Float id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @ManyToOne

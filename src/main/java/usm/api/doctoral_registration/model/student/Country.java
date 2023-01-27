@@ -19,6 +19,7 @@ public enum Country {
     POLAND("Polonia");
 
     final String localTitle;
+
     Country(String local) {
         this.localTitle = local;
     }

@@ -3,9 +3,6 @@ package usm.api.doctoral_registration.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +19,14 @@ import java.util.List;
 @Slf4j
 public class SalamController {
     private final SpecialityService specialityService;
+
     @GetMapping("/salam")
     public String salam() {
         return "Salam " + ", Bro!!! ";
     }
 
     @GetMapping("/specialities")
-    public ResponseEntity<List<Speciality>> getSpecialities(){
+    public ResponseEntity<List<Speciality>> getSpecialities() {
         return ResponseEntity.ok(specialityService.findAll());
     }
 

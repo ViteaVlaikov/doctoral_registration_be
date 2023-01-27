@@ -24,7 +24,7 @@ public class SciencesProfile {
     @Column(name = "id", nullable = false)
     private Float id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "sciencesProfile", cascade = CascadeType.ALL, orphanRemoval = true)

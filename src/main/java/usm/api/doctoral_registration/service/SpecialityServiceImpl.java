@@ -11,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SpecialityServiceImpl implements SpecialityService {
     private final SpecialityRepository specialityRepository;
+
     @Override
     public List<Speciality> findAll() {
         return specialityRepository.findAll();

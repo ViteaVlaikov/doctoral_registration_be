@@ -41,7 +41,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);;
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+        ;
 
         // Add JWT token filter
 //        http.addFilterBefore(
