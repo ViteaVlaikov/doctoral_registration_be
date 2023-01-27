@@ -16,6 +16,9 @@
     <properties>
         <java.version>17</java.version>
         <spring-cloud-azure.version>6.0.0-beta.4</spring-cloud-azure.version>
+        <flyway-db.user>postgres</flyway-db.user>
+        <flyway-db.password>postgres</flyway-db.password>
+        <flyway-db.url>jdbc:postgresql://localhost:5432/doctoral_registration</flyway-db.url>
     </properties>
     <dependencies>
         <dependency>
@@ -30,7 +33,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -45,6 +47,7 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+            <version>9.10.2</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -71,25 +74,34 @@
             <artifactId>java-jwt</artifactId>
             <version>4.2.1</version>
         </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>jwks-rsa</artifactId>
-            <version>0.21.2</version>
-        </dependency>
+
         <dependency>
             <groupId>com.azure.spring</groupId>
             <artifactId>spring-cloud-azure-starter-active-directory</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
+        <!--     Apache POI - Java API To Access Microsoft Format Files     -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>usm.api</groupId>
+            <artifactId>doctoral_registration</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -114,6 +126,16 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>8.5.13</version>
+                <configuration>
+                    <url>${flyway-db.url}</url>
+                    <user>${flyway-db.user}</user>
+                    <password>${flyway-db.password}</password>
                 </configuration>
             </plugin>
         </plugins>
