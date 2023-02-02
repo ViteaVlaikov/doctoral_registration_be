@@ -9,12 +9,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
 @Configuration
 public class WebSecurityConfig {
-    //private final JwtTokeFilter jwtTokenFilter;
+    private final JwtTokeFilter jwtTokenFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -45,10 +47,10 @@ public class WebSecurityConfig {
         ;
 
         // Add JWT token filter
-//        http.addFilterBefore(
-//                (Filter) jwtTokenFilter,
-//                AuthenticationFilter.class
-//        );
+        http.addFilterBefore(
+                jwtTokenFilter,
+                BasicAuthenticationFilter.class
+        );
         return http.build();
     }
 }
