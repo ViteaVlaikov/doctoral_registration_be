@@ -34,6 +34,6 @@ public class SciencesBranch {
     private SciencesDomain sciencesDomain;
 
     @ManyToOne
-    @JoinColumn(name = "science_id")
-    private Science science;
+    @JoinColumn(name = "science_school_id")
+    private ScienceSchool scienceSchool;
 }

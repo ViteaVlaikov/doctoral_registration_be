@@ -116,14 +116,16 @@ public class StudentExcelReader {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-
+            int i = 0;
             for (Row row : sheet) {
                 if (removeLines != 0) {
                     removeLines--;
                     continue;
                 }
+
                 listStudentsDTO.add(convertToStudentDTO(row));
-//                break;
+                if(i++ == 100)
+                    break;
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,10 +6,10 @@ CREATE TABLE supervisor
     last_name          VARCHAR(255),
     post               VARCHAR(255),
     speciality         VARCHAR(255),
-    science_id         BIGINT,
+    science_school_id         BIGINT,
     academician        VARCHAR(255) default '',
     CONSTRAINT pk_supervisor PRIMARY KEY (id)
 );
 
 ALTER TABLE supervisor
-    ADD CONSTRAINT FK_SUPERVISOR_ON_SCIENCE FOREIGN KEY (science_id) REFERENCES science (id);
+    ADD CONSTRAINT FK_SUPERVISOR_ON_SCIENCE FOREIGN KEY (science_school_id) REFERENCES science_school (id);

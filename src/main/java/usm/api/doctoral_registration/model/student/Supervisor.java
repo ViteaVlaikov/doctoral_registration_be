@@ -8,11 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Data;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import usm.api.doctoral_registration.model.sciences.Science;
-import usm.api.doctoral_registration.model.sciences.SciencesBranch;
+import usm.api.doctoral_registration.model.sciences.ScienceSchool;
 
 @Data
 @Entity
@@ -29,8 +26,8 @@ public class Supervisor {
     String academician = "";
 
     @ManyToOne
-    @JoinColumn(name = "science_id")
-    private Science sciences;
+    @JoinColumn(name = "science_school_id")
+    private ScienceSchool sciences;
 
 
 }

@@ -14,8 +14,8 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "science")
-public class Science {
+@Table(name = "science_school")
+public class ScienceSchool {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -24,6 +24,6 @@ public class Science {
     @Column(name = "name")
     String  name;
 
-    @OneToMany(mappedBy = "science", orphanRemoval = true)
+    @OneToMany(mappedBy = "scienceSchool", orphanRemoval = true)
     private Set<SciencesBranch> sciencesBranches = new LinkedHashSet<>();
 }

@@ -5,6 +5,6 @@ CREATE TABLE sciences_branch
     id                 FLOAT NOT NULL default nextval('sciences_branch_sequence'),
     name               VARCHAR(255),
     sciences_domain_id FLOAT,
-    science_id         BIGINT default null,
+    science_school_id         BIGINT default null,
     CONSTRAINT pk_sciences_branch PRIMARY KEY (id)
 );

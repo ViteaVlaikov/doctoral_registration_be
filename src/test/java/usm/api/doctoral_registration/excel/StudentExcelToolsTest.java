@@ -13,10 +13,10 @@ class StudentExcelToolsTest {
 
     private final static String PATH = "./src/test/java/usm/api/doctoral_registration/excel/";
 
-//    @Test
-//    void test() {
-//        studentExcelTools.read(PATH + "students.xlsx", 2);
-//    }
-//
+    @Test
+    void test() {
+        studentExcelTools.read(PATH + "students.xlsx", 2);
+    }
+
 
 }

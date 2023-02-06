@@ -35,11 +35,4 @@ public class SciencesProfile {
     @JoinColumn(name = "sciences_branch_id")
     private SciencesBranch sciencesBranch;
 
-    public SciencesBranch getSciencesBranch() {
-        return sciencesBranch;
-    }
-
-    public void setSciencesBranch(SciencesBranch sciencesBranch) {
-        this.sciencesBranch = sciencesBranch;
-    }
 }
