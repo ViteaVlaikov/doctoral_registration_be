@@ -17,6 +17,7 @@ import usm.api.doctoral_registration.DTO.student.StudentDTO;
 import usm.api.doctoral_registration.service.student.StudentService;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
@@ -48,4 +49,9 @@ public class SalamController {
 
     @GetMapping("/students")
     public ResponseEntity<List<StudentDTO>> getStudents(){return ResponseEntity.ok(studentService.findAll());}
+
+    @GetMapping("/sciences_by_years")
+    public ResponseEntity<Map<ScienceSchool,List<Integer>>> getScienceSchoolByYears(){
+        return ResponseEntity.ok(scienceSchoolService.getScienceSchoolByYears());
+    }
 }

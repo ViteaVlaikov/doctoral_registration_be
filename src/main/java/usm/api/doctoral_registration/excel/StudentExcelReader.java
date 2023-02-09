@@ -11,6 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import usm.api.doctoral_registration.DTO.order.OrderDTO;
 import usm.api.doctoral_registration.DTO.student.StudentDTO;
 import usm.api.doctoral_registration.DTO.student.StudyDTO;
+import usm.api.doctoral_registration.model.sciences.ScienceSchool;
+import usm.api.doctoral_registration.model.sciences.SciencesBranch;
 import usm.api.doctoral_registration.model.student.Financing;
 import usm.api.doctoral_registration.model.student.StudyType;
 import usm.api.doctoral_registration.model.student.YearStudy;
@@ -295,7 +297,11 @@ public class StudentExcelReader {
     }
 
     private void readSciencesBranch(Cell cell, StudentDTO studentDTO) {
-        cell.getStringCellValue();
+        SciencesBranch sciencesBranch = new SciencesBranch();
+        String[] components = cell.getStringCellValue().split("\\.");
+        sciencesBranch.setId(Float.valueOf(components[0]));
+        sciencesBranch.setName(components[1].strip());
+        studentDTO.setSciencesBranch(sciencesBranch);
     }
 
     private void readSciencesProfile(Cell cell, StudentDTO studentDTO) {
@@ -318,7 +324,9 @@ public class StudentExcelReader {
 
     // TODO: add doctoral school
     private void readDoctoralSchoolNew(Cell cell, StudentDTO studentDTO) {
-        cell.getStringCellValue();
+        ScienceSchool scienceSchool = new ScienceSchool();
+        scienceSchool.setName(cell.getStringCellValue());
+        studentDTO.setScienceSchool(scienceSchool);
     }
 
     private void readDoctoralSchoolOld(Cell cell, StudentDTO studentDTO) {

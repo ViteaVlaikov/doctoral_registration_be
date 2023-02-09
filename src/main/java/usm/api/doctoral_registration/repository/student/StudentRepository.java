@@ -6,4 +6,5 @@ import usm.api.doctoral_registration.model.student.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
 }
