@@ -2,8 +2,8 @@ package usm.api.doctoral_registration.repository.sciences;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import usm.api.doctoral_registration.model.sciences.SciencesBranch;
+import usm.api.doctoral_registration.model.sciences.ScienceDomain;
 
 @Repository
-public interface SciencesBranchRepository extends JpaRepository<SciencesBranch, Float> {
+public interface ScienceDomainRepository extends JpaRepository<ScienceDomain, Float> {
 }

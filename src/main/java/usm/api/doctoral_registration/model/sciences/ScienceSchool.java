@@ -17,13 +17,13 @@ import java.util.Set;
 @Table(name = "science_school")
 public class ScienceSchool {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
-    String  name;
+    String name;
 
     @OneToMany(mappedBy = "scienceSchool", orphanRemoval = true)
-    private Set<SciencesBranch> sciencesBranches = new LinkedHashSet<>();
+    private Set<ScienceDomain> scienceDomains = new LinkedHashSet<>();
 }

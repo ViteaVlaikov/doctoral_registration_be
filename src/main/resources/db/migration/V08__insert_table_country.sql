@@ -1,8 +1,8 @@
-insert into country (id, country) values (1, 'Republica Moldova');
-insert into country (id, country) values (2, 'România');
-insert into country (id, country) values (3, 'Georgia');
-insert into country (id, country) values (4, 'Grecia');
-insert into country (id, country) values (5, 'Federația Rusă');
-insert into country (id, country) values (6, 'Israel');
-insert into country (id, country) values (7, 'Ucraina');
-insert into country (id, country) values (8, 'Polonia');
+insert into country (country) values ('Republica Moldova');
+insert into country (country) values ('România');
+insert into country (country) values ('Georgia');
+insert into country (country) values ('Grecia');
+insert into country (country) values ('Federația Rusă');
+insert into country (country) values ('Israel');
+insert into country (country) values ('Ucraina');
+insert into country (country) values ('Polonia');

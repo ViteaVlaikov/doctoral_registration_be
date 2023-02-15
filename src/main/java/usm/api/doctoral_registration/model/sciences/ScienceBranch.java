@@ -1,10 +1,7 @@
 package usm.api.doctoral_registration.model.sciences;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,23 +13,20 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "sciences_profile")
+@Table(name = "science_branch")
 @Data
-public class SciencesProfile {
+public class ScienceBranch {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Float id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "sciencesProfile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Speciality> specialities = new LinkedHashSet<>();
-
-
     @ManyToOne
-    @JoinColumn(name = "sciences_branch_id")
-    private SciencesBranch sciencesBranch;
+    @JoinColumn(name = "science_domain_id")
+    private ScienceDomain scienceDomain;
 
+    @OneToMany(mappedBy = "scienceBranch", orphanRemoval = true)
+    private Set<ScienceProfile> scienceProfiles = new LinkedHashSet<>();
 }

@@ -15,25 +15,25 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "sciences_branch")
+@Table(name = "science_domain")
 @Data
-public class SciencesBranch {
+public class ScienceDomain {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Float id;
+    private Integer id;
+
+    @Column(name = "number", nullable = false)
+    private Integer number;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "sciencesBranch", orphanRemoval = true)
-    private Set<SciencesProfile> sciencesProfiles = new LinkedHashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "sciences_domain_id")
-    private SciencesDomain sciencesDomain;
-
     @ManyToOne
     @JoinColumn(name = "science_school_id")
     private ScienceSchool scienceSchool;
+
+    @OneToMany(mappedBy = "scienceDomain", orphanRemoval = true)
+    private Set<ScienceBranch> scienceBranches = new LinkedHashSet<>();
+
 }

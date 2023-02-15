@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import usm.api.doctoral_registration.model.sciences.ScienceSchool;
-import usm.api.doctoral_registration.model.sciences.SciencesBranch;
+import usm.api.doctoral_registration.model.sciences.ScienceBranch;
 
 import java.time.LocalDate;
 
@@ -44,7 +44,7 @@ public class StudentDTO {
 
     private String status;
 
-    private SciencesBranch sciencesBranch;
+    private ScienceBranch scienceBranch;
 
     private ScienceSchool scienceSchool;
 

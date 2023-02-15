@@ -12,7 +12,7 @@ import usm.api.doctoral_registration.DTO.order.OrderDTO;
 import usm.api.doctoral_registration.DTO.student.StudentDTO;
 import usm.api.doctoral_registration.DTO.student.StudyDTO;
 import usm.api.doctoral_registration.model.sciences.ScienceSchool;
-import usm.api.doctoral_registration.model.sciences.SciencesBranch;
+import usm.api.doctoral_registration.model.sciences.ScienceBranch;
 import usm.api.doctoral_registration.model.student.Financing;
 import usm.api.doctoral_registration.model.student.StudyType;
 import usm.api.doctoral_registration.model.student.YearStudy;
@@ -297,11 +297,13 @@ public class StudentExcelReader {
     }
 
     private void readSciencesBranch(Cell cell, StudentDTO studentDTO) {
-        SciencesBranch sciencesBranch = new SciencesBranch();
-        String[] components = cell.getStringCellValue().split("\\.");
-        sciencesBranch.setId(Float.valueOf(components[0]));
-        sciencesBranch.setName(components[1].strip());
-        studentDTO.setSciencesBranch(sciencesBranch);
+//        ScienceBranch scienceBranch = new ScienceBranch();
+//        String[] components = cell.getStringCellValue().split("\\.");
+//        scienceBranch.setId(Float.valueOf(components[0]));
+//        scienceBranch.setName(components[1].strip());
+//        studentDTO.setScienceBranch(scienceBranch);
+
+        cell.getStringCellValue();
     }
 
     private void readSciencesProfile(Cell cell, StudentDTO studentDTO) {
