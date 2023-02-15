@@ -1,12 +1,11 @@
-package usm.api.doctoral_registration.service.sciences;
+package usm.api.doctoral_registration.service.science;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.DTO.student.StudentDTO;
 import usm.api.doctoral_registration.DTO.student.StudyDTO;
-import usm.api.doctoral_registration.model.sciences.ScienceSchool;
-import usm.api.doctoral_registration.repository.sciences.ScienceSchoolRepository;
+import usm.api.doctoral_registration.model.science.ScienceSchool;
+import usm.api.doctoral_registration.repository.science.ScienceSchoolRepository;
 import usm.api.doctoral_registration.service.student.StudentService;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.service.sciences;
+package usm.api.doctoral_registration.service.science;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

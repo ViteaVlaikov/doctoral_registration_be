@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.service.sciences;
+package usm.api.doctoral_registration.service.science;
 
 import usm.api.doctoral_registration.model.student.Supervisor;
 

@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.model.sciences;
+package usm.api.doctoral_registration.model.science;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,10 +1,9 @@
-package usm.api.doctoral_registration.service.sciences;
+package usm.api.doctoral_registration.service.science;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import usm.api.doctoral_registration.model.sciences.Speciality;
-import usm.api.doctoral_registration.repository.sciences.SpecialityRepository;
-import usm.api.doctoral_registration.service.sciences.SpecialityService;
+import usm.api.doctoral_registration.model.science.Speciality;
+import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 
 import java.util.List;
 

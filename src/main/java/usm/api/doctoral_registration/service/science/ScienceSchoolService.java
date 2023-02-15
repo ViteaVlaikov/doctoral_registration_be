@@ -1,7 +1,6 @@
-package usm.api.doctoral_registration.service.sciences;
+package usm.api.doctoral_registration.service.science;
 
-import org.springframework.http.ResponseEntity;
-import usm.api.doctoral_registration.model.sciences.ScienceSchool;
+import usm.api.doctoral_registration.model.science.ScienceSchool;
 
 import java.util.List;
 import java.util.Map;

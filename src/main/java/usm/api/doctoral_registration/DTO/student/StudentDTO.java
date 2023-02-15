@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import usm.api.doctoral_registration.model.sciences.ScienceSchool;
-import usm.api.doctoral_registration.model.sciences.ScienceBranch;
+import usm.api.doctoral_registration.model.science.ScienceSchool;
+import usm.api.doctoral_registration.model.science.ScienceBranch;
 
 import java.time.LocalDate;
 

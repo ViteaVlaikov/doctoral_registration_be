@@ -309,19 +309,19 @@ values (6, 'Științe Umanistice');
 -- Довести sequences до действительных значений:
 -- school_sequence до last_value 6:
 
-nextval('science_school_sequence');
-nextval('science_school_sequence');
-nextval('science_school_sequence');
-nextval('science_school_sequence');
-nextval('science_school_sequence');
-nextval('science_school_sequence');
+SELECT nextval('science_school_sequence');
+SELECT nextval('science_school_sequence');
+SELECT nextval('science_school_sequence');
+SELECT nextval('science_school_sequence');
+SELECT nextval('science_school_sequence');
+SELECT nextval('science_school_sequence');
 
 -- domain_sequence до last_value 7:
 
-nextval('science_domain_sequence');
-nextval('science_domain_sequence');
-nextval('science_domain_sequence');
-nextval('science_domain_sequence');
-nextval('science_domain_sequence');
-nextval('science_domain_sequence');
-nextval('science_domain_sequence');
+SELECT nextval('science_domain_sequence');
+SELECT nextval('science_domain_sequence');
+SELECT nextval('science_domain_sequence');
+SELECT nextval('science_domain_sequence');
+SELECT nextval('science_domain_sequence');
+SELECT nextval('science_domain_sequence');
+SELECT nextval('science_domain_sequence');

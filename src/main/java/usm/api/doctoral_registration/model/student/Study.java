@@ -9,7 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import usm.api.doctoral_registration.model.order.Order;
-import usm.api.doctoral_registration.model.sciences.Speciality;
+import usm.api.doctoral_registration.model.science.Speciality;
 
 import java.time.LocalDate;
 import java.util.List;
