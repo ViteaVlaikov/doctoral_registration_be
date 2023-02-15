@@ -50,8 +50,5 @@ public class SalamController {
     @GetMapping("/students")
     public ResponseEntity<List<StudentDTO>> getStudents(){return ResponseEntity.ok(studentService.findAll());}
 
-    @GetMapping("/sciences_by_years")
-    public ResponseEntity<Map<ScienceSchool,List<Integer>>> getScienceSchoolByYears(){
-        return ResponseEntity.ok(scienceSchoolService.getScienceSchoolByYears());
-    }
+
 }
