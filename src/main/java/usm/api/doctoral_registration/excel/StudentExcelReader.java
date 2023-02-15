@@ -12,9 +12,9 @@ import usm.api.doctoral_registration.DTO.order.OrderDTO;
 import usm.api.doctoral_registration.DTO.student.StudentDTO;
 import usm.api.doctoral_registration.DTO.student.StudyDTO;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
-import usm.api.doctoral_registration.model.student.Financing;
-import usm.api.doctoral_registration.model.student.StudyType;
-import usm.api.doctoral_registration.model.student.YearStudy;
+import usm.api.doctoral_registration.model.student.properties.Financing;
+import usm.api.doctoral_registration.model.student.properties.StudyType;
+import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
 import java.io.FileInputStream;
 import java.io.IOException;
