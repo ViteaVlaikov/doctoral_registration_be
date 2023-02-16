@@ -8,9 +8,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import usm.api.doctoral_registration.DTO.order.OrderDTO;
-import usm.api.doctoral_registration.DTO.student.StudentDTO;
-import usm.api.doctoral_registration.DTO.student.StudyDTO;
+import usm.api.doctoral_registration.dto.order.OrderDTO;
+import usm.api.doctoral_registration.dto.student.StudentDTO;
+import usm.api.doctoral_registration.dto.student.StudyDTO;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.properties.Financing;
 import usm.api.doctoral_registration.model.student.properties.StudyType;
@@ -163,7 +163,7 @@ public class StudentExcelReader {
                     case 14 -> readDoctoralSchoolNew(cellInfo, studentDTO);
                     case 15 -> readDoctoralSchoolOld(cellInfo, studentDTO);
                     case 16 -> readFaculty(cellInfo, studentDTO);
-                    case 17 -> readScientificAdviser(cellInfo, studentDTO);
+                    case 17 -> readScientificSupervisor(cellInfo, studentDTO);
                     case 18 -> readSteeringCommittee(cellInfo, studentDTO);
                     case 19 -> readAdmissionInformation(cellInfo, studentDTO);
                     case 20 -> readPersonalContactData(cellInfo, studentDTO);
@@ -340,13 +340,17 @@ public class StudentExcelReader {
     }
 
     // TODO: parse to scientific adviser
-    private void readScientificAdviser(Cell cell, StudentDTO studentDTO) {
-        cell.getStringCellValue();
+    private void readScientificSupervisor(Cell cell, StudentDTO studentDTO) {
+        String supervisor = cell.getStringCellValue().split(",")[0];
+        studentDTO.setSupervisor(supervisor);
     }
 
     // TODO: parse to steering committee
     private void readSteeringCommittee(Cell cell, StudentDTO studentDTO) {
-        cell.getStringCellValue();
+        List<String> supervisors =
+                Arrays.stream(cell.getStringCellValue().split("\n"))
+                        .map(supervisor -> supervisor.split(",")[0]).toList();
+        studentDTO.setSteeringCommittee(supervisors);
     }
 
     // TODO: parse to admission information

@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.DTO.order;
+package usm.api.doctoral_registration.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

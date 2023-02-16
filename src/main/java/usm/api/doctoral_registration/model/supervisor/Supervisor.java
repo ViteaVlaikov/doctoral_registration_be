@@ -36,4 +36,7 @@ public class Supervisor {
 
     @OneToMany(mappedBy = "supervisor", orphanRemoval = true)
     private Set<Student> students = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "supervisor")
+    Set<SteeringCommittee> steeringCommittee;
 }

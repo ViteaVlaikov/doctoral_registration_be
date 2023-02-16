@@ -10,20 +10,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import usm.api.doctoral_registration.model.country.Country;
-import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.Status;
+import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 
-import java.security.Provider;
 import java.util.Set;
 
 @Data
@@ -33,8 +31,8 @@ import java.util.Set;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
-    @SequenceGenerator(name = "student_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+    @SequenceGenerator(name = "student_sequence")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -80,16 +78,13 @@ public class Student {
     @Embedded
     private Study study;
 
+    @Column(name = "remark")
     private String remark;
 
     @ManyToOne
     @JoinColumn(name = "supervisor_id")
     private Supervisor supervisor;
 
-    @ManyToMany
-    @JoinTable(
-            name = "steering_committee"
-    )
-    private Set<Supervisor> steeringCommittee;
-
+    @OneToMany(mappedBy = "student")
+    private Set<SteeringCommittee> steeringCommittee;
 }

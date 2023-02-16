@@ -1,10 +1,10 @@
-package usm.api.doctoral_registration.DTO.student;
+package usm.api.doctoral_registration.dto.student;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import usm.api.doctoral_registration.DTO.order.OrderDTO;
+import usm.api.doctoral_registration.dto.order.OrderDTO;
 
 import java.time.LocalDate;
 

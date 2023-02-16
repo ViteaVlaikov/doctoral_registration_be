@@ -2,7 +2,7 @@ package usm.api.doctoral_registration.service.student;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import usm.api.doctoral_registration.DTO.student.StudentDTO;
+import usm.api.doctoral_registration.dto.student.StudentDTO;
 import usm.api.doctoral_registration.excel.StudentExcelReader;
 import usm.api.doctoral_registration.repository.science.ScienceBranchRepository;
 

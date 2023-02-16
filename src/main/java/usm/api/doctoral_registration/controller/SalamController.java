@@ -13,7 +13,7 @@ import usm.api.doctoral_registration.model.supervisor.Supervisor;
 import usm.api.doctoral_registration.service.science.ScienceSchoolService;
 import usm.api.doctoral_registration.service.science.SpecialityService;
 import usm.api.doctoral_registration.service.science.SupervisorService;
-import usm.api.doctoral_registration.DTO.student.StudentDTO;
+import usm.api.doctoral_registration.dto.student.StudentDTO;
 import usm.api.doctoral_registration.service.student.StudentService;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.DTO.student;
+package usm.api.doctoral_registration.dto.student;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.science.ScienceBranch;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -44,9 +45,17 @@ public class StudentDTO {
 
     private String status;
 
+    // TODO : scienceBranch & scienceSchool -> to remove
+
     private ScienceBranch scienceBranch;
 
     private ScienceSchool scienceSchool;
 
+    //
+
+    private String remark;
+    private String supervisor;
+
+    private List<String> steeringCommittee;
 
 }
