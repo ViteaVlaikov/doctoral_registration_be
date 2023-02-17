@@ -25,8 +25,8 @@ public class Supervisor {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    String first_name;
-    String last_name;
+    String firstName;
+    String lastName;
     String post;
     String academician = "";
 
@@ -37,6 +37,6 @@ public class Supervisor {
     @OneToMany(mappedBy = "supervisor", orphanRemoval = true)
     private Set<Student> students = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "supervisor")
-    Set<SteeringCommittee> steeringCommittee;
+//    @OneToMany(mappedBy = "supervisor")
+//    Set<SteeringCommittee> steeringCommittee;
 }

@@ -1,5 +1,7 @@
 package usm.api.doctoral_registration.excel;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -8,13 +10,20 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import usm.api.doctoral_registration.dto.country.CountryDTO;
 import usm.api.doctoral_registration.dto.order.OrderDTO;
 import usm.api.doctoral_registration.dto.student.StudentDTO;
 import usm.api.doctoral_registration.dto.student.StudyDTO;
+import usm.api.doctoral_registration.dto.supervisor.SupervisorDTO;
+import usm.api.doctoral_registration.mapper.SupervisorMapper;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.properties.Financing;
 import usm.api.doctoral_registration.model.student.properties.StudyType;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
+import usm.api.doctoral_registration.model.supervisor.Supervisor;
+import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,13 +34,26 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Slf4j
+@Component
 public class StudentExcelReader {
 
     private final static String ORDER_REGEX = "$[0-9]{1,10}-c";
+
+//    private final SupervisorRepository supervisorRepository;
+//
+//    private final SupervisorMapper supervisorMapper;
+//
+//    @Autowired
+//    public StudentExcelReader(SupervisorRepository supervisorRepository, SupervisorMapper supervisorMapper) {
+//        this.supervisorRepository = supervisorRepository;
+//        this.supervisorMapper = supervisorMapper;
+//    }
 
     enum TypeBook {
 
@@ -125,7 +147,7 @@ public class StudentExcelReader {
                 }
 
                 listStudentsDTO.add(convertToStudentDTO(row));
-                if(i++ == 100)
+                if (i++ == 100)
                     break;
             }
         } catch (IOException e) {
@@ -136,8 +158,8 @@ public class StudentExcelReader {
 
     private StudentDTO convertToStudentDTO(Row row) {
         StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setStudyDTO(new StudyDTO());
-        studentDTO.getStudyDTO().setOrderDTO(new OrderDTO());
+        studentDTO.setStudy(new StudyDTO());
+        studentDTO.getStudy().setOrderDTO(new OrderDTO());
 
         Iterator<Cell> cellIterator = row.cellIterator();
         Cell cellInfo = null;
@@ -181,7 +203,7 @@ public class StudentExcelReader {
             throw new IllegalArgumentException(e.toString() + ingoMessage, e);
         }
 
-        System.out.println(studentDTO);
+//        System.out.println(studentDTO);
 
         return studentDTO;
     }
@@ -208,7 +230,7 @@ public class StudentExcelReader {
             case "grație II" -> yearStudy = YearStudy.EXTRA_I.toString();
             default -> yearStudy = cell.getStringCellValue();
         }
-        studentDTO.getStudyDTO().setYearStudy(yearStudy);
+        studentDTO.getStudy().setYearStudy(yearStudy);
     }
 
     private void readYearBirth(Cell cell, StudentDTO studentDTO) {
@@ -228,6 +250,11 @@ public class StudentExcelReader {
 
     private void readGender(Cell cell, StudentDTO studentDTO) {
         String gender = cell.getStringCellValue().toUpperCase();
+        if(gender.equals("F")) {
+            gender = "FEMININE";
+        } else {
+            gender = "MASCULINE";
+        }
         studentDTO.setGender(gender);
     }
 
@@ -238,7 +265,7 @@ public class StudentExcelReader {
             case "c" -> financingType = Financing.CONTRACT.toString();
         }
         ;
-        studentDTO.getStudyDTO().setFinancing(financingType);
+        studentDTO.getStudy().setFinancing(financingType);
     }
 
     private void readDateAndOrderBegin(Cell cell, StudentDTO studentDTO) {
@@ -247,19 +274,19 @@ public class StudentExcelReader {
         LocalDate orderDate;
         if (cell.getCellType() == CellType.NUMERIC) {
             dateBegin = cell.getLocalDateTimeCellValue().toLocalDate();
-            studentDTO.getStudyDTO().setBeginStudies(dateBegin);
+            studentDTO.getStudy().setBeginStudies(dateBegin);
             return;
         }
         List<String> dateAndOrderBegin = Arrays.stream(cell.getStringCellValue().split("(, )|(,\n)")).toList();
         dateBegin = DateTemplate.toLocalDate(dateAndOrderBegin.get(0));
         if (dateAndOrderBegin.size() == 1) {
-            studentDTO.getStudyDTO().setBeginStudies(dateBegin);
+            studentDTO.getStudy().setBeginStudies(dateBegin);
             return;
         }
         if (DateTemplate.isDate(dateAndOrderBegin.get(1))) {
             orderDate = DateTemplate.toLocalDate(dateAndOrderBegin.get(1));
-            studentDTO.getStudyDTO().setBeginStudies(dateBegin);
-            studentDTO.getStudyDTO().getOrderDTO().setOrderDate(orderDate);
+            studentDTO.getStudy().setBeginStudies(dateBegin);
+            studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
             return;
         }
         orderNumber = dateAndOrderBegin.get(1);
@@ -267,9 +294,9 @@ public class StudentExcelReader {
             throw new IllegalArgumentException("order number invalid");
         }
         orderDate = DateTemplate.toLocalDate(dateAndOrderBegin.get(2));
-        studentDTO.getStudyDTO().setBeginStudies(dateBegin);
-        studentDTO.getStudyDTO().getOrderDTO().setOrderNumber(orderNumber);
-        studentDTO.getStudyDTO().getOrderDTO().setOrderDate(orderDate);
+        studentDTO.getStudy().setBeginStudies(dateBegin);
+        studentDTO.getStudy().getOrderDTO().setOrderNumber(orderNumber);
+        studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
     }
 
     private void readDateEnd(Cell cell, StudentDTO studentDTO) {
@@ -278,7 +305,7 @@ public class StudentExcelReader {
             case NUMERIC -> dateEnd = cell.getLocalDateTimeCellValue().toLocalDate();
             case STRING -> dateEnd = DateTemplate.toLocalDate(cell.getStringCellValue());
         }
-        studentDTO.getStudyDTO().setEndStudies(dateEnd);
+        studentDTO.getStudy().setEndStudies(dateEnd);
     }
 
     private void readStudyType(Cell cell, StudentDTO studentDTO) {
@@ -288,7 +315,7 @@ public class StudentExcelReader {
             case "zi" -> studyType = StudyType.LOW_FREQUENCY.toString();
         }
         ;
-        studentDTO.getStudyDTO().setStudyType(studyType);
+        studentDTO.getStudy().setStudyType(studyType);
     }
 
     private void readSciencesDomain(Cell cell, StudentDTO studentDTO) {
@@ -316,7 +343,7 @@ public class StudentExcelReader {
                     substring(cell.getStringCellValue(), "[0-9]{3}\\.[0-9]{2}"));
             case NUMERIC -> idSpeciality = Float.parseFloat(cell.getStringCellValue());
         }
-        studentDTO.getStudyDTO().setSpeciality(idSpeciality);
+        studentDTO.getStudy().setSpeciality(idSpeciality);
     }
 
     private void readSpecialty(Cell cell, StudentDTO studentDTO) {
@@ -341,8 +368,9 @@ public class StudentExcelReader {
 
     // TODO: parse to scientific adviser
     private void readScientificSupervisor(Cell cell, StudentDTO studentDTO) {
-        String supervisor = cell.getStringCellValue().split(",")[0];
-        studentDTO.setSupervisor(supervisor);
+        String supervisorName = cell.getStringCellValue().split(",")[0];
+//        Supervisor supervisor = supervisorRepository.findByFullName(supervisorName).orElseThrow();
+//        studentDTO.setSupervisor(supervisorMapper.toDto(supervisor));
     }
 
     // TODO: parse to steering committee
@@ -350,7 +378,12 @@ public class StudentExcelReader {
         List<String> supervisors =
                 Arrays.stream(cell.getStringCellValue().split("\n"))
                         .map(supervisor -> supervisor.split(",")[0]).toList();
-        studentDTO.setSteeringCommittee(supervisors);
+
+//        Set<SupervisorDTO> supervisorsDTO = supervisors.stream()
+//                .map(supervisorRepository::findByFullName)
+//                .map(Optional::orElseThrow).map(supervisorMapper::toDto).collect(Collectors.toSet());
+//
+//        studentDTO.setSteeringCommittee(supervisorsDTO);
     }
 
     // TODO: parse to admission information
@@ -369,20 +402,44 @@ public class StudentExcelReader {
 
     private void readCitizenship(Cell cell, StudentDTO studentDTO) {
         String country = cell.getStringCellValue();
-        Integer idCountry = null;
+        CountryDTO countryDTO = new CountryDTO();
 
         switch (country) {
-            case "RM" -> idCountry = 1;
-            case "RO" -> idCountry = 2;
-            case "Georgia" -> idCountry = 3;
-            case "GR" -> idCountry = 4;
-            case "Rusia" -> idCountry = 5;
-            case "Israel" -> idCountry = 6;
-            case "Ucr.", "Ucraina" -> idCountry = 7;
-            case "Polonia" -> idCountry = 8;
+            case "RM" -> {
+                countryDTO.setId(1);
+                countryDTO.setCountry("Republica Moldova");
+            }
+            case "RO" -> {
+                countryDTO.setId(2);
+                countryDTO.setCountry("România");
+            }
+            case "Georgia" -> {
+                countryDTO.setId(3);
+                countryDTO.setCountry("Georgia");
+            }
+            case "GR" -> {
+                countryDTO.setId(4);
+                countryDTO.setCountry("Grecia");
+            }
+            case "Rusia" -> {
+                countryDTO.setId(5);
+                countryDTO.setCountry("Federația Rusă");
+            }
+            case "Israel" -> {
+                countryDTO.setId(6);
+                countryDTO.setCountry("Israel");
+            }
+            case "Ucr.", "Ucraina" -> {
+                countryDTO.setId(7);
+                countryDTO.setCountry("Ucraina");
+            }
+            case "Polonia" -> {
+                countryDTO.setId(8);
+                countryDTO.setCountry("Polonia");
+            }
         }
 
-        studentDTO.setCitizenship(idCountry);
+        studentDTO.setCitizenship(countryDTO);
     }
 
     // TODO: resolve value: "CA"
@@ -390,9 +447,10 @@ public class StudentExcelReader {
         String status = cell.getStringCellValue();
 
         switch (status) {
-            case "Activ" -> status = "Active";
-            case "CA" -> status = "";
+            case "Activ" -> status = "ACTIVE";
+            case "CA" -> status = "INACTIVE";   // temp, is not inactive
         }
+        status = "ACTIVE";
         studentDTO.setStatus(status);
     }
 }

@@ -1,0 +1,13 @@
+package usm.api.doctoral_registration.service.science;
+
+import usm.api.doctoral_registration.model.science.ScienceDomain;
+import usm.api.doctoral_registration.model.science.ScienceSchool;
+
+import java.util.List;
+
+public interface ScienceDomainService {
+    List<ScienceDomain> findAll();
+    List<ScienceDomain> findAllByScienceSchoolId(Integer scienceSchoolId);
+
+    List<ScienceDomain> findAllByScienceSchoolIdAndYear(Integer school_id, Integer year);
+}

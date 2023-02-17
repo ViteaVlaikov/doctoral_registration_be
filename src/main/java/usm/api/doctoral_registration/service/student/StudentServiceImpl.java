@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.dto.student.StudentDTO;
 import usm.api.doctoral_registration.excel.StudentExcelReader;
+import usm.api.doctoral_registration.mapper.StudentMapper;
 import usm.api.doctoral_registration.repository.science.ScienceBranchRepository;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
-    private final StudentExcelReader studentExcelTools = new StudentExcelReader();
+    private final StudentExcelReader studentExcelTools;
 
     private final static String PATH = "./src/test/java/usm/api/doctoral_registration/excel/";
     private final ScienceBranchRepository scienceBranchRepository;

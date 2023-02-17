@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.Status;
-import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
+//import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 
 import java.util.Set;
@@ -36,7 +36,7 @@ public class Student {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "corporate_email", nullable = false)
+    @Column(name = "corporate_email")
     private String corporateEmail;
 
     @Column(name = "first_name")
@@ -85,6 +85,6 @@ public class Student {
     @JoinColumn(name = "supervisor_id")
     private Supervisor supervisor;
 
-    @OneToMany(mappedBy = "student")
-    private Set<SteeringCommittee> steeringCommittee;
+//    @OneToMany(mappedBy = "student")
+//    private Set<SteeringCommittee> steeringCommittee;
 }

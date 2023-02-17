@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import usm.api.doctoral_registration.model.order.Order;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.properties.Financing;
@@ -20,6 +22,8 @@ import java.security.Provider;
 import java.time.LocalDate;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
 @Embeddable
 public class Study {
     @Column(name = "registration_type")

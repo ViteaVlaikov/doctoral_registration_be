@@ -1,16 +1,30 @@
 package usm.api.doctoral_registration.model.student.properties;
 
+import java.util.Arrays;
+
 public enum YearStudy {
 
-    I,
+    I(1),
 
-    II,
+    II(2),
 
-    III,
+    III(3),
 
-    IV,
+    IV(4),
 
-    EXTRA_I,
+    EXTRA_I(5),
 
-    EXTRA_II
+    EXTRA_II(6);
+
+    public final int code;
+
+    YearStudy(int code) {
+        this.code = code;
+    }
+
+    public static String toYear(int code) {
+        return Arrays.stream(YearStudy.values())
+                .filter(year -> year.code == code)
+                .findFirst().orElseThrow().toString();
+    }
 }
