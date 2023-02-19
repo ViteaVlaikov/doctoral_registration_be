@@ -54,7 +54,7 @@ class StudentExcelToolsTest {
         for(int i = 0; i < students.size(); i++) {
             System.out.println(studentDtos.get(i));
             students.get(i).getStudy().setSpeciality(specialities
-                    .get(studentDtos.get(i).getStudy().getSpeciality()));
+                    .get(studentDtos.get(i).getStudy().getSpeciality().getId()));
         }
 
 //        students.forEach(student -> student.getStudy().setSpeciality(specialityRepository.findById(student.)));

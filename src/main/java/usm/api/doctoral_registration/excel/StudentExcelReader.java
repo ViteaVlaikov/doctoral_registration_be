@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
 import usm.api.doctoral_registration.dto.country.CountryDto;
 import usm.api.doctoral_registration.dto.order.OrderDto;
+import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.dto.student.StudyDto;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
@@ -334,7 +335,9 @@ public class StudentExcelReader {
                     substring(cell.getStringCellValue(), "[0-9]{3}\\.[0-9]{2}"));
             case NUMERIC -> idSpeciality = Float.parseFloat(cell.getStringCellValue());
         }
-        //studentDTO.getStudy().setSpeciality(idSpeciality);
+        SpecialityDto specialityDto = new SpecialityDto();
+        specialityDto.setId(idSpeciality);
+        studentDTO.getStudy().setSpeciality(specialityDto);
     }
 
     private void readSpecialty(Cell cell, StudentDto studentDTO) {

@@ -16,11 +16,12 @@ import java.util.Set;
  */
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class SpecialityDto implements Serializable {
-    private final Float id;
-    private final String name;
-    private final Long scienceProfileId;
-    private final Set<StudentDto> students;
+    private Float id;
+    private String name;
+    private Long scienceProfileId;
+    private Set<StudentDto> students;
 //    private final ScienceProfile scienceProfile;
 }

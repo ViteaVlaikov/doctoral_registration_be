@@ -82,7 +82,7 @@ class StudentMapperTest {
     @Test
     void toDto() {
         Student student1 = studentRepository.findById(1L).get();
-//        System.out.println(student1);
+
         StudentDto studentDto = studentMapper.toDto(student1);
 
         System.out.println(studentDto);
