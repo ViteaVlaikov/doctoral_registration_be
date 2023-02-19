@@ -5,13 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import usm.api.doctoral_registration.dto.country.CountryDTO;
+import usm.api.doctoral_registration.dto.country.CountryDto;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDTO;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.science.ScienceBranch;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -19,7 +17,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentDTO {
+public class StudentDto {
     private String corporateEmail;
 
     private String firstName;
@@ -34,7 +32,7 @@ public class StudentDTO {
 
     private String gender;
 
-    private CountryDTO citizenship;
+    private CountryDto citizenship;
 
     private String diplomaSeries;
 
@@ -44,7 +42,7 @@ public class StudentDTO {
 
     private String phoneNumber;
 
-    private StudyDTO study;
+    private StudyDto study;
 
     private String status;
 
@@ -61,4 +59,5 @@ public class StudentDTO {
 
     private Set<SupervisorDTO> steeringCommittee;
 
+    private Float specialityId;
 }

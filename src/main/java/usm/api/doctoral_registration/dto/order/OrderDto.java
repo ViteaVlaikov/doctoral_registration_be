@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDTO {
+public class OrderDto {
 
     private Integer orderType;      // id
 

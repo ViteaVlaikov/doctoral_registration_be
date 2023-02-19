@@ -1,7 +1,5 @@
 package usm.api.doctoral_registration.excel;
 
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -10,20 +8,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import usm.api.doctoral_registration.dto.country.CountryDTO;
-import usm.api.doctoral_registration.dto.order.OrderDTO;
-import usm.api.doctoral_registration.dto.student.StudentDTO;
-import usm.api.doctoral_registration.dto.student.StudyDTO;
-import usm.api.doctoral_registration.dto.supervisor.SupervisorDTO;
-import usm.api.doctoral_registration.mapper.SupervisorMapper;
+import usm.api.doctoral_registration.dto.country.CountryDto;
+import usm.api.doctoral_registration.dto.order.OrderDto;
+import usm.api.doctoral_registration.dto.student.StudentDto;
+import usm.api.doctoral_registration.dto.student.StudyDto;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.properties.Financing;
 import usm.api.doctoral_registration.model.student.properties.StudyType;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
-import usm.api.doctoral_registration.model.supervisor.Supervisor;
-import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,10 +27,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -132,8 +123,8 @@ public class StudentExcelReader {
         throw new IllegalArgumentException("fileName invalid.");
     }
 
-    public List<StudentDTO> read(String fileLocation, int removeLines) {
-        List<StudentDTO> listStudentsDTO = new ArrayList<>();
+    public List<StudentDto> read(String fileLocation, int removeLines) {
+        List<StudentDto> listStudentsDTO = new ArrayList<>();
         try (FileInputStream file = new FileInputStream(fileLocation)) {
             Workbook workbook = getWorkbook(fileLocation, file);
 
@@ -156,10 +147,10 @@ public class StudentExcelReader {
         return listStudentsDTO;
     }
 
-    private StudentDTO convertToStudentDTO(Row row) {
-        StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setStudy(new StudyDTO());
-        studentDTO.getStudy().setOrderDTO(new OrderDTO());
+    private StudentDto convertToStudentDTO(Row row) {
+        StudentDto studentDTO = new StudentDto();
+        studentDTO.setStudy(new StudyDto());
+        studentDTO.getStudy().setOrderDTO(new OrderDto());
 
         Iterator<Cell> cellIterator = row.cellIterator();
         Cell cellInfo = null;
@@ -208,11 +199,11 @@ public class StudentExcelReader {
         return studentDTO;
     }
 
-    private void readStudentNumber(Cell cell, StudentDTO studentDTO) {
+    private void readStudentNumber(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
-    private void readFirstNameLastName(Cell cell, StudentDTO studentDTO) {
+    private void readFirstNameLastName(Cell cell, StudentDto studentDTO) {
         List<String> fullName = new ArrayList<>(Arrays
                 .stream(cell.getStringCellValue().split(" ")).toList());
 
@@ -223,7 +214,7 @@ public class StudentExcelReader {
         studentDTO.setLastName(lastName);
     }
 
-    private void readYearStudy(Cell cell, StudentDTO studentDTO) {
+    private void readYearStudy(Cell cell, StudentDto studentDTO) {
         String yearStudy = cell.getStringCellValue();
         switch (yearStudy) {
             case "grație I-II" -> yearStudy = YearStudy.EXTRA_II.toString();
@@ -233,7 +224,7 @@ public class StudentExcelReader {
         studentDTO.getStudy().setYearStudy(yearStudy);
     }
 
-    private void readYearBirth(Cell cell, StudentDTO studentDTO) {
+    private void readYearBirth(Cell cell, StudentDto studentDTO) {
         int year = 0;
         switch (cell.getCellType()) {
             case STRING -> {
@@ -248,7 +239,7 @@ public class StudentExcelReader {
         studentDTO.setYearBirth(year);
     }
 
-    private void readGender(Cell cell, StudentDTO studentDTO) {
+    private void readGender(Cell cell, StudentDto studentDTO) {
         String gender = cell.getStringCellValue().toUpperCase();
         if(gender.equals("F")) {
             gender = "FEMININE";
@@ -258,7 +249,7 @@ public class StudentExcelReader {
         studentDTO.setGender(gender);
     }
 
-    private void readFinancing(Cell cell, StudentDTO studentDTO) {
+    private void readFinancing(Cell cell, StudentDto studentDTO) {
         String financingType = cell.getStringCellValue();
         switch (financingType) {
             case "b" -> financingType = Financing.BUDGET.toString();
@@ -268,7 +259,7 @@ public class StudentExcelReader {
         studentDTO.getStudy().setFinancing(financingType);
     }
 
-    private void readDateAndOrderBegin(Cell cell, StudentDTO studentDTO) {
+    private void readDateAndOrderBegin(Cell cell, StudentDto studentDTO) {
         LocalDate dateBegin;
         String orderNumber;
         LocalDate orderDate;
@@ -299,7 +290,7 @@ public class StudentExcelReader {
         studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
     }
 
-    private void readDateEnd(Cell cell, StudentDTO studentDTO) {
+    private void readDateEnd(Cell cell, StudentDto studentDTO) {
         LocalDate dateEnd = null;
         switch (cell.getCellType()) {
             case NUMERIC -> dateEnd = cell.getLocalDateTimeCellValue().toLocalDate();
@@ -308,7 +299,7 @@ public class StudentExcelReader {
         studentDTO.getStudy().setEndStudies(dateEnd);
     }
 
-    private void readStudyType(Cell cell, StudentDTO studentDTO) {
+    private void readStudyType(Cell cell, StudentDto studentDTO) {
         String studyType = cell.getStringCellValue();
         switch (studyType) {
             case "fr" -> studyType = StudyType.FREQUENCY.toString();
@@ -318,11 +309,11 @@ public class StudentExcelReader {
         studentDTO.getStudy().setStudyType(studyType);
     }
 
-    private void readSciencesDomain(Cell cell, StudentDTO studentDTO) {
+    private void readSciencesDomain(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
-    private void readSciencesBranch(Cell cell, StudentDTO studentDTO) {
+    private void readSciencesBranch(Cell cell, StudentDto studentDTO) {
 //        ScienceBranch scienceBranch = new ScienceBranch();
 //        String[] components = cell.getStringCellValue().split("\\.");
 //        scienceBranch.setId(Float.valueOf(components[0]));
@@ -332,11 +323,11 @@ public class StudentExcelReader {
         cell.getStringCellValue();
     }
 
-    private void readSciencesProfile(Cell cell, StudentDTO studentDTO) {
+    private void readSciencesProfile(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
-    private void readIdSpeciality(Cell cell, StudentDTO studentDTO) {
+    private void readIdSpeciality(Cell cell, StudentDto studentDTO) {
         Float idSpeciality = null;
         switch (cell.getCellType()) {
             case STRING -> idSpeciality = Float.parseFloat(
@@ -346,35 +337,35 @@ public class StudentExcelReader {
         studentDTO.getStudy().setSpeciality(idSpeciality);
     }
 
-    private void readSpecialty(Cell cell, StudentDTO studentDTO) {
+    private void readSpecialty(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
     // TODO: add doctoral school
-    private void readDoctoralSchoolNew(Cell cell, StudentDTO studentDTO) {
+    private void readDoctoralSchoolNew(Cell cell, StudentDto studentDTO) {
         ScienceSchool scienceSchool = new ScienceSchool();
         scienceSchool.setName(cell.getStringCellValue());
         studentDTO.setScienceSchool(scienceSchool);
     }
 
-    private void readDoctoralSchoolOld(Cell cell, StudentDTO studentDTO) {
+    private void readDoctoralSchoolOld(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
     // TODO: add faculty
-    private void readFaculty(Cell cell, StudentDTO studentDTO) {
+    private void readFaculty(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
     // TODO: parse to scientific adviser
-    private void readScientificSupervisor(Cell cell, StudentDTO studentDTO) {
+    private void readScientificSupervisor(Cell cell, StudentDto studentDTO) {
         String supervisorName = cell.getStringCellValue().split(",")[0];
 //        Supervisor supervisor = supervisorRepository.findByFullName(supervisorName).orElseThrow();
 //        studentDTO.setSupervisor(supervisorMapper.toDto(supervisor));
     }
 
     // TODO: parse to steering committee
-    private void readSteeringCommittee(Cell cell, StudentDTO studentDTO) {
+    private void readSteeringCommittee(Cell cell, StudentDto studentDTO) {
         List<String> supervisors =
                 Arrays.stream(cell.getStringCellValue().split("\n"))
                         .map(supervisor -> supervisor.split(",")[0]).toList();
@@ -387,22 +378,22 @@ public class StudentExcelReader {
     }
 
     // TODO: parse to admission information
-    private void readAdmissionInformation(Cell cell, StudentDTO studentDTO) {
+    private void readAdmissionInformation(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
-    private void readPersonalContactData(Cell cell, StudentDTO studentDTO) {
+    private void readPersonalContactData(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
     // TODO: parse to remark (V)
-    private void readRemark(Cell cell, StudentDTO studentDTO) {
+    private void readRemark(Cell cell, StudentDto studentDTO) {
         cell.getStringCellValue();
     }
 
-    private void readCitizenship(Cell cell, StudentDTO studentDTO) {
+    private void readCitizenship(Cell cell, StudentDto studentDTO) {
         String country = cell.getStringCellValue();
-        CountryDTO countryDTO = new CountryDTO();
+        CountryDto countryDTO = new CountryDto();
 
         switch (country) {
             case "RM" -> {
@@ -443,7 +434,7 @@ public class StudentExcelReader {
     }
 
     // TODO: resolve value: "CA"
-    private void readStatus(Cell cell, StudentDTO studentDTO) {
+    private void readStatus(Cell cell, StudentDto studentDTO) {
         String status = cell.getStringCellValue();
 
         switch (status) {

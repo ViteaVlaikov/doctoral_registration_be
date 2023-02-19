@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,23 +20,25 @@ public class ScienceSchoolServiceImpl implements ScienceSchoolService {
     private final ScienceSchoolRepository scienceSchoolRepository;
     private final ScienceSchoolMapper scienceSchoolMapper;
     @Override
-    public List<ScienceSchool> findAll() {
-        return scienceSchoolRepository.findAll();
+    public List<ScienceSchoolDto> findAll() {
+        return scienceSchoolRepository.findAll().stream()
+                .map(scienceSchoolMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Map<ScienceSchoolDto, List<Integer>> getScienceSchoolByYears() {
+    public Map<ScienceSchoolDto, List<Long>> getScienceSchoolByYears() {
         List<ScienceSchool> scienceSchools = scienceSchoolRepository.findAll();
-        Map<ScienceSchoolDto, List<Integer>> result = new HashMap<>();
+        Map<ScienceSchoolDto, List<Long>> result = new HashMap<>();
         for(ScienceSchool scienceSchool : scienceSchools) {
-            ScienceSchoolDto scienceSchoolDto = scienceSchoolMapper.toDto(scienceSchool);
+            ScienceSchoolDto scienceSchoolDto = scienceSchoolMapper.mapToDto(scienceSchool);
             result.put(scienceSchoolDto,getCountOfStudentsByYearsForScienceSchool(scienceSchool));
         }
         return result;
     }
 
-    private List<Integer> getCountOfStudentsByYearsForScienceSchool(ScienceSchool scienceSchool) {
-        List<Integer> studentsCount = new ArrayList<>();
+    private List<Long> getCountOfStudentsByYearsForScienceSchool(ScienceSchool scienceSchool) {
+        List<Long> studentsCount = new ArrayList<>();
         studentsCount.add(scienceSchoolRepository.getCountOfStudentsByIdAndGrade(YearStudy.I,scienceSchool.getId()));
         studentsCount.add(scienceSchoolRepository.getCountOfStudentsByIdAndGrade(YearStudy.II,scienceSchool.getId()));
         studentsCount.add(scienceSchoolRepository.getCountOfStudentsByIdAndGrade(YearStudy.III,scienceSchool.getId()));

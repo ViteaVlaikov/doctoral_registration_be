@@ -1,5 +1,6 @@
 package usm.api.doctoral_registration.service.science;
 
+import usm.api.doctoral_registration.dto.science.ScienceDomainDto;
 import usm.api.doctoral_registration.model.science.ScienceDomain;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 
@@ -9,5 +10,5 @@ public interface ScienceDomainService {
     List<ScienceDomain> findAll();
     List<ScienceDomain> findAllByScienceSchoolId(Integer scienceSchoolId);
 
-    List<ScienceDomain> findAllByScienceSchoolIdAndYear(Integer school_id, Integer year);
+    List<ScienceDomainDto> findAllByScienceSchoolIdAndYear(Integer school_id, Integer year);
 }

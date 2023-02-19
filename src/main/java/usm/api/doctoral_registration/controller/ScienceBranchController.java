@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import usm.api.doctoral_registration.model.science.ScienceBranch;
 import usm.api.doctoral_registration.service.science.ScienceBranchService;
 
-import static usm.api.doctoral_registration.util.MockDataUtils.SCIENCE_BRANCHES;
 import java.util.List;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -17,6 +17,6 @@ public class ScienceBranchController {
 
     @GetMapping("/branch/{domain_id}/{year}")
     List<ScienceBranch> findAllByDomainIdAndYear(@PathVariable Integer domain_id, @PathVariable Integer year){
-        return SCIENCE_BRANCHES;
+        return null;
     }
 }

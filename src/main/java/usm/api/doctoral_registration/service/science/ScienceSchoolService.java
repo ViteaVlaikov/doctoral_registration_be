@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ScienceSchoolService {
-    List<ScienceSchool> findAll();
+    List<ScienceSchoolDto> findAll();
 
-    Map<ScienceSchoolDto, List<Integer>> getScienceSchoolByYears();
+    Map<ScienceSchoolDto, List<Long>> getScienceSchoolByYears();
 }

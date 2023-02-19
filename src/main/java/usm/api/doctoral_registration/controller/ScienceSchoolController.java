@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import usm.api.doctoral_registration.dto.science.ScienceSchoolDto;
+import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.service.science.ScienceSchoolService;
 
 import java.util.List;
@@ -22,8 +23,11 @@ public class ScienceSchoolController {
 
     private final ScienceSchoolService scienceSchoolService;
 
+    @GetMapping("/science")
+    public ResponseEntity<List<ScienceSchoolDto>> getSciences(){return ResponseEntity.ok(scienceSchoolService.findAll());}
+
     @GetMapping("/sciences_by_years")
-    public ResponseEntity<Map<ScienceSchoolDto, List<Integer>>> getScienceSchoolByYears() {
+    public ResponseEntity<Map<ScienceSchoolDto, List<Long>>> getScienceSchoolByYears() {
         return ResponseEntity.ok(scienceSchoolService.getScienceSchoolByYears());
     }
 }

@@ -15,5 +15,5 @@ public interface ScienceSchoolRepository extends JpaRepository<ScienceSchool, Lo
             "join Speciality s on sp = s.scienceProfile " +
             "join Student s2 on s = s2.study.speciality " +
             "where s2.study.yearStudy = :grade and ss.id = :id")
-    Integer getCountOfStudentsByIdAndGrade(YearStudy grade, Integer id);
+    Long getCountOfStudentsByIdAndGrade(YearStudy grade, Long id);
 }

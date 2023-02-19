@@ -2,9 +2,8 @@ package usm.api.doctoral_registration.service.student;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import usm.api.doctoral_registration.dto.student.StudentDTO;
+import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.excel.StudentExcelReader;
-import usm.api.doctoral_registration.mapper.StudentMapper;
 import usm.api.doctoral_registration.repository.science.ScienceBranchRepository;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class StudentServiceImpl implements StudentService {
     private final ScienceBranchRepository scienceBranchRepository;
 
     @Override
-    public List<StudentDTO> findAll() {
+    public List<StudentDto> findAll() {
         return studentExcelTools.read(PATH + "students.xlsx", 2);
     }
 

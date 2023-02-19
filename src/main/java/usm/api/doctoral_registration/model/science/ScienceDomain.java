@@ -35,7 +35,7 @@ public class ScienceDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "number", nullable = false)
     private Integer number;

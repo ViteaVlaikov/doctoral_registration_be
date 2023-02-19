@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 import usm.api.doctoral_registration.service.science.ScienceSchoolService;
 import usm.api.doctoral_registration.service.science.SpecialityService;
 import usm.api.doctoral_registration.service.science.SupervisorService;
-import usm.api.doctoral_registration.dto.student.StudentDTO;
 import usm.api.doctoral_registration.service.student.StudentService;
 
 import java.util.List;
@@ -43,11 +43,9 @@ public class SalamController {
     @GetMapping("/supervisors")
     public ResponseEntity<List<Supervisor>> getSupervisors(){return ResponseEntity.ok(supervisorService.findAll());}
 
-    @GetMapping("/science")
-    public ResponseEntity<List<ScienceSchool>> getSciences(){return ResponseEntity.ok(scienceSchoolService.findAll());}
 
     @GetMapping("/students")
-    public ResponseEntity<List<StudentDTO>> getStudents(){return ResponseEntity.ok(studentService.findAll());}
+    public ResponseEntity<List<StudentDto>> getStudents(){return ResponseEntity.ok(studentService.findAll());}
 
 
 }

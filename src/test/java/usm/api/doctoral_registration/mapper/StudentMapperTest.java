@@ -1,12 +1,11 @@
 package usm.api.doctoral_registration.mapper;
 
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import usm.api.doctoral_registration.dto.student.StudentDTO;
-import usm.api.doctoral_registration.dto.student.StudyDTO;
+import usm.api.doctoral_registration.dto.student.StudentDto;
+import usm.api.doctoral_registration.dto.student.StudyDto;
 import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.Student;
@@ -14,11 +13,6 @@ import usm.api.doctoral_registration.model.student.Study;
 import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.Registration;
 import usm.api.doctoral_registration.model.student.properties.Status;
-import usm.api.doctoral_registration.model.student.properties.YearStudy;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringJUnitConfig(classes = {StudentMapperImpl.class, CountryMapperImpl.class, SupervisorMapperImpl.class, StudyMapperImpl.class})
 class StudentMapperTest {
@@ -31,7 +25,7 @@ class StudentMapperTest {
 
     Student student;
 
-    StudentDTO studentDTO;
+    StudentDto studentDTO;
 
     Study study;
 
@@ -67,15 +61,15 @@ class StudentMapperTest {
 
     @Test
     void test() {
-        StudentDTO studentDTO1 = studentMapper.toDto(student);
+        StudentDto studentDto1 = studentMapper.toDto(student);
         System.out.println(student);
-        System.out.println(studentDTO1);
+        System.out.println(studentDto1);
     }
 
     @Test
     void testStudy() {
-        StudyDTO studyDTO1 = studyMapper.toDto(study);
+        StudyDto studyDto1 = studyMapper.toDto(study);
 
-        System.out.println(studyDTO1);
+        System.out.println(studyDto1);
     }
 }

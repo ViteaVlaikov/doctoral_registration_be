@@ -11,23 +11,33 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 import usm.api.doctoral_registration.model.country.Country;
+import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.Status;
-//import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 
-import java.util.Set;
+import java.util.Objects;
 
-@Data
-@NoArgsConstructor
+//import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
+
 @Entity
 @Table(name = "student")
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
 
     @Id
@@ -59,6 +69,7 @@ public class Student {
     private Gender gender;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private Country citizenship;
 
     @Column(name = "diploma_series")
@@ -85,6 +96,24 @@ public class Student {
     @JoinColumn(name = "supervisor_id")
     private Supervisor supervisor;
 
+    @ManyToOne
+    @JoinColumn(name = "speciality", insertable = false, updatable = false)
+    private Speciality speciality;
+
+
 //    @OneToMany(mappedBy = "student")
 //    private Set<SteeringCommittee> steeringCommittee;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Student student = (Student) o;
+        return id != null && Objects.equals(id, student.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

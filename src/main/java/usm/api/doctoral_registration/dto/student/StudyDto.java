@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import usm.api.doctoral_registration.dto.order.OrderDTO;
+import usm.api.doctoral_registration.dto.order.OrderDto;
 
 import java.time.LocalDate;
 
@@ -12,11 +12,11 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @NoArgsConstructor
-public class StudyDTO {
+public class StudyDto {
 
     private String registration;
 
-    private OrderDTO orderDTO;
+    private OrderDto orderDTO;
 
     private String yearStudy;
 
