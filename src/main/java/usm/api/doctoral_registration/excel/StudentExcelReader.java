@@ -334,7 +334,7 @@ public class StudentExcelReader {
                     substring(cell.getStringCellValue(), "[0-9]{3}\\.[0-9]{2}"));
             case NUMERIC -> idSpeciality = Float.parseFloat(cell.getStringCellValue());
         }
-        studentDTO.getStudy().setSpeciality(idSpeciality);
+        //studentDTO.getStudy().setSpeciality(idSpeciality);
     }
 
     private void readSpecialty(Cell cell, StudentDto studentDTO) {

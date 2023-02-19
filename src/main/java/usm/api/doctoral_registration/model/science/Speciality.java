@@ -45,7 +45,7 @@ public class Speciality {
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     @ToString.Exclude
-    @OneToMany(mappedBy = "speciality", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "speciality", orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Student> students = new LinkedHashSet<>();
 
 

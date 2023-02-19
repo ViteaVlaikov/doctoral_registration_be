@@ -3,6 +3,7 @@ package usm.api.doctoral_registration.mapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.dto.student.StudyDto;
@@ -13,8 +14,10 @@ import usm.api.doctoral_registration.model.student.Study;
 import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.Registration;
 import usm.api.doctoral_registration.model.student.properties.Status;
+import usm.api.doctoral_registration.repository.student.StudentRepository;
 
-@SpringJUnitConfig(classes = {StudentMapperImpl.class, CountryMapperImpl.class, SupervisorMapperImpl.class, StudyMapperImpl.class})
+@SpringBootTest
+//@SpringJUnitConfig(classes = {StudentMapperImpl.class, CountryMapperImpl.class, SupervisorMapperImpl.class, StudyMapperImpl.class})
 class StudentMapperTest {
 
     @Autowired
@@ -28,6 +31,9 @@ class StudentMapperTest {
     StudentDto studentDTO;
 
     Study study;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     @BeforeEach
     void startUp() {
@@ -71,5 +77,14 @@ class StudentMapperTest {
         StudyDto studyDto1 = studyMapper.toDto(study);
 
         System.out.println(studyDto1);
+    }
+
+    @Test
+    void toDto() {
+        Student student1 = studentRepository.findById(1L).get();
+//        System.out.println(student1);
+        StudentDto studentDto = studentMapper.toDto(student1);
+
+        System.out.println(studentDto);
     }
 }

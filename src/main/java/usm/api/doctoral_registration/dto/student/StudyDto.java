@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import usm.api.doctoral_registration.dto.order.OrderDto;
+import usm.api.doctoral_registration.dto.science.SpecialityDto;
 
 import java.time.LocalDate;
 
@@ -28,5 +29,5 @@ public class StudyDto {
 
     private String financing;
 
-    private Float Speciality;         // id
+    private SpecialityDto Speciality;         // id
 }

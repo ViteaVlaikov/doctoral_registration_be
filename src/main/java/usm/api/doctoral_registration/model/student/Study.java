@@ -53,8 +53,7 @@ public class Study {
     @Enumerated(EnumType.STRING)
     private Financing financing;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "speciality",
-            referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "speciality")
     private Speciality speciality;
 }

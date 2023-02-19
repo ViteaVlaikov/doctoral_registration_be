@@ -8,6 +8,7 @@ import usm.api.doctoral_registration.mapper.science.SpecialityMapper;
 import usm.api.doctoral_registration.model.student.Study;
 
 @Component
+//@Mapper
 @Mapper(uses = {SpecialityMapper.class})
 public interface StudyMapper extends EntityMapper<Study, StudyDto> {
 
