@@ -21,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.properties.Gender;
@@ -97,9 +99,9 @@ public class Student {
     private Supervisor supervisor;
 
     @ManyToOne
-    @JoinColumn(name = "speciality", insertable = false, updatable = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "speciality")
     private Speciality speciality;
-
 
 //    @OneToMany(mappedBy = "student")
 //    private Set<SteeringCommittee> steeringCommittee;

@@ -46,13 +46,7 @@ public class StudentDto {
 
     private String status;
 
-    // TODO : scienceBranch & scienceSchool -> to remove
 
-    private ScienceBranch scienceBranch;
-
-    private ScienceSchool scienceSchool;
-
-    //
 
     private String remark;
     private SupervisorDto supervisor;

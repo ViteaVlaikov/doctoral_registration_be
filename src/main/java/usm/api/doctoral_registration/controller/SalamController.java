@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.science.Speciality;
@@ -24,7 +25,7 @@ import java.util.List;
 @RequestMapping("api")
 @Slf4j
 public class SalamController {
-    private final SpecialityService specialityService;
+
     private final SupervisorService supervisorService;
     private final ScienceSchoolService scienceSchoolService;
 
@@ -35,17 +36,11 @@ public class SalamController {
         return "Salam " + ", Bro!!! ";
     }
 
-    @GetMapping("/specialities")
-    public ResponseEntity<List<Speciality>> getSpecialities() {
-        return ResponseEntity.ok(specialityService.findAll());
-    }
 
     @GetMapping("/supervisors")
     public ResponseEntity<List<Supervisor>> getSupervisors(){return ResponseEntity.ok(supervisorService.findAll());}
 
 
-    @GetMapping("/students")
-    public ResponseEntity<List<StudentDto>> getStudents(){return ResponseEntity.ok(studentService.findAll());}
 
 
 }

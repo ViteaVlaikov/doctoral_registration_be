@@ -139,7 +139,7 @@ public class StudentExcelReader {
                 }
 
                 listStudentsDTO.add(convertToStudentDTO(row));
-                if (i++ == 100)
+                if (i++ == 200)
                     break;
             }
         } catch (IOException e) {
@@ -150,8 +150,8 @@ public class StudentExcelReader {
 
     private StudentDto convertToStudentDTO(Row row) {
         StudentDto studentDTO = new StudentDto();
-        studentDTO.setStudy(new StudyDto());
-        studentDTO.getStudy().setOrderDTO(new OrderDto());
+//        studentDTO.setStudy(new StudyDto());
+//        studentDTO.getStudy().setOrderDTO(new OrderDto());
 
         Iterator<Cell> cellIterator = row.cellIterator();
         Cell cellInfo = null;
@@ -222,7 +222,7 @@ public class StudentExcelReader {
             case "grație II" -> yearStudy = YearStudy.EXTRA_I.toString();
             default -> yearStudy = cell.getStringCellValue();
         }
-        studentDTO.getStudy().setYearStudy(yearStudy);
+//        studentDTO.getStudy().setYearStudy(yearStudy);
     }
 
     private void readYearBirth(Cell cell, StudentDto studentDTO) {
@@ -257,7 +257,7 @@ public class StudentExcelReader {
             case "c" -> financingType = Financing.CONTRACT.toString();
         }
         ;
-        studentDTO.getStudy().setFinancing(financingType);
+//        studentDTO.getStudy().setFinancing(financingType);
     }
 
     private void readDateAndOrderBegin(Cell cell, StudentDto studentDTO) {
@@ -266,19 +266,19 @@ public class StudentExcelReader {
         LocalDate orderDate;
         if (cell.getCellType() == CellType.NUMERIC) {
             dateBegin = cell.getLocalDateTimeCellValue().toLocalDate();
-            studentDTO.getStudy().setBeginStudies(dateBegin);
+//            studentDTO.getStudy().setBeginStudies(dateBegin);
             return;
         }
         List<String> dateAndOrderBegin = Arrays.stream(cell.getStringCellValue().split("(, )|(,\n)")).toList();
         dateBegin = DateTemplate.toLocalDate(dateAndOrderBegin.get(0));
         if (dateAndOrderBegin.size() == 1) {
-            studentDTO.getStudy().setBeginStudies(dateBegin);
+//            studentDTO.getStudy().setBeginStudies(dateBegin);
             return;
         }
         if (DateTemplate.isDate(dateAndOrderBegin.get(1))) {
             orderDate = DateTemplate.toLocalDate(dateAndOrderBegin.get(1));
-            studentDTO.getStudy().setBeginStudies(dateBegin);
-            studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
+//            studentDTO.getStudy().setBeginStudies(dateBegin);
+//            studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
             return;
         }
         orderNumber = dateAndOrderBegin.get(1);
@@ -286,9 +286,9 @@ public class StudentExcelReader {
             throw new IllegalArgumentException("order number invalid");
         }
         orderDate = DateTemplate.toLocalDate(dateAndOrderBegin.get(2));
-        studentDTO.getStudy().setBeginStudies(dateBegin);
-        studentDTO.getStudy().getOrderDTO().setOrderNumber(orderNumber);
-        studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
+//        studentDTO.getStudy().setBeginStudies(dateBegin);
+//        studentDTO.getStudy().getOrderDTO().setOrderNumber(orderNumber);
+//        studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
     }
 
     private void readDateEnd(Cell cell, StudentDto studentDTO) {
@@ -297,7 +297,7 @@ public class StudentExcelReader {
             case NUMERIC -> dateEnd = cell.getLocalDateTimeCellValue().toLocalDate();
             case STRING -> dateEnd = DateTemplate.toLocalDate(cell.getStringCellValue());
         }
-        studentDTO.getStudy().setEndStudies(dateEnd);
+//        studentDTO.getStudy().setEndStudies(dateEnd);
     }
 
     private void readStudyType(Cell cell, StudentDto studentDTO) {
@@ -307,7 +307,7 @@ public class StudentExcelReader {
             case "zi" -> studyType = StudyType.LOW_FREQUENCY.toString();
         }
         ;
-        studentDTO.getStudy().setStudyType(studyType);
+//        studentDTO.getStudy().setStudyType(studyType);
     }
 
     private void readSciencesDomain(Cell cell, StudentDto studentDTO) {
@@ -337,7 +337,7 @@ public class StudentExcelReader {
         }
         SpecialityDto specialityDto = new SpecialityDto();
         specialityDto.setId(idSpeciality);
-        studentDTO.getStudy().setSpeciality(specialityDto);
+        studentDTO.setSpecialityId(specialityDto.getId());
     }
 
     private void readSpecialty(Cell cell, StudentDto studentDTO) {
@@ -348,7 +348,7 @@ public class StudentExcelReader {
     private void readDoctoralSchoolNew(Cell cell, StudentDto studentDTO) {
         ScienceSchool scienceSchool = new ScienceSchool();
         scienceSchool.setName(cell.getStringCellValue());
-        studentDTO.setScienceSchool(scienceSchool);
+//        studentDTO.setScienceSchool(scienceSchool);
     }
 
     private void readDoctoralSchoolOld(Cell cell, StudentDto studentDTO) {
@@ -433,7 +433,7 @@ public class StudentExcelReader {
             }
         }
 
-        studentDTO.setCitizenship(countryDTO);
+//        studentDTO.setCitizenship(countryDTO);
     }
 
     // TODO: resolve value: "CA"

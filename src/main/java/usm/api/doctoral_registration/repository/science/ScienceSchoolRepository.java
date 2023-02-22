@@ -8,12 +8,12 @@ import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
 @Repository
 public interface ScienceSchoolRepository extends JpaRepository<ScienceSchool, Long> {
-    @Query("select count(s.id) from ScienceSchool ss " +
+    @Query("select count(s2.id) from ScienceSchool ss " +
             "join ScienceDomain sd on ss = sd.scienceSchool " +
             "join ScienceBranch sb on sd = sb.scienceDomain " +
             "join ScienceProfile sp on sb = sp.scienceBranch " +
             "join Speciality s on sp = s.scienceProfile " +
-            "join Student s2 on s = s2.study.speciality " +
+            "join Student s2 on s = s2.speciality " +
             "where s2.study.yearStudy = :grade and ss.id = :id")
-    Long getCountOfStudentsByIdAndGrade(YearStudy grade, Long id);
+    Long getCountOfStudentsByIdAndGrade(YearStudy grade, Integer id);
 }

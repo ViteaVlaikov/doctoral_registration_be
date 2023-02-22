@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import usm.api.doctoral_registration.dto.student.StudentDto;
-import usm.api.doctoral_registration.model.science.ScienceProfile;
 import usm.api.doctoral_registration.model.student.Student;
 
 import java.io.Serializable;
@@ -16,12 +16,12 @@ import java.util.Set;
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class SpecialityDto implements Serializable {
     private Float id;
     private String name;
-    private Long scienceProfileId;
+    private Integer scienceProfileId;
+    @ToString.Exclude
     private Set<StudentDto> students;
-//    private final ScienceProfile scienceProfile;
 }

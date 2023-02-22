@@ -32,7 +32,7 @@ import java.util.Set;
 public class ScienceBranch {
     @Id
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;

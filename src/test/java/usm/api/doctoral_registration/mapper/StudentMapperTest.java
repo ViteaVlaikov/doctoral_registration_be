@@ -58,7 +58,7 @@ class StudentMapperTest {
         student.setStatus(Status.ACTIVE);
         study = new Study();
         study.setRegistration(Registration.ENROLLED);
-        study.setSpeciality(new Speciality());
+//        study.setSpeciality(new Speciality());
 //        study.setOrders();
 
         student.setStudy(study);

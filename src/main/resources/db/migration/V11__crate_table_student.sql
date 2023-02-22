@@ -24,7 +24,7 @@ CREATE TABLE student
     end_studies       date,
     study             VARCHAR(255),
     financing         VARCHAR(255),
-    speciality        REAL,
+    speciality        real,
     CONSTRAINT pk_student PRIMARY KEY (id)
 );
 

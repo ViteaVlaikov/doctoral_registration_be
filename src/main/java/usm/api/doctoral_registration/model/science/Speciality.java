@@ -1,5 +1,6 @@
 package usm.api.doctoral_registration.model.science;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +19,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 import usm.api.doctoral_registration.model.student.Student;
+import usm.api.doctoral_registration.model.student.Study;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -42,13 +44,9 @@ public class Speciality {
     @JoinColumn(name = "science_profile_id")
     private ScienceProfile scienceProfile;
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     @ToString.Exclude
-    @OneToMany(mappedBy = "speciality", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "speciality", orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Student> students = new LinkedHashSet<>();
-
-
 
     @Override
     public boolean equals(Object o) {

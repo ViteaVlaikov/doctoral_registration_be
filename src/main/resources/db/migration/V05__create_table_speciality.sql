@@ -1,6 +1,6 @@
 CREATE TABLE speciality
 (
-    id                 FLOAT NOT NULL,
+    id                 real NOT NULL,
     name               VARCHAR(255),
     science_profile_id INTEGER,
     CONSTRAINT pk_speciality PRIMARY KEY (id)

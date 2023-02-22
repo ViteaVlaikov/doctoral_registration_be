@@ -11,9 +11,13 @@ import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
 import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
+import usm.api.doctoral_registration.service.student.StudentService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -33,6 +37,8 @@ class StudentExcelToolsTest {
 
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
     private SpecialityRepository specialityRepository;
@@ -50,18 +56,19 @@ class StudentExcelToolsTest {
         //511.01
         Map<Float, Speciality> specialities = specialityRepository
                 .findAll().stream().collect(Collectors.toMap(Speciality::getId, Function.identity()));
-
         for(int i = 0; i < students.size(); i++) {
-            System.out.println(studentDtos.get(i));
-            students.get(i).getStudy().setSpeciality(specialities
-                    .get(studentDtos.get(i).getStudy().getSpeciality().getId()));
+//            System.out.println(studentDtos.get(i));
+            specialities
+                    .get(studentDtos.get(i).getSpecialityId())
+                    .getStudents().add(studentMapper.toEntity(studentDtos.get(i)));
+            students.get(i).setSpeciality(specialities
+                    .get(studentDtos.get(i).getSpecialityId()));
         }
-
 //        students.forEach(student -> student.getStudy().setSpeciality(specialityRepository.findById(student.)));
 
         //students.forEach(student -> student.getCitizenship().setStudent(students));
         //students.forEach(student -> student.getStudy().setSpeciality(specialityRepository.findById(student.)));
-        studentRepository.saveAll(students);
+        studentService.saveAll(students);
     }
 
 

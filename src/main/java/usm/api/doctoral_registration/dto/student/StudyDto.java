@@ -29,5 +29,5 @@ public class StudyDto {
 
     private String financing;
 
-    private SpecialityDto Speciality;         // id
+//    private SpecialityDto Speciality;         // id
 }

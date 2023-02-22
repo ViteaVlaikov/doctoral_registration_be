@@ -14,10 +14,13 @@ public interface StudentMapper extends EntityMapper<Student, StudentDto> {
     @Override
 //    @Mapping(target = "citizenship", source = "citizenship.country")
 //    @Mapping(target = "steeringCommittee", source = "steeringCommittee.")
-//    @Mapping(target = "studyDTO", source = "study")
+    @Mapping(target = "study", source = "study")
+    @Mapping(target = "specialityId", source = "speciality.id")
     StudentDto toDto(Student entity);
 
     @Override
 //    @Mapping(target = "citizenship", expression = "")
+    @Mapping(source = "study", target = "study")
+    @Mapping(source = "specialityId", target = "speciality.id")
     Student toEntity(StudentDto dto);
 }

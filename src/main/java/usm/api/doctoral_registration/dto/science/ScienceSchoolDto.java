@@ -16,8 +16,13 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class ScienceSchoolDto implements Serializable {
-    private final Long id;
+    private final Integer id;
     private final String name;
-    @ToString.Exclude
     private final Set<ScienceDomainDto> scienceDomains;
+
+    @Override
+    public String toString() {
+        return "id='" + id + "'" +
+                ", name='" + name + "'";
+    }
 }

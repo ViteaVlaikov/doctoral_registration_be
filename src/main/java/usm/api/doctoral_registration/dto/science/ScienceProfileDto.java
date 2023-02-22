@@ -16,10 +16,9 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class ScienceProfileDto implements Serializable {
-    private final Long id;
-    private final String name;
-    private final Long scienceBranchId;
-//    private final ScienceBranchDto scienceBranch;
+    private Integer id;
+    private String name;
+    private Integer scienceBranchId;
     @ToString.Exclude
-    private final Set<SpecialityDto> specialities;
+    private Set<SpecialityDto> specialities;
 }
