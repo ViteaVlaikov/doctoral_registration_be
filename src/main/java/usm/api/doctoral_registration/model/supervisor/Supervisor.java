@@ -32,7 +32,7 @@ public class Supervisor {
 
     @ManyToOne
     @JoinColumn(name = "science_school_id")
-    private ScienceSchool sciences;
+    private ScienceSchool scienceSchool;
 
     @OneToMany(mappedBy = "supervisor", orphanRemoval = true)
     private Set<Student> students = new LinkedHashSet<>();

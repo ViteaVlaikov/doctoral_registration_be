@@ -19,7 +19,7 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/order")
+@RequestMapping("api/orders")
 @Slf4j
 public class OrderController {
 

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SupervisorDTO {
+public class SupervisorDto {
 
     private Long id;
 

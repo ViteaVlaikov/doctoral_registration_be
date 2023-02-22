@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import usm.api.doctoral_registration.dto.country.CountryDto;
-import usm.api.doctoral_registration.dto.supervisor.SupervisorDTO;
+import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.science.ScienceBranch;
 
@@ -55,9 +55,9 @@ public class StudentDto {
     //
 
     private String remark;
-    private SupervisorDTO supervisor;
+    private SupervisorDto supervisor;
 
-    private Set<SupervisorDTO> steeringCommittee;
+    private Set<SupervisorDto> steeringCommittee;
 
     private Float specialityId;
 }
