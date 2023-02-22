@@ -14,16 +14,18 @@ import usm.api.doctoral_registration.service.science.SpecialityService;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api")
-@Slf4j
+@RequestMapping("api/sciences/specialities")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class SpecialityController {
     private final SpecialityService specialityService;
     private final YearStudyMapper yearStudyMapper;
-    @GetMapping("/specialities/{profile_id}/{year}")
-    public ResponseEntity<List<SpecialityDto>> getSpecialitiesByProfileIdAndYear(@PathVariable Integer profile_id, @PathVariable Integer year) {
-        return ResponseEntity.ok(specialityService.findAllByScienceProfileIdAndGrade(profile_id,yearStudyMapper.mapFromInteger(year)));
+
+    @GetMapping("/profiles/{id}/{year}")
+    public ResponseEntity<List<SpecialityDto>> getSpecialitiesByProfileIdAndYear(
+            @PathVariable Integer id, @PathVariable Integer year) {
+        return ResponseEntity.ok(specialityService.findAllByScienceProfileIdAndGrade(id, yearStudyMapper.mapFromInteger(year)));
     }
 }

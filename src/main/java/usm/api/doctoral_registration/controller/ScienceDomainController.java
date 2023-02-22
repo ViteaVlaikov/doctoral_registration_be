@@ -1,7 +1,6 @@
 package usm.api.doctoral_registration.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,21 +12,21 @@ import usm.api.doctoral_registration.service.science.ScienceDomainService;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api")
-@Slf4j
+@RequestMapping("api/sciences/domains")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class ScienceDomainController {
     private final ScienceDomainService domainService;
 
-    @GetMapping("/domain")
-    public List<ScienceDomain> getAll(){
+    @GetMapping
+    public List<ScienceDomain> getAll() {
         return domainService.findAll();
     }
 
-    @GetMapping("/domain/{school_id}/{year}")
-    public List<ScienceDomainDto> findAllByScienceSchoolIdAndYear(@PathVariable Integer school_id, @PathVariable Integer year){
-        return domainService.findAllByScienceSchoolIdAndYear(school_id,year);
+    @GetMapping("/schools/{id}/{year}")
+    public List<ScienceDomainDto> findAllByScienceSchoolIdAndYear(
+            @PathVariable Integer id, @PathVariable Integer year) {
+        return domainService.findAllByScienceSchoolIdAndYear(id, year);
     }
 }

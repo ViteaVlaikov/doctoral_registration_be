@@ -1,7 +1,6 @@
 package usm.api.doctoral_registration.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +12,15 @@ import usm.api.doctoral_registration.service.supervisor.SupervisorService;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/supervisors")
-@Slf4j
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class SupervisorController {
 
     private final SupervisorService supervisorService;
 
-    @GetMapping("/school/{id}")
+    @GetMapping("/schools/{id}")
     public ResponseEntity<List<SupervisorDto>> findAllByScienceSchoolId(@PathVariable Long id) {
         return ResponseEntity.ok(supervisorService.findAllByScienceSchool(id));
     }

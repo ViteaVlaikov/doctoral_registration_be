@@ -1,32 +1,31 @@
 package usm.api.doctoral_registration.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import usm.api.doctoral_registration.dto.science.ScienceSchoolDto;
-import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.service.science.ScienceSchoolService;
 
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api")
-@Slf4j
+@RequestMapping("api/sciences/schools")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class ScienceSchoolController {
 
     private final ScienceSchoolService scienceSchoolService;
 
-    @GetMapping("/science")
-    public ResponseEntity<List<ScienceSchoolDto>> getSciences(){return ResponseEntity.ok(scienceSchoolService.findAll());}
+    @GetMapping
+    public ResponseEntity<List<ScienceSchoolDto>> getSciences() {
+        return ResponseEntity.ok(scienceSchoolService.findAll());
+    }
 
-    @GetMapping("/sciences_by_years")
+    @GetMapping("/years")
     public ResponseEntity<Map<ScienceSchoolDto, List<Long>>> getScienceSchoolByYears() {
         return ResponseEntity.ok(scienceSchoolService.getScienceSchoolByYears());
     }
