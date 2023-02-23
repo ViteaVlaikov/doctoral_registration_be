@@ -74,7 +74,7 @@ values (2, 'Științe Fizice, Matematice, ale Informației și Inginerești');
     insert into science_domain(id, number, name, science_school_id)
     VALUES (2, 1,'Științe ale naturii', 2);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (11, 'Matematică', 1);
+        VALUES (11, 'Matematică', 2);
             insert into science_profile(id, name, science_branch_id)
             VALUES (111, 'Matematică pură', 11);
                 insert into speciality(id, name, science_profile_id)
@@ -84,7 +84,7 @@ values (2, 'Științe Fizice, Matematice, ale Informației și Inginerești');
                 insert into speciality(id, name, science_profile_id)
                 VALUES (112.03,'Cibernetică matematică și cercetări operaționale',112);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (12, 'Ştiinţa informaţiei', 1);
+        VALUES (12, 'Ştiinţa informaţiei', 2);
             insert into science_profile(id, name, science_branch_id)
             VALUES (121, ' Informatică teoretică', 12);
                 insert into speciality(id, name, science_profile_id)
