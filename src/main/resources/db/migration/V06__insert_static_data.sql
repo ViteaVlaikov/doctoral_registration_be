@@ -92,7 +92,7 @@ values (2, 'Științe Fizice, Matematice, ale Informației și Inginerești');
                 insert into speciality(id, name, science_profile_id)
                 VALUES (122.03,'Modelare, metode matematice, produse program',121);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (13, 'Ştiinţe fizice', 1);
+        VALUES (13, 'Ştiinţe fizice', 2);
             insert into science_profile(id, name, science_branch_id)
             VALUES (131, 'Fizică teoretic', 13);
                 insert into speciality(id, name, science_profile_id)
@@ -260,7 +260,7 @@ values (6, 'Științe Umanistice');
     insert into science_domain(id, number, name, science_school_id)
     VALUES (7, 6,'Științe umaniste', 6);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (61,  'Istorie şi arheologie', 6);
+        VALUES (61,  'Istorie şi arheologie', 7);
             insert into science_profile(id, name, science_branch_id)
             VALUES (611, 'Istorie', 61);
                 insert into speciality(id, name, science_profile_id)
@@ -276,7 +276,7 @@ values (6, 'Științe Umanistice');
                 insert into speciality(id, name, science_profile_id)
                 VALUES (613.01,'Arheologie',613);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (62,  'Filologie', 6);
+        VALUES (62,  'Filologie', 7);
             insert into science_profile(id, name, science_branch_id)
             VALUES (621, 'Științe ale limbajului', 62);
                 insert into speciality(id, name, science_profile_id)
@@ -296,7 +296,7 @@ values (6, 'Științe Umanistice');
                 insert into speciality(id, name, science_profile_id)
                 VALUES (622.04,'Folcloristică',622);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (63,  'Filosofie', 6);
+        VALUES (63,  'Filosofie', 7);
             insert into science_profile(id, name, science_branch_id)
             VALUES (631, 'Filosofie', 63);
                 insert into speciality(id, name, science_profile_id)
