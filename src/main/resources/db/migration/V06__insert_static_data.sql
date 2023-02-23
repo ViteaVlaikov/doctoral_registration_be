@@ -192,13 +192,13 @@ values (5, 'Științe Sociale și ale Educației');
     insert into science_domain(id, number, name, science_school_id)
     VALUES (6, 5,'Științe sociale și economice', 5);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (51,  'Psihologie', 5);
+        VALUES (51,  'Psihologie', 6);
             insert into science_profile(id, name, science_branch_id)
             VALUES (511, 'Drept penal', 51);
                 insert into speciality(id, name, science_profile_id)
                 VALUES (511.01,'Psihologie generală',511);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (53,  'Științe ale educației', 5);
+        VALUES (53,  'Științe ale educației', 6);
             insert into science_profile(id, name, science_branch_id)
             VALUES (531, 'Pedagogie generală', 53);
                 insert into speciality(id, name, science_profile_id)
@@ -210,7 +210,7 @@ values (5, 'Științe Sociale și ale Educației');
                 insert into speciality(id, name, science_profile_id)
                 VALUES (533.03,'Pedagogia adulţilor',533);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (54,  'Sociologie', 5);
+        VALUES (54,  'Sociologie', 6);
             insert into science_profile(id, name, science_branch_id)
             VALUES (541, 'Sociologie', 54);
                 insert into speciality(id, name, science_profile_id)
@@ -222,7 +222,7 @@ values (5, 'Științe Sociale și ale Educației');
                 insert into speciality(id, name, science_profile_id)
                 VALUES (542.01,'Teoria și practica asistenței sociale',542);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (56,  'Științe politice', 5);
+        VALUES (56,  'Științe politice', 6);
             insert into science_profile(id, name, science_branch_id)
             VALUES (561, 'Politologie', 56);
                 insert into speciality(id, name, science_profile_id)
@@ -242,7 +242,7 @@ values (5, 'Științe Sociale și ale Educației');
                 insert into speciality(id, name, science_profile_id)
                 VALUES (563.02,'Organizarea şi dirijarea în instituţiile administraţiei publice; servicii publice',563);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (57,  'Media şi comunicare', 5);
+        VALUES (57,  'Media şi comunicare', 6);
             insert into science_profile(id, name, science_branch_id)
             VALUES (571, 'Jurnalism şi comunicare', 57);
                 insert into speciality(id, name, science_profile_id)
