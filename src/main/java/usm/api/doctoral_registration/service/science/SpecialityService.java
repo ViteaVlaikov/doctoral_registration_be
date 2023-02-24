@@ -10,4 +10,6 @@ import java.util.List;
 public interface SpecialityService {
     List<SpecialityDto> findAll();
     List<SpecialityDto> findAllByScienceProfileIdAndGrade(Integer profile_id, YearStudy grade);
+
+    List<SpecialityDto> findAllByScienceSchool(Integer id);
 }

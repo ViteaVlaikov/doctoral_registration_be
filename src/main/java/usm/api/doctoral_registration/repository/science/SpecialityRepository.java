@@ -15,4 +15,8 @@ public interface SpecialityRepository extends JpaRepository<Speciality, Float> {
             "join Student st on s = st.speciality " +
             "where s.scienceProfile.id = :profile_id and st.study.yearStudy = :grade")
     List<Speciality> findAllByScienceProfileIdAndGrade(Integer profile_id, YearStudy grade);
+
+    @Query("from Speciality s " +
+            "where s.scienceProfile.scienceBranch.scienceDomain.scienceSchool.id = :id")
+    List<Speciality> findAllByScienceSchool(Integer id);
 }

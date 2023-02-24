@@ -27,6 +27,13 @@ public class ScienceSchoolServiceImpl implements ScienceSchoolService {
     }
 
     @Override
+    public List<ScienceSchoolDto> findAllWithoutDependencies() {
+        return scienceSchoolRepository.findAll().stream()
+                .peek(school -> school.setScienceDomains(null))
+                .map(scienceSchoolMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
+    @Override
     public Map<ScienceSchoolDto, List<Long>> getScienceSchoolByYears() {
         List<ScienceSchool> scienceSchools = scienceSchoolRepository.findAll();
         Map<ScienceSchoolDto, List<Long>> result = new HashMap<>();

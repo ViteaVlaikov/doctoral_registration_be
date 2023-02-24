@@ -9,5 +9,7 @@ import java.util.Map;
 public interface ScienceSchoolService {
     List<ScienceSchoolDto> findAll();
 
+    List<ScienceSchoolDto> findAllWithoutDependencies();
+
     Map<ScienceSchoolDto, List<Long>> getScienceSchoolByYears();
 }

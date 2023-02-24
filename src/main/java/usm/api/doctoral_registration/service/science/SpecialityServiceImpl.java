@@ -30,4 +30,11 @@ public class SpecialityServiceImpl implements SpecialityService {
                 .map(specialityMapper::mapToDto)
                 .toList();
     }
+
+    @Override
+    public List<SpecialityDto> findAllByScienceSchool(Integer id) {
+        return specialityRepository.findAllByScienceSchool(id).stream()
+                .peek(speciality -> speciality.setStudents(null))
+                .map(specialityMapper::mapToDto).toList();
+    }
 }

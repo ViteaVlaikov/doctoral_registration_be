@@ -17,5 +17,7 @@ public class SupervisorDto {
 
     private String post;
 
+    private String speciality;
+
     private String academician;
 }

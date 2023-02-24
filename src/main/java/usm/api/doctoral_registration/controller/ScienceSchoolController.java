@@ -21,7 +21,12 @@ public class ScienceSchoolController {
     private final ScienceSchoolService scienceSchoolService;
 
     @GetMapping
-    public ResponseEntity<List<ScienceSchoolDto>> getSciences() {
+    public ResponseEntity<List<ScienceSchoolDto>> getScienceSchools() {
+        return ResponseEntity.ok(scienceSchoolService.findAllWithoutDependencies());
+    }
+
+    @GetMapping("/domains")
+    public ResponseEntity<List<ScienceSchoolDto>> getSciencesSchoolsAndDomains() {
         return ResponseEntity.ok(scienceSchoolService.findAll());
     }
 

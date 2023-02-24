@@ -28,4 +28,10 @@ public class SpecialityController {
             @PathVariable Integer id, @PathVariable Integer year) {
         return ResponseEntity.ok(specialityService.findAllByScienceProfileIdAndGrade(id, yearStudyMapper.mapFromInteger(year)));
     }
+
+    @GetMapping("/schools/{id}")
+    public ResponseEntity<List<SpecialityDto>> getSpecialitiesByScienceSchool(@PathVariable Integer id) {
+        return ResponseEntity.ok(specialityService.findAllByScienceSchool(id));
+    }
 }
+

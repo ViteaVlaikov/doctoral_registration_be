@@ -25,10 +25,20 @@ public class Supervisor {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "first_name")
     String firstName;
+
+    @Column(name = "last_name")
     String lastName;
+
+    @Column(name = "post")
     String post;
-    String academician = "";
+
+    @Column(name = "speciality")
+    String speciality;
+
+    @Column(name = "academician")
+    String academician;
 
     @ManyToOne
     @JoinColumn(name = "science_school_id")
