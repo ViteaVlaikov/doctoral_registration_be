@@ -28,8 +28,5 @@ public class OrderType {
     private String order;
 
     @OneToMany(mappedBy = "orderType")
-    private List<Order> orders;
-
-    @OneToMany(mappedBy = "orderType")
     private List<OrderSubtype> orderSubtypes;
 }

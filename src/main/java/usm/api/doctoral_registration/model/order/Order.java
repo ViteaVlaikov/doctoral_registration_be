@@ -29,7 +29,7 @@ public class Order {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private OrderType orderType;
+    private OrderSubtype orderSubtype;
 
     @Column(name = "number")
     private String number;

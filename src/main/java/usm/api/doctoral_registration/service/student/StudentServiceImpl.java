@@ -5,14 +5,12 @@ import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.excel.StudentExcelReader;
 import usm.api.doctoral_registration.mapper.StudentMapper;
-import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 import usm.api.doctoral_registration.repository.science.ScienceBranchRepository;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
 import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
-import usm.api.doctoral_registration.service.science.SupervisorService;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void saveAll(List<Student> students) {
-        for (Student student : students){
+        for (Student student : students) {
 //            supervisorRepository.save(student.getSupervisor());
 //            specialityRepository.save(student.getSpeciality());
             studentRepository.save(student);
@@ -43,9 +41,24 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> findAllBySpecialityIdAndYear(Float speciality_id, YearStudy grade) {
-        return studentRepository.findAllBySpecialityIdAndGrade(speciality_id,grade).stream()
+        return studentRepository.findAllBySpecialityIdAndGrade(speciality_id, grade).stream()
                 .map(studentMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public StudentDto findById(Long id) {
+        Student student = studentRepository.findById(id).orElseThrow();
+        student.getStudy().setOrders(
+                student.getStudy().getOrders()
+                        .stream()
+                        .peek(order -> order.getOrderSubtype()
+                                .getOrderType()
+                                .setOrderSubtypes(null))
+                        .peek(order -> order.getOrderSubtype()
+                                .setOrders(null))
+                        .toList());
+        return studentMapper.toDto(student);
     }
 
 

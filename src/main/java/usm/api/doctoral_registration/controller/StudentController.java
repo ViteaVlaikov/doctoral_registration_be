@@ -23,6 +23,11 @@ public class StudentController {
 
     private final YearStudyMapper yearStudyMapper;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentDto> getStudent(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.findById(id));
+    }
+
     @GetMapping("specialities/{id}/{year}")
     public ResponseEntity<List<StudentDto>> getStudents(@PathVariable Float id, @PathVariable Integer year) {
         return ResponseEntity.ok(studentService.findAllBySpecialityIdAndYear(id, yearStudyMapper.mapFromInteger(year)));

@@ -13,4 +13,6 @@ public interface StudentService {
     void saveAll(List<Student> students);
 
     List<StudentDto> findAllBySpecialityIdAndYear(Float speciality_id, YearStudy grade);
+
+    StudentDto findById(Long id);
 }
