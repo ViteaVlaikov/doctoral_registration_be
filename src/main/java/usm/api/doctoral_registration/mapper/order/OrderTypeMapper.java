@@ -7,4 +7,5 @@ import usm.api.doctoral_registration.model.order.OrderType;
 
 @Mapper(uses = {OrderSubtypeMapper.class})
 public interface OrderTypeMapper extends EntityMapper<OrderType, OrderTypeDto> {
+
 }

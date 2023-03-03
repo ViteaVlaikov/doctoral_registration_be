@@ -9,10 +9,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
@@ -22,14 +20,15 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "science_branch")
 @Getter
 @Setter
-@ToString
 @Builder
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "science_branch")
 public class ScienceBranch {
+
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
@@ -41,8 +40,8 @@ public class ScienceBranch {
     @JoinColumn(name = "science_domain_id")
     private ScienceDomain scienceDomain;
 
-    @OneToMany(mappedBy = "scienceBranch", orphanRemoval = true)
     @ToString.Exclude
+    @OneToMany(mappedBy = "scienceBranch", orphanRemoval = true)
     private Set<ScienceProfile> scienceProfiles = new LinkedHashSet<>();
 
     @Override

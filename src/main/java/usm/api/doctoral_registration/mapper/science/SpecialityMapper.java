@@ -3,7 +3,7 @@ package usm.api.doctoral_registration.mapper.science;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import usm.api.doctoral_registration.dto.science.SpecialityDto;
-import usm.api.doctoral_registration.mapper.StudentMapper;
+import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.science.Speciality;
 
 @Mapper(componentModel = "spring", uses = {StudentMapper.class})

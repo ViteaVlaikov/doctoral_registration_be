@@ -9,10 +9,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
@@ -22,15 +20,16 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 @Getter
 @Setter
-@ToString
-@Entity
-@Table(name = "science_school")
 @Builder
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "science_school")
 public class ScienceSchool implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -39,8 +38,8 @@ public class ScienceSchool implements Serializable {
     @Column(name = "name")
     String name;
 
-    @OneToMany(mappedBy = "scienceSchool", orphanRemoval = true)
     @ToString.Exclude
+    @OneToMany(mappedBy = "scienceSchool", orphanRemoval = true)
     private Set<ScienceDomain> scienceDomains = new LinkedHashSet<>();
 
     @Override

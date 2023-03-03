@@ -14,6 +14,7 @@ import java.util.Set;
 /**
  * A DTO for the {@link usm.api.doctoral_registration.model.science.Speciality} entity
  */
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -21,7 +22,8 @@ import java.util.Set;
 public class SpecialityDto implements Serializable {
     private Float id;
     private String name;
-    private Integer scienceProfileId;
+    private ScienceProfileDto scienceProfile;
+
     @ToString.Exclude
     private Set<StudentDto> students;
 }

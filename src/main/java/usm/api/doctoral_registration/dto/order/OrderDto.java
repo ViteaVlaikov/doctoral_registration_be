@@ -8,6 +8,10 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
+/**
+ * A DTO for the {@link usm.api.doctoral_registration.model.order.Order} entity
+ */
+
 @Getter
 @Setter
 @ToString
@@ -15,9 +19,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class OrderDto {
 
-    private Integer orderType;      // id
+    private Integer id;
 
-    private String orderNumber;
+    private OrderSubtypeDto orderSubtype;
 
-    private LocalDate orderDate;
+    private String number;
+
+    private LocalDate date;
 }

@@ -1,7 +1,6 @@
 package usm.api.doctoral_registration.model.student;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -11,35 +10,41 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import usm.api.doctoral_registration.model.country.Country;
+import usm.api.doctoral_registration.model.order.Order;
 import usm.api.doctoral_registration.model.science.Speciality;
+import usm.api.doctoral_registration.model.student.properties.Financing;
 import usm.api.doctoral_registration.model.student.properties.Gender;
+import usm.api.doctoral_registration.model.student.properties.Registration;
 import usm.api.doctoral_registration.model.student.properties.Status;
+import usm.api.doctoral_registration.model.student.properties.StudyType;
+import usm.api.doctoral_registration.model.student.properties.YearStudy;
+import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
-
-//import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
+import java.util.Set;
 
 @Entity
-@Table(name = "student")
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "student")
 public class Student {
 
     @Id
@@ -70,8 +75,8 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     private Country citizenship;
 
     @Column(name = "diploma_series")
@@ -88,8 +93,38 @@ public class Student {
 
     @Column(name = "status")
     private Status status;
-    @Embedded
-    private Study study;
+
+    // transfer without study :
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "registration_type")
+    private Registration registration;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "student",
+            cascade = jakarta.persistence.CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Order> orders;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "year_study")
+    private YearStudy yearStudy;
+
+    @Column(name = "begin_studies")
+    private LocalDate beginStudies;
+
+    @Column(name = "end_studies")
+    private LocalDate endStudies;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "study")
+    private StudyType studyType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "financing")
+    private Financing financing;
+
+    // end
 
     @Column(name = "remark")
     private String remark;
@@ -103,8 +138,12 @@ public class Student {
     @JoinColumn(name = "speciality")
     private Speciality speciality;
 
-//    @OneToMany(mappedBy = "student")
-//    private Set<SteeringCommittee> steeringCommittee;
+    @OneToMany(mappedBy = "student")
+    @ToString.Exclude
+    private Set<SteeringCommittee> steeringCommittee;
+
+    @Column(name = "science_topic")
+    private String scienceTopic;
 
     @Override
     public boolean equals(Object o) {

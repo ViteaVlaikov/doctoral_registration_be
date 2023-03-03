@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.excel.StudentExcelReader;
-import usm.api.doctoral_registration.mapper.StudentMapper;
+import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 import usm.api.doctoral_registration.repository.science.ScienceBranchRepository;

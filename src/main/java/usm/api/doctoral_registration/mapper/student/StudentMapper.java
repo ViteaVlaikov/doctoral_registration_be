@@ -1,9 +1,13 @@
-package usm.api.doctoral_registration.mapper;
+package usm.api.doctoral_registration.mapper.student;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 import usm.api.doctoral_registration.dto.student.StudentDto;
+import usm.api.doctoral_registration.mapper.country.CountryMapper;
+import usm.api.doctoral_registration.mapper.EntityMapper;
+import usm.api.doctoral_registration.mapper.StudyMapper;
+import usm.api.doctoral_registration.mapper.supervisor.SupervisorMapper;
 import usm.api.doctoral_registration.model.student.Student;
 
 @Component

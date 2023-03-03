@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * A DTO for the {@link usm.api.doctoral_registration.model.order.OrderSubtype} entity
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
