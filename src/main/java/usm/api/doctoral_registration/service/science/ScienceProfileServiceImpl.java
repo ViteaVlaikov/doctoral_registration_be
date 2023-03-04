@@ -17,7 +17,7 @@ public class ScienceProfileServiceImpl implements ScienceProfileService {
     @Override
     public List<ScienceProfileDto> findAllByScienceBranchIdAndYear(Integer branch_id, YearStudy grade) {
         return scienceProfileRepository.findAllByScienceBranchIdAndYear(branch_id, grade).stream()
-                .map(scienceProfileMapper::mapToDto)
+                .map(scienceProfileMapper::toDto)
                 .toList();
     }
 }

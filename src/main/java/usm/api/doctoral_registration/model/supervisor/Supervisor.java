@@ -1,14 +1,6 @@
 package usm.api.doctoral_registration.model.supervisor;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.Student;
@@ -47,6 +39,6 @@ public class Supervisor {
     @OneToMany(mappedBy = "supervisor", orphanRemoval = true)
     private Set<Student> students = new LinkedHashSet<>();
 
-//    @OneToMany(mappedBy = "supervisor")
-//    Set<SteeringCommittee> steeringCommittee;
+    @ManyToMany(mappedBy = "steeringCommittee")
+    Set<Student> steeringCommittee;
 }

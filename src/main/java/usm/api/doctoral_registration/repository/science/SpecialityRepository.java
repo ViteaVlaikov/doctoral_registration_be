@@ -13,7 +13,7 @@ import java.util.List;
 public interface SpecialityRepository extends JpaRepository<Speciality, Float> {
     @Query("from Speciality s " +
             "join Student st on s = st.speciality " +
-            "where s.scienceProfile.id = :profile_id and st.study.yearStudy = :grade")
+            "where s.scienceProfile.id = :profile_id and st.yearStudy = :grade")
     List<Speciality> findAllByScienceProfileIdAndGrade(Integer profile_id, YearStudy grade);
 
     @Query("from Speciality s " +

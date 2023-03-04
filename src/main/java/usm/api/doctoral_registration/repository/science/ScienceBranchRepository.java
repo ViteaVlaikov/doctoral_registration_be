@@ -16,6 +16,6 @@ public interface ScienceBranchRepository extends JpaRepository<ScienceBranch, Fl
             "join ScienceProfile sp on sb = sp.scienceBranch " +
             "join Speciality s on sp = s.scienceProfile " +
             "join Student st on s = st.speciality " +
-            "where sd.id = :domain_id and st.study.yearStudy = :grade")
+            "where sd.id = :domain_id and st.yearStudy = :grade")
     List<ScienceBranch> findAllByScienceDomainIdAndYear(Integer domain_id, YearStudy grade);
 }

@@ -17,7 +17,7 @@ public interface ScienceDomainRepository extends JpaRepository<ScienceDomain, Fl
             "join ScienceProfile sp on sb = sp.scienceBranch " +
             "join Speciality s on sp = s.scienceProfile " +
             "join Student s2 on s = s2.speciality " +
-            "where s2.study.yearStudy = :grade and sd.id = :id")
+            "where s2.yearStudy = :grade and sd.id = :id")
     Integer getCountOfStudentsByScienceDomainIdAndGrade(String grade, Integer id);
 
     @Query("from ScienceDomain sd " +
@@ -26,6 +26,6 @@ public interface ScienceDomainRepository extends JpaRepository<ScienceDomain, Fl
             "join ScienceProfile sp on sb = sp.scienceBranch " +
             "join Speciality s on sp = s.scienceProfile " +
             "join Student s2 on s = s2.speciality " +
-            "where ss.id = :science_id and s2.study.yearStudy = :grade")
+            "where ss.id = :science_id and s2.yearStudy = :grade")
     List<ScienceDomain> findAllByScienceSchoolIdAndGrade(Integer science_id, YearStudy grade);
 }

@@ -22,7 +22,7 @@ public class ScienceSchoolServiceImpl implements ScienceSchoolService {
     @Override
     public List<ScienceSchoolDto> findAll() {
         return scienceSchoolRepository.findAll().stream()
-                .map(scienceSchoolMapper::mapToDto)
+                .map(scienceSchoolMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -30,7 +30,7 @@ public class ScienceSchoolServiceImpl implements ScienceSchoolService {
     public List<ScienceSchoolDto> findAllWithoutDependencies() {
         return scienceSchoolRepository.findAll().stream()
                 .peek(school -> school.setScienceDomains(null))
-                .map(scienceSchoolMapper::mapToDto)
+                .map(scienceSchoolMapper::toDto)
                 .collect(Collectors.toList());
     }
     @Override
@@ -38,7 +38,7 @@ public class ScienceSchoolServiceImpl implements ScienceSchoolService {
         List<ScienceSchool> scienceSchools = scienceSchoolRepository.findAll();
         Map<ScienceSchoolDto, List<Long>> result = new HashMap<>();
         for(ScienceSchool scienceSchool : scienceSchools) {
-            ScienceSchoolDto scienceSchoolDto = scienceSchoolMapper.mapToDto(scienceSchool);
+            ScienceSchoolDto scienceSchoolDto = scienceSchoolMapper.toDto(scienceSchool);
             result.put(scienceSchoolDto,getCountOfStudentsByYearsForScienceSchool(scienceSchool));
         }
         return result;

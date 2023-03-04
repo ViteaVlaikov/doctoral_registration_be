@@ -20,7 +20,9 @@ import java.util.List;
 @RequestMapping("api/sciences/specialities")
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class SpecialityController {
+
     private final SpecialityService specialityService;
+
     private final YearStudyMapper yearStudyMapper;
 
     @GetMapping("/profiles/{id}/{year}")

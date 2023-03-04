@@ -48,17 +48,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDto findById(Long id) {
-        Student student = studentRepository.findById(id).orElseThrow();
-        student.getStudy().setOrders(
-                student.getStudy().getOrders()
-                        .stream()
-                        .peek(order -> order.getOrderSubtype()
-                                .getOrderType()
-                                .setOrderSubtypes(null))
-                        .peek(order -> order.getOrderSubtype()
-                                .setOrders(null))
-                        .toList());
-        return studentMapper.toDto(student);
+        return studentMapper.toDto(
+                studentRepository.findById(id).orElseThrow());
     }
 
 

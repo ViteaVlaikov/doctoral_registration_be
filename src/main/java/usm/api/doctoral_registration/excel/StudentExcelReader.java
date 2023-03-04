@@ -335,7 +335,7 @@ public class StudentExcelReader {
         }
         SpecialityDto specialityDto = new SpecialityDto();
         specialityDto.setId(idSpeciality);
-        studentDTO.setSpecialityId(specialityDto.getId());
+//        studentDTO.setSpecialityId(specialityDto.getId());
     }
 
     private void readSpecialty(Cell cell, StudentDto studentDTO) {

@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("api/sciences/domains")
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class ScienceDomainController {
+
     private final ScienceDomainService domainService;
 
     @GetMapping

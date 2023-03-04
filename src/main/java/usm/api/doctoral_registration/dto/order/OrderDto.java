@@ -21,9 +21,15 @@ public class OrderDto {
 
     private Integer id;
 
-    private OrderSubtypeDto orderSubtype;
-
     private String number;
 
     private LocalDate date;
+
+    private Integer orderSubtypeId;
+
+    private String orderSubtype;
+
+    private Integer orderTypeId;
+
+    private String orderType;
 }

@@ -21,8 +21,10 @@ import java.util.Set;
 @NoArgsConstructor
 public class SpecialityDto implements Serializable {
     private Float id;
+
     private String name;
-    private ScienceProfileDto scienceProfile;
+
+    private Integer scienceProfileId;
 
     @ToString.Exclude
     private Set<StudentDto> students;

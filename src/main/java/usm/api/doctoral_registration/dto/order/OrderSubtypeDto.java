@@ -16,4 +16,6 @@ public class OrderSubtypeDto {
     private Integer id;
 
     private String order;
+
+    private OrderTypeDto orderType;
 }

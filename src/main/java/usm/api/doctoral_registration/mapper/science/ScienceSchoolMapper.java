@@ -9,8 +9,6 @@ import usm.api.doctoral_registration.dto.science.ScienceSchoolDto;
 import usm.api.doctoral_registration.mapper.EntityMapper;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 
-@Mapper(componentModel = "spring",uses = {ScienceDomainMapper.class})
-public interface ScienceSchoolMapper {
-    ScienceSchool mapToEntity(ScienceSchoolDto scienceSchoolDto);
-    ScienceSchoolDto mapToDto(ScienceSchool scienceSchool);
+@Mapper(uses = {ScienceDomainMapper.class})
+public interface ScienceSchoolMapper extends EntityMapper<ScienceSchool, ScienceSchoolDto> {
 }

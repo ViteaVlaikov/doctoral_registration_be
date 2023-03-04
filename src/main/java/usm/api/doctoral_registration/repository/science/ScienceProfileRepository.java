@@ -14,6 +14,6 @@ public interface ScienceProfileRepository extends JpaRepository<ScienceProfile, 
     @Query("from ScienceProfile sp " +
             "join Speciality s2 on sp = s2.scienceProfile " +
             "join Student s on s2 = s.speciality " +
-            "where sp.scienceBranch.id = :branch_id and s.study.yearStudy = :grade")
+            "where sp.scienceBranch.id = :branch_id and s.yearStudy = :grade")
     List<ScienceProfile> findAllByScienceBranchIdAndYear(Integer branch_id, YearStudy grade);
 }

@@ -17,7 +17,7 @@ public class ScienceBranchServiceImpl implements ScienceBranchService {
     @Override
     public List<ScienceBranchDto> findAllByScienceDomainIdAndYear(Integer domain_id, YearStudy grade) {
         return scienceBranchRepository.findAllByScienceDomainIdAndYear(domain_id, grade).stream()
-                .map(scienceBranchMapper::mapToDto)
+                .map(scienceBranchMapper::toDto)
                 .toList();
     }
 }

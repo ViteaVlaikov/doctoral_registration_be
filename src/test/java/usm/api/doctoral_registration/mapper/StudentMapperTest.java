@@ -8,9 +8,7 @@ import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.student.Student;
-import usm.api.doctoral_registration.model.student.Study;
 import usm.api.doctoral_registration.model.student.properties.Gender;
-import usm.api.doctoral_registration.model.student.properties.Registration;
 import usm.api.doctoral_registration.model.student.properties.Status;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
 
@@ -21,14 +19,11 @@ class StudentMapperTest {
     @Autowired
     StudentMapper studentMapper;
 
-    @Autowired
-    StudyMapper studyMapper;
 
     Student student;
 
     StudentDto studentDTO;
 
-    Study study;
 
     @Autowired
     StudentRepository studentRepository;
@@ -43,7 +38,7 @@ class StudentMapperTest {
         student.setPatronymicName("Artiomov");
         student.setYearBirth(2002);
         student.setIdentNumber("123456789012");
-        student.setGender(Gender.MASCULINE);
+        student.setGender(Gender.M);
 
         Country country = new Country();
         country.setId(1);
@@ -54,12 +49,7 @@ class StudentMapperTest {
         student.setDiplomaNumber(12345);
         student.setPersonalEmail("student@gmail.com");
         student.setStatus(Status.ACTIVE);
-        study = new Study();
-        study.setRegistration(Registration.ENROLLED);
-//        study.setSpeciality(new Speciality());
-//        study.setOrders();
 
-        student.setStudy(study);
 
     }
 
@@ -72,9 +62,7 @@ class StudentMapperTest {
 
     @Test
     void testStudy() {
-        StudyDto studyDto1 = studyMapper.toDto(study);
 
-        System.out.println(studyDto1);
     }
 
     @Test

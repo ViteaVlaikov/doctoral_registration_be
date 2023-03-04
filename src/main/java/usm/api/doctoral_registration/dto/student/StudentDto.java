@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import usm.api.doctoral_registration.dto.country.CountryDto;
-import usm.api.doctoral_registration.dto.order.OrderDto;
-import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
 
 import java.time.LocalDate;
@@ -24,6 +22,45 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentDto {
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class OrderDto {
+
+        private Integer id;
+
+        private String number;
+
+        private LocalDate date;
+
+        private Integer orderSubtypeId;
+
+        private Integer orderTypeId;
+
+        private String orderSubtype;
+
+        private String orderType;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class SpecialityDto {
+        private Float id;
+
+        private String name;
+
+        private String scienceProfile;
+
+        private String scienceBranch;
+
+        private String scienceDomain;
+
+        private Integer scienceSchoolId;
+
+        private String scienceSchool;
+    }
 
     private Long id;
 
@@ -53,7 +90,6 @@ public class StudentDto {
 
     private String status;
 
-    //    private StudyDto study;
     private String registration;
 
     private List<OrderDto> orders;
@@ -70,9 +106,11 @@ public class StudentDto {
 
     private String remark;
 
+    private String scienceTopic;
+
     private SupervisorDto supervisor;
 
-    private SpecialityDto specialityDto;
+    private SpecialityDto speciality;
 
     private Set<SupervisorDto> steeringCommittee;
 }

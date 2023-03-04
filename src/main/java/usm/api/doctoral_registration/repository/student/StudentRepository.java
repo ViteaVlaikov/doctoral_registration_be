@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("from Student " +
-            "where speciality.id = :specialityId and study.yearStudy = :grade")
+            "where speciality.id = :specialityId and yearStudy = :grade")
     List<Student> findAllBySpecialityIdAndGrade(Float specialityId, YearStudy grade);
 }

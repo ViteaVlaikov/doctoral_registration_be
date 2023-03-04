@@ -45,7 +45,7 @@ public class ScienceDomainServiceImpl implements ScienceDomainService {
         YearStudy grade = yearStudyMapper.mapFromInteger(year);
 
         List<ScienceDomainDto> scienceDomainDtos = domainRepository.findAllByScienceSchoolIdAndGrade(scienceSchoolId, grade).stream()
-                .map(scienceDomainMapper::mapToDto)
+                .map(scienceDomainMapper::toDto)
                 .toList();
         setBranchDtosToDomainDtos(grade, scienceDomainDtos);
 

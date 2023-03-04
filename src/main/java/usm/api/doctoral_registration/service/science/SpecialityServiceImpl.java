@@ -20,14 +20,14 @@ public class SpecialityServiceImpl implements SpecialityService {
     @Override
     public List<SpecialityDto> findAll() {
         return specialityRepository.findAll().stream()
-                .map(specialityMapper::mapToDto)
+                .map(specialityMapper::toDto)
                 .toList();
     }
 
     @Override
     public List<SpecialityDto> findAllByScienceProfileIdAndGrade(Integer profile_id, YearStudy grade) {
         return specialityRepository.findAllByScienceProfileIdAndGrade(profile_id, grade).stream()
-                .map(specialityMapper::mapToDto)
+                .map(specialityMapper::toDto)
                 .toList();
     }
 
@@ -35,6 +35,6 @@ public class SpecialityServiceImpl implements SpecialityService {
     public List<SpecialityDto> findAllByScienceSchool(Integer id) {
         return specialityRepository.findAllByScienceSchool(id).stream()
                 .peek(speciality -> speciality.setStudents(null))
-                .map(specialityMapper::mapToDto).toList();
+                .map(specialityMapper::toDto).toList();
     }
 }

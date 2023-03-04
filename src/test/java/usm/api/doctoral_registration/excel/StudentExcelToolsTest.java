@@ -53,14 +53,14 @@ class StudentExcelToolsTest {
         //511.01
         Map<Float, Speciality> specialities = specialityRepository
                 .findAll().stream().collect(Collectors.toMap(Speciality::getId, Function.identity()));
-        for(int i = 0; i < students.size(); i++) {
-//            System.out.println(studentDtos.get(i));
-            specialities
-                    .get(studentDtos.get(i).getSpecialityId())
-                    .getStudents().add(studentMapper.toEntity(studentDtos.get(i)));
-            students.get(i).setSpeciality(specialities
-                    .get(studentDtos.get(i).getSpecialityId()));
-        }
+//        for(int i = 0; i < students.size(); i++) {
+////            System.out.println(studentDtos.get(i));
+//            specialities
+//                    .get(studentDtos.get(i).getSpecialityId())
+//                    .getStudents().add(studentMapper.toEntity(studentDtos.get(i)));
+//            students.get(i).setSpeciality(specialities
+//                    .get(studentDtos.get(i).getSpecialityId()));
+//        }
 //        students.forEach(student -> student.getStudy().setSpeciality(specialityRepository.findById(student.)));
 
         //students.forEach(student -> student.getCitizenship().setStudent(students));

@@ -1,26 +1,8 @@
 package usm.api.doctoral_registration.model.student;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.order.Order;
 import usm.api.doctoral_registration.model.science.Speciality;
@@ -30,7 +12,6 @@ import usm.api.doctoral_registration.model.student.properties.Registration;
 import usm.api.doctoral_registration.model.student.properties.Status;
 import usm.api.doctoral_registration.model.student.properties.StudyType;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
-import usm.api.doctoral_registration.model.supervisor.SteeringCommittee;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 
 import java.time.LocalDate;
@@ -91,10 +72,9 @@ public class Student {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
-
-    // transfer without study :
 
     @Enumerated(EnumType.STRING)
     @Column(name = "registration_type")
@@ -102,7 +82,7 @@ public class Student {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "student",
-            cascade = jakarta.persistence.CascadeType.ALL,
+            cascade = CascadeType.ALL,
             orphanRemoval = true)
     private List<Order> orders;
 
@@ -124,26 +104,27 @@ public class Student {
     @Column(name = "financing")
     private Financing financing;
 
-    // end
-
-    @Column(name = "remark")
-    private String remark;
-
     @ManyToOne
     @JoinColumn(name = "supervisor_id")
     private Supervisor supervisor;
 
     @ManyToOne
-    @Cascade(CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "speciality")
     private Speciality speciality;
 
-    @OneToMany(mappedBy = "student")
+    @ManyToMany
     @ToString.Exclude
-    private Set<SteeringCommittee> steeringCommittee;
+    @JoinTable(
+            name = "steering_committee",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "supervisor_id"))
+    private Set<Supervisor> steeringCommittee;
 
     @Column(name = "science_topic")
     private String scienceTopic;
+
+    @Column(name = "remark")
+    private String remark;
 
     @Override
     public boolean equals(Object o) {
