@@ -7,7 +7,7 @@ import usm.api.doctoral_registration.mapper.EntityMapper;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.science.Speciality;
 
-@Mapper
+@Mapper(uses = {StudentMapper.class})
 public interface SpecialityMapper extends EntityMapper<Speciality, SpecialityDto> {
 
     @Override

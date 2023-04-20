@@ -27,7 +27,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> findAll() {
-        return studentExcelTools.read(PATH + "students.xlsx", 2);
+//        return studentExcelTools.read(PATH + "students.xlsx", 2);
+        return studentRepository.findAll().stream().map(studentMapper::toDto).toList();
     }
 
     @Override

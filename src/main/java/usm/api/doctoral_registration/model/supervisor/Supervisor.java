@@ -18,19 +18,19 @@ public class Supervisor {
     private Long id;
 
     @Column(name = "first_name")
-    String firstName;
+    private String firstName;
 
     @Column(name = "last_name")
-    String lastName;
+    private String lastName;
 
     @Column(name = "post")
-    String post;
+    private String post;
 
     @Column(name = "speciality")
-    String speciality;
+    private String speciality;
 
     @Column(name = "academician")
-    String academician;
+    private String academician;
 
     @ManyToOne
     @JoinColumn(name = "science_school_id")
@@ -40,5 +40,5 @@ public class Supervisor {
     private Set<Student> students = new LinkedHashSet<>();
 
     @ManyToMany(mappedBy = "steeringCommittee")
-    Set<Student> steeringCommittee;
+    private Set<Student> steeringCommittee;
 }
