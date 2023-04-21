@@ -22,9 +22,9 @@ public enum YearStudy {
         this.code = code;
     }
 
-    public static String toYear(int code) {
+    public static YearStudy toYear(int code) {
         return Arrays.stream(YearStudy.values())
                 .filter(year -> year.code == code)
-                .findFirst().orElseThrow().toString();
+                .findFirst().orElseThrow();
     }
 }

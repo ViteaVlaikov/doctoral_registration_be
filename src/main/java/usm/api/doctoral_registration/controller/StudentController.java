@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.mapper.YearStudyMapper;
 import usm.api.doctoral_registration.service.student.StudentService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +34,11 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<StudentDto> getStudent(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.findById(id));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<StudentDto>> getFilteredStudents(@RequestParam Map<String, String> params) {
+        return ResponseEntity.ok(studentService.findByParams(params));
     }
 
     @GetMapping("specialities/{id}/{year}")
