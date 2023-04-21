@@ -22,11 +22,12 @@ public enum YearStudy {
         this.code = code;
     }
 
-    public static YearStudy toYear(String code) {
-        return toYear(Integer.parseInt(code));
+    public static YearStudy toYearStudy(String code) {
+        return toYearStudy(Integer.parseInt(code));
+
     }
 
-    public static YearStudy toYear(int code) {
+    public static YearStudy toYearStudy(int code) {
         return Arrays.stream(YearStudy.values())
                 .filter(year -> year.code == code)
                 .findFirst().orElseThrow();

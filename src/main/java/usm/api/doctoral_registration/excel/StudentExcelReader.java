@@ -14,6 +14,7 @@ import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.properties.Financing;
+import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.StudyType;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
@@ -21,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -28,6 +30,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static usm.api.doctoral_registration.model.student.properties.YearStudy.toYearStudy;
 
 @Slf4j
 @Component
@@ -137,7 +141,8 @@ public class StudentExcelReader {
                 }
 
                 listStudentsDTO.add(convertToStudentDTO(row));
-                if (i++ == 200)
+                //714
+                if (i++ == 282)
                     break;
             }
         } catch (IOException e) {
@@ -214,13 +219,18 @@ public class StudentExcelReader {
     }
 
     private void readYearStudy(Cell cell, StudentDto studentDTO) {
-        String yearStudy = cell.getStringCellValue();
-        switch (yearStudy) {
-            case "grație I-II" -> yearStudy = YearStudy.EXTRA_II.toString();
-            case "grație II" -> yearStudy = YearStudy.EXTRA_I.toString();
-            default -> yearStudy = cell.getStringCellValue();
+        String year = cell.getStringCellValue();
+        YearStudy yearStudy;
+        switch (year) {
+            case "grație I-II" -> yearStudy = YearStudy.EXTRA_II;
+            case "grație II" -> yearStudy = YearStudy.EXTRA_I;
+            case "I" -> yearStudy = YearStudy.I;
+            case "II" -> yearStudy = YearStudy.II;
+            case "III" -> yearStudy = YearStudy.III;
+            case "IV" -> yearStudy = YearStudy.IV;
+            default -> yearStudy = null;
         }
-//        studentDTO.getStudy().setYearStudy(yearStudy);
+        studentDTO.setYearStudy(yearStudy);
     }
 
     private void readYearBirth(Cell cell, StudentDto studentDTO) {
@@ -240,12 +250,13 @@ public class StudentExcelReader {
 
     private void readGender(Cell cell, StudentDto studentDTO) {
         String gender = cell.getStringCellValue().toUpperCase();
+        Gender gender1;
         if(gender.equals("F")) {
-            gender = "FEMININE";
+            gender1 = Gender.F;
         } else {
-            gender = "MASCULINE";
+            gender1 = Gender.M;
         }
-        studentDTO.setGender(gender);
+        studentDTO.setGender(gender1);
     }
 
     private void readFinancing(Cell cell, StudentDto studentDTO) {
@@ -259,23 +270,23 @@ public class StudentExcelReader {
     }
 
     private void readDateAndOrderBegin(Cell cell, StudentDto studentDTO) {
-        LocalDate dateBegin;
+        LocalDate dateBegin = null;
         String orderNumber;
         LocalDate orderDate;
         if (cell.getCellType() == CellType.NUMERIC) {
-            dateBegin = cell.getLocalDateTimeCellValue().toLocalDate();
+//            dateBegin = cell.getLocalDateTimeCellValue().toLocalDate();
 //            studentDTO.getStudy().setBeginStudies(dateBegin);
             return;
         }
         List<String> dateAndOrderBegin = Arrays.stream(cell.getStringCellValue().split("(, )|(,\n)")).toList();
-        dateBegin = DateTemplate.toLocalDate(dateAndOrderBegin.get(0));
+//        dateBegin = DateTemplate.toLocalDate(dateAndOrderBegin.get(0));
         if (dateAndOrderBegin.size() == 1) {
 //            studentDTO.getStudy().setBeginStudies(dateBegin);
             return;
         }
         if (DateTemplate.isDate(dateAndOrderBegin.get(1))) {
             orderDate = DateTemplate.toLocalDate(dateAndOrderBegin.get(1));
-//            studentDTO.getStudy().setBeginStudies(dateBegin);
+//            studentDTO.setBeginStudies(dateBegin);
 //            studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
             return;
         }
@@ -284,7 +295,20 @@ public class StudentExcelReader {
             throw new IllegalArgumentException("order number invalid");
         }
         orderDate = DateTemplate.toLocalDate(dateAndOrderBegin.get(2));
-//        studentDTO.getStudy().setBeginStudies(dateBegin);
+        String dateRegex = "\\d{1,4}([/.-])\\d{1,2}\\1\\d{1,4}";
+
+        Pattern pattern = Pattern.compile(dateRegex);
+        Matcher matcher = pattern.matcher(cell.getStringCellValue());
+        if (matcher.find()) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                dateBegin = LocalDate.parse(matcher.group(), formatter);
+            }catch (DateTimeParseException e){
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                dateBegin = LocalDate.parse(matcher.group(), formatter);
+            }
+        }
+        studentDTO.setBeginStudies(dateBegin);
 //        studentDTO.getStudy().getOrderDTO().setOrderNumber(orderNumber);
 //        studentDTO.getStudy().getOrderDTO().setOrderDate(orderDate);
     }
@@ -431,7 +455,7 @@ public class StudentExcelReader {
             }
         }
 
-//        studentDTO.setCitizenship(countryDTO);
+        studentDTO.setCitizenship(countryDTO);
     }
 
     // TODO: resolve value: "CA"

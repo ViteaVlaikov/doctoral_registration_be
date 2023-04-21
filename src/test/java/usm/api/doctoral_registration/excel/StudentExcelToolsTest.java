@@ -51,8 +51,9 @@ class StudentExcelToolsTest {
 
         List<Student> students = studentDtos.stream().map(studentMapper::toEntity).toList();
         //511.01
-        Map<Float, Speciality> specialities = specialityRepository
-                .findAll().stream().collect(Collectors.toMap(Speciality::getId, Function.identity()));
+//        Map<Float, Speciality> specialities = specialityRepository
+//                .findAll().stream().collect(Collectors.toMap(Speciality::getId, Function.identity()));
+//        students.forEach(System.out::println);
 //        for(int i = 0; i < students.size(); i++) {
 ////            System.out.println(studentDtos.get(i));
 //            specialities

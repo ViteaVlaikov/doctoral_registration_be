@@ -8,7 +8,7 @@ public class YearStudyMapperImpl implements YearStudyMapper {
 
     @Override
     public YearStudy mapFromInteger(Integer year) {
-        return YearStudy.toYear(year);
+        return YearStudy.toYearStudy(year);
     }
 
     @Override

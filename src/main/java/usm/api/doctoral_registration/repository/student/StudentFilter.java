@@ -15,7 +15,7 @@ public enum StudentFilter {
 
     SCHOOL_ID("school_id", StudentRepository::bySchoolsId, Integer::valueOf),
 
-    YEAR("year_study", StudentRepository::byYearStudy, YearStudy::toYear);
+    YEAR("year_study", StudentRepository::byYearStudy, YearStudy::toYearStudy);
 
     final String field;
 

@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 import usm.api.doctoral_registration.dto.country.CountryDto;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
+import usm.api.doctoral_registration.model.student.properties.Gender;
+import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -76,7 +78,7 @@ public class StudentDto {
 
     private String identNumber;
 
-    private String gender;
+    private Gender gender;
 
     private CountryDto citizenship;
 
@@ -94,7 +96,7 @@ public class StudentDto {
 
     private List<OrderDto> orders;
 
-    private String yearStudy;
+    private YearStudy yearStudy;
 
     private LocalDate beginStudies;
 
