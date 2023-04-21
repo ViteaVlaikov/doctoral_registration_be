@@ -17,20 +17,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
             "where speciality.id = :specialityId and yearStudy = :grade")
     List<Student> findAllBySpecialityIdAndGrade(Float specialityId, YearStudy grade);
 
-//    @Query("from Student " +
-//            "where speciality.scienceProfile.scienceBranch.scienceDomain.scienceSchool.id in (:schoolsId)")
-//    List<Student> findAllBySchoolsIdContaining(List<Integer> schoolsId);
-//
-//    @Query("from Student " +
-//            "where yearStudy in (:yearStudies)")
-//    List<Student> findAllByYearStudyContaining(List<YearStudy> yearStudies);
-//
-//    @Query("from Student " +
-//            "where speciality.id in (:specialitiesId)")
-//    List<Student> findAllBySpecialityIdConstraining(List<Float> specialitiesId);
-
     static Specification<Student> byYearStudy(List<?> years) {
-        return (student, cq, cb) -> student.get("year_study").in(years);
+        return (student, cq, cb) -> student.get("yearStudy").in(years);
     }
 
     static Specification<Student> bySpecialitiesId(List<?> specialitiesId) {
