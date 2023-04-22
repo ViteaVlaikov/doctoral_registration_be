@@ -1,16 +1,22 @@
 package usm.api.doctoral_registration.excel;
 
+import org.apache.catalina.Store;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
+import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.dto.student.StudentDto;
+import usm.api.doctoral_registration.mapper.science.SpecialityMapper;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.Student;
+import usm.api.doctoral_registration.repository.science.ScienceBranchRepository;
+import usm.api.doctoral_registration.repository.science.ScienceProfileRepository;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
 import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
+import usm.api.doctoral_registration.service.science.SpecialityService;
 import usm.api.doctoral_registration.service.student.StudentService;
 
 import java.util.List;
@@ -44,6 +50,14 @@ class StudentExcelToolsTest {
     private final static String PATH = "./src/test/java/usm/api/doctoral_registration/excel/";
     @Autowired
     private SupervisorRepository supervisorRepository;
+    @Autowired
+    private SpecialityMapper specialityMapper;
+    @Autowired
+    private ScienceProfileRepository scienceProfileRepository;
+    @Autowired
+    private ScienceBranchRepository scienceBranchRepository;
+    @Autowired
+    private SpecialityService specialityService;
 
     @Test
     void test() {
@@ -51,6 +65,7 @@ class StudentExcelToolsTest {
 
 
         List<Student> students = studentDtos.stream().map(studentMapper::toEntity).toList();
+
         //511.01
 //        Map<Float, Speciality> specialities = specialityRepository
 //                .findAll().stream().collect(Collectors.toMap(Speciality::getId, Function.identity()));

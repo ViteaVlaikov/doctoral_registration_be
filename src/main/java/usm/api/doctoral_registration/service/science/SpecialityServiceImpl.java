@@ -7,6 +7,7 @@ import usm.api.doctoral_registration.mapper.science.SpecialityMapper;
 import usm.api.doctoral_registration.model.science.ScienceDomain;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
+import usm.api.doctoral_registration.repository.science.ScienceProfileRepository;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.List;
 public class SpecialityServiceImpl implements SpecialityService {
     private final SpecialityRepository specialityRepository;
     private final SpecialityMapper specialityMapper;
+
+    private final ScienceProfileRepository scienceProfileRepository;
 
     @Override
     public List<SpecialityDto> findAll() {
@@ -36,5 +39,11 @@ public class SpecialityServiceImpl implements SpecialityService {
         return specialityRepository.findAllByScienceSchool(id).stream()
                 .peek(speciality -> speciality.setStudents(null))
                 .map(specialityMapper::toDto).toList();
+    }
+
+    @Override
+    public void save(Speciality speciality) {
+        scienceProfileRepository.save(speciality.getScienceProfile());
+        specialityRepository.save(speciality);
     }
 }

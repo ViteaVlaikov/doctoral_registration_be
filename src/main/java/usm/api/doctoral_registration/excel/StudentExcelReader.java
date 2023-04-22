@@ -162,7 +162,7 @@ public class StudentExcelReader {
 
     private StudentDto convertToStudentDTO(Row row) {
         StudentDto studentDTO = new StudentDto();
-        studentDTO.setSpeciality(new StudentDto.SpecialityDto());
+        studentDTO.setSpecialityDto(new SpecialityDto());
 //        studentDTO.setStudy(new StudyDto());
 //        studentDTO.getStudy().setOrderDTO(new OrderDto());
 
@@ -365,11 +365,9 @@ public class StudentExcelReader {
                     substring(cell.getStringCellValue(), "[0-9]{3}\\.[0-9]{2}"));
             case NUMERIC -> idSpeciality = Float.parseFloat(cell.getStringCellValue());
         }
-        SpecialityDto specialityDto = specialityRepository.findById(idSpeciality).map(specialityMapper::toDto).orElse(null);
-        if(specialityDto != null) {
-            specialityDto.setId(idSpeciality);
-            studentDTO.getSpeciality().setId(specialityDto.getId());
-        }
+        SpecialityDto specialityDto = specialityRepository.findById(idSpeciality)
+                .map(specialityMapper::toDto).orElse(new SpecialityDto((float) 0));
+        studentDTO.setSpecialityDto(specialityDto);
     }
 
     private void readSpecialty(Cell cell, StudentDto studentDTO) {

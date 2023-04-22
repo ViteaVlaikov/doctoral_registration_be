@@ -28,4 +28,8 @@ public class SpecialityDto implements Serializable {
 
     @ToString.Exclude
     private Set<StudentDto> students;
+
+    public SpecialityDto(Float i) {
+        this.id = i;
+    }
 }

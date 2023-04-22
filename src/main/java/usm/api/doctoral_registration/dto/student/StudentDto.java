@@ -113,6 +113,7 @@ public class StudentDto {
     private SupervisorDto supervisor;
 
     private SpecialityDto speciality;
+    private usm.api.doctoral_registration.dto.science.SpecialityDto specialityDto;
 
     private Set<SupervisorDto> steeringCommittee;
 }

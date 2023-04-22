@@ -44,6 +44,10 @@ public class Speciality {
     @OneToMany(mappedBy = "speciality", orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Student> students = new LinkedHashSet<>();
 
+    public Speciality(float i) {
+        this.id = i;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
