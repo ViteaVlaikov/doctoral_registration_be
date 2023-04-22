@@ -27,7 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         locations = "classpath:application.properties")
 class StudentExcelToolsTest {
 
-    private final StudentExcelReader studentExcelTools = new StudentExcelReader();
+    @Autowired
+    private StudentExcelReader studentExcelTools;
 
     @Autowired
     private StudentMapper studentMapper;
