@@ -12,11 +12,13 @@ import org.springframework.stereotype.Component;
 import usm.api.doctoral_registration.dto.country.CountryDto;
 import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.dto.student.StudentDto;
+import usm.api.doctoral_registration.mapper.science.SpecialityMapper;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.properties.Financing;
 import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.StudyType;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
+import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -38,6 +40,13 @@ import static usm.api.doctoral_registration.model.student.properties.YearStudy.t
 public class StudentExcelReader {
 
     private final static String ORDER_REGEX = "$[0-9]{1,10}-c";
+    private final SpecialityRepository specialityRepository;
+    private final SpecialityMapper specialityMapper;
+
+    public StudentExcelReader(SpecialityRepository specialityRepository, SpecialityMapper specialityMapper) {
+        this.specialityRepository = specialityRepository;
+        this.specialityMapper = specialityMapper;
+    }
 
 //    private final SupervisorRepository supervisorRepository;
 //
@@ -153,6 +162,7 @@ public class StudentExcelReader {
 
     private StudentDto convertToStudentDTO(Row row) {
         StudentDto studentDTO = new StudentDto();
+        studentDTO.setSpeciality(new StudentDto.SpecialityDto());
 //        studentDTO.setStudy(new StudyDto());
 //        studentDTO.getStudy().setOrderDTO(new OrderDto());
 
@@ -265,8 +275,7 @@ public class StudentExcelReader {
             case "b" -> financingType = Financing.BUDGET.toString();
             case "c" -> financingType = Financing.CONTRACT.toString();
         }
-        ;
-//        studentDTO.getStudy().setFinancing(financingType);
+        studentDTO.setFinancing(financingType);
     }
 
     private void readDateAndOrderBegin(Cell cell, StudentDto studentDTO) {
@@ -319,7 +328,7 @@ public class StudentExcelReader {
             case NUMERIC -> dateEnd = cell.getLocalDateTimeCellValue().toLocalDate();
             case STRING -> dateEnd = DateTemplate.toLocalDate(cell.getStringCellValue());
         }
-//        studentDTO.getStudy().setEndStudies(dateEnd);
+        studentDTO.setEndStudies(dateEnd);
     }
 
     private void readStudyType(Cell cell, StudentDto studentDTO) {
@@ -328,8 +337,7 @@ public class StudentExcelReader {
             case "fr" -> studyType = StudyType.FREQUENCY.toString();
             case "zi" -> studyType = StudyType.LOW_FREQUENCY.toString();
         }
-        ;
-//        studentDTO.getStudy().setStudyType(studyType);
+        studentDTO.setStudyType(studyType);
     }
 
     private void readSciencesDomain(Cell cell, StudentDto studentDTO) {
@@ -357,9 +365,11 @@ public class StudentExcelReader {
                     substring(cell.getStringCellValue(), "[0-9]{3}\\.[0-9]{2}"));
             case NUMERIC -> idSpeciality = Float.parseFloat(cell.getStringCellValue());
         }
-        SpecialityDto specialityDto = new SpecialityDto();
-        specialityDto.setId(idSpeciality);
-//        studentDTO.setSpecialityId(specialityDto.getId());
+        SpecialityDto specialityDto = specialityRepository.findById(idSpeciality).map(specialityMapper::toDto).orElse(null);
+        if(specialityDto != null) {
+            specialityDto.setId(idSpeciality);
+            studentDTO.getSpeciality().setId(specialityDto.getId());
+        }
     }
 
     private void readSpecialty(Cell cell, StudentDto studentDTO) {
