@@ -9,4 +9,6 @@ import java.util.List;
 public interface ScienceProfileService {
 
     List<ScienceProfileDto> findAllByScienceBranchIdAndYear(Integer branch_id, YearStudy year);
+
+    List<ScienceProfileDto> findAll();
 }

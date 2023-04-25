@@ -12,12 +12,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ScienceBranchServiceImpl implements ScienceBranchService {
-    private final ScienceBranchRepository scienceBranchRepository;
-    private final ScienceBranchMapper scienceBranchMapper;
+    private final ScienceBranchRepository branchRepository;
+    private final ScienceBranchMapper branchMapper;
     @Override
     public List<ScienceBranchDto> findAllByScienceDomainIdAndYear(Integer domain_id, YearStudy grade) {
-        return scienceBranchRepository.findAllByScienceDomainIdAndYear(domain_id, grade).stream()
-                .map(scienceBranchMapper::toDto)
+        return branchRepository.findAllByScienceDomainIdAndYear(domain_id, grade).stream()
+                .map(branchMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public List<ScienceBranchDto> getAll() {
+        return branchRepository.findAll().stream().map(branchMapper::toDto).toList();
     }
 }

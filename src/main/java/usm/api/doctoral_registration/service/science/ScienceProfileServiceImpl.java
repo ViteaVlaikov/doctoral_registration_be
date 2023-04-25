@@ -20,4 +20,9 @@ public class ScienceProfileServiceImpl implements ScienceProfileService {
                 .map(scienceProfileMapper::toDto)
                 .toList();
     }
+
+    @Override
+    public List<ScienceProfileDto> findAll() {
+        return scienceProfileRepository.findAll().stream().map(scienceProfileMapper::toDto).toList();
+    }
 }

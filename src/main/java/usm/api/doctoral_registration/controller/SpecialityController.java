@@ -25,6 +25,11 @@ public class SpecialityController {
 
     private final YearStudyMapper yearStudyMapper;
 
+    @GetMapping
+    public ResponseEntity<List<SpecialityDto>> getAll() {
+        return ResponseEntity.ok(specialityService.findAll());
+    }
+
     @GetMapping("/profiles/{id}/{year}")
     public ResponseEntity<List<SpecialityDto>> getSpecialitiesByProfileIdAndYear(
             @PathVariable Integer id, @PathVariable Integer year) {
