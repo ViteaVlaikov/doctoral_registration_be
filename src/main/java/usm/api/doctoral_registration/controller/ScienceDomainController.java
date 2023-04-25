@@ -21,7 +21,7 @@ public class ScienceDomainController {
     private final ScienceDomainService domainService;
 
     @GetMapping
-    public List<ScienceDomain> getAll() {
+    public List<ScienceDomainDto> findAll() {
         return domainService.findAll();
     }
 

@@ -7,7 +7,7 @@ import usm.api.doctoral_registration.model.science.ScienceSchool;
 import java.util.List;
 
 public interface ScienceDomainService {
-    List<ScienceDomain> findAll();
+    List<ScienceDomainDto> findAll();
     List<ScienceDomain> findAllByScienceSchoolId(Integer scienceSchoolId);
 
     List<ScienceDomainDto> findAllByScienceSchoolIdAndYear(Integer school_id, Integer year);

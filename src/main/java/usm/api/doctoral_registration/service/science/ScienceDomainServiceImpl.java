@@ -31,8 +31,10 @@ public class ScienceDomainServiceImpl implements ScienceDomainService {
     private final YearStudyMapper yearStudyMapper;
 
     @Override
-    public List<ScienceDomain> findAll() {
-        return domainRepository.findAll();
+    public List<ScienceDomainDto> findAll() {
+        return domainRepository.findAll().stream()
+                .map(scienceDomainMapper::toDto)
+                .toList();
     }
 
     @Override
