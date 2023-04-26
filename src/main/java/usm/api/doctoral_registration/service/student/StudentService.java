@@ -17,4 +17,6 @@ public interface StudentService {
     StudentDto findById(Long id);
 
     List<StudentDto> findByParams(Map<String, String> params);
+
+    StudentDto save(StudentDto studentDto);
 }
