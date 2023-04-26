@@ -108,7 +108,7 @@ values (2, 'Științe Fizice, Matematice, ale Informației și Inginerești');
     insert into science_domain(id, number, name, science_school_id)
     VALUES (3, 2,'Științe inginerești și tehnologii ', 2);
         insert into science_branch(id, name, science_domain_id)
-        VALUES (23, 'Inginerie electronică și a informației', 2);
+        VALUES (23, 'Inginerie electronică și a informației', 3);
             insert into science_profile(id, name, science_branch_id)
             VALUES (232, 'Calculatoare și tehnologii informaționale', 23);
                 insert into speciality(id, name, science_profile_id)
