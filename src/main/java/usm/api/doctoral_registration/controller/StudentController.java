@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,8 +47,9 @@ public class StudentController {
     public ResponseEntity<List<StudentDto>> getStudents(@PathVariable Float id, @PathVariable Integer year) {
         return ResponseEntity.ok(studentService.findAllBySpecialityIdAndYear(id, yearStudyMapper.mapFromInteger(year)));
     }
+
     @PostMapping()
-    public ResponseEntity<StudentDto> saveStudent(@RequestBody StudentDto studentDto){
+    public ResponseEntity<StudentDto> saveStudent(@RequestBody StudentDto studentDto) {
         return ResponseEntity.ok(studentService.save(studentDto));
     }
 
