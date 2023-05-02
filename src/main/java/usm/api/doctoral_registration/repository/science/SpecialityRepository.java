@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface SpecialityRepository extends JpaRepository<Speciality, Float> {
     @Query("from Speciality s " +
             "where s.scienceProfile.scienceBranch.scienceDomain.scienceSchool.id = :id")
     List<Speciality> findAllByScienceSchool(Integer id);
+
+    List<Speciality> findAllByScienceProfileId(Integer id);
 }

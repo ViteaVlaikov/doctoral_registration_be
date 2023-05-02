@@ -46,4 +46,12 @@ public class SpecialityServiceImpl implements SpecialityService {
         scienceProfileRepository.save(speciality.getScienceProfile());
         specialityRepository.save(speciality);
     }
+
+    @Override
+    public List<SpecialityDto> getAllByScienceProfileId(Integer id) {
+        return specialityRepository
+                .findAllByScienceProfileId(id).stream()
+                .map(specialityMapper::toDto)
+                .toList();
+    }
 }

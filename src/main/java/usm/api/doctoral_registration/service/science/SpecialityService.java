@@ -14,4 +14,6 @@ public interface SpecialityService {
     List<SpecialityDto> findAllByScienceSchool(Integer id);
 
     void save(Speciality speciality);
+
+    List<SpecialityDto> getAllByScienceProfileId(Integer id);
 }

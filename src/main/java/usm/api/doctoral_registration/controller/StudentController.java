@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import usm.api.doctoral_registration.crosstab.CrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.mapper.YearStudyMapper;
 import usm.api.doctoral_registration.service.student.StudentService;
@@ -38,9 +39,14 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findById(id));
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<List<StudentDto>> getFilteredStudents(@RequestParam Map<String, String> params) {
+    @GetMapping("/filter/list")
+    public ResponseEntity<List<StudentDto>> getFilteredStudentsList(@RequestParam Map<String, String> params) {
         return ResponseEntity.ok(studentService.findByParams(params));
+    }
+
+    @GetMapping("/filter/cross_tab")
+    public ResponseEntity<CrossTab> getFilteredStudentsCrossTab(@RequestParam Map<String, String> params) {
+        return ResponseEntity.ok(studentService.createCrossTab(params));
     }
 
     @GetMapping("specialities/{id}/{year}")

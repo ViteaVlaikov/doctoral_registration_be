@@ -10,4 +10,6 @@ public interface ScienceBranchService {
     List<ScienceBranchDto> findAllByScienceDomainIdAndYear(Integer domain_id, YearStudy grade);
 
     List<ScienceBranchDto> getAll();
+
+    List<ScienceBranchDto> findAllByScienceDomainId(Integer id);
 }

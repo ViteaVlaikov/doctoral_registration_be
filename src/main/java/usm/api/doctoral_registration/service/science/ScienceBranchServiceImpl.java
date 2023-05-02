@@ -25,4 +25,11 @@ public class ScienceBranchServiceImpl implements ScienceBranchService {
     public List<ScienceBranchDto> getAll() {
         return branchRepository.findAll().stream().map(branchMapper::toDto).toList();
     }
+
+    @Override
+    public List<ScienceBranchDto> findAllByScienceDomainId(Integer id) {
+        return branchRepository
+                .findAllByScienceDomainId(id).stream()
+                .map(branchMapper::toDto).toList();
+    }
 }

@@ -25,4 +25,11 @@ public class ScienceProfileServiceImpl implements ScienceProfileService {
     public List<ScienceProfileDto> findAll() {
         return scienceProfileRepository.findAll().stream().map(scienceProfileMapper::toDto).toList();
     }
+
+    @Override
+    public List<ScienceProfileDto> findAllByScienceBranchId(Integer id) {
+        return scienceProfileRepository
+                .findAllByScienceBranchId(id).stream()
+                .map(scienceProfileMapper::toDto).toList();
+    }
 }

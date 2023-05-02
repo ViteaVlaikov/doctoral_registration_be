@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import usm.api.doctoral_registration.model.science.ScienceProfile;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface ScienceProfileRepository extends JpaRepository<ScienceProfile, 
             "join Student s on s2 = s.speciality " +
             "where sp.scienceBranch.id = :branch_id and s.yearStudy = :grade")
     List<ScienceProfile> findAllByScienceBranchIdAndYear(Integer branch_id, YearStudy grade);
+
+    List<ScienceProfile> findAllByScienceBranchId(Integer id);
 }

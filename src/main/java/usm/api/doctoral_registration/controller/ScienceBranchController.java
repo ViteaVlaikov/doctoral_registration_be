@@ -22,9 +22,15 @@ public class ScienceBranchController {
     private final ScienceBranchService branchService;
 
     @GetMapping
-    public ResponseEntity<List<ScienceBranchDto>> getAll() {
+    public ResponseEntity<List<ScienceBranchDto>> findAll() {
         return ResponseEntity.ok(branchService.getAll());
     }
+
+    @GetMapping("/domain/{id}")
+    public ResponseEntity<List<ScienceBranchDto>> findAllByScienceDomainId(@PathVariable Integer id) {
+        return ResponseEntity.ok(branchService.findAllByScienceDomainId(id));
+    }
+
 
     @GetMapping("domains/{id}/{year}")
     List<ScienceBranch> findAllByDomainIdAndYear(@PathVariable Integer id, @PathVariable Integer year) {

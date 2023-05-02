@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ScienceDomainService {
     List<ScienceDomainDto> findAll();
-    List<ScienceDomain> findAllByScienceSchoolId(Integer scienceSchoolId);
+    List<ScienceDomainDto> findAllByScienceSchoolId(Integer id);
 
     List<ScienceDomainDto> findAllByScienceSchoolIdAndYear(Integer school_id, Integer year);
 }

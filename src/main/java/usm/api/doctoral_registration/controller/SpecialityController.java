@@ -30,6 +30,11 @@ public class SpecialityController {
         return ResponseEntity.ok(specialityService.findAll());
     }
 
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<List<SpecialityDto>> getAllByScienceProfileId(@PathVariable Integer id) {
+        return ResponseEntity.ok(specialityService.getAllByScienceProfileId(id));
+    }
+
     @GetMapping("/profiles/{id}/{year}")
     public ResponseEntity<List<SpecialityDto>> getSpecialitiesByProfileIdAndYear(
             @PathVariable Integer id, @PathVariable Integer year) {

@@ -11,4 +11,6 @@ public interface ScienceProfileService {
     List<ScienceProfileDto> findAllByScienceBranchIdAndYear(Integer branch_id, YearStudy year);
 
     List<ScienceProfileDto> findAll();
+
+    List<ScienceProfileDto> findAllByScienceBranchId(Integer id);
 }

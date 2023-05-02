@@ -3,9 +3,11 @@ package usm.api.doctoral_registration.repository.science;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import usm.api.doctoral_registration.dto.science.ScienceBranchDto;
 import usm.api.doctoral_registration.model.science.ScienceBranch;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,4 +20,6 @@ public interface ScienceBranchRepository extends JpaRepository<ScienceBranch, Fl
             "join Student st on s = st.speciality " +
             "where sd.id = :domain_id and st.yearStudy = :grade")
     List<ScienceBranch> findAllByScienceDomainIdAndYear(Integer domain_id, YearStudy grade);
+
+    List<ScienceBranch> findAllByScienceDomainId(Integer id);
 }
