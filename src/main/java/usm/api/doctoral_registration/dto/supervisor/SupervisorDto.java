@@ -20,4 +20,6 @@ public class SupervisorDto {
     private String speciality;
 
     private String academician;
+
+    private Integer scienceSchoolId;
 }
