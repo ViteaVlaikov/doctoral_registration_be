@@ -89,9 +89,4 @@ public class StudentServiceImpl implements StudentService {
         student.setSteeringCommittee(supervisorSet);
         return studentMapper.toDto(studentRepository.save(student));
     }
-
-    @Override
-    public CrossTab createCrossTab(Map<String, String> params) {
-        return null;
-    }
 }
