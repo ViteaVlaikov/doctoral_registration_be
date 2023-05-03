@@ -3,6 +3,7 @@ package usm.api.doctoral_registration.service.student;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import usm.api.doctoral_registration.crosstab.CrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.excel.StudentExcelReader;
 import usm.api.doctoral_registration.exception.entity.StudentNotFoundException;
@@ -87,5 +88,10 @@ public class StudentServiceImpl implements StudentService {
         student.setSupervisor(supervisor);
         student.setSteeringCommittee(supervisorSet);
         return studentMapper.toDto(studentRepository.save(student));
+    }
+
+    @Override
+    public CrossTab createCrossTab(Map<String, String> params) {
+        return null;
     }
 }

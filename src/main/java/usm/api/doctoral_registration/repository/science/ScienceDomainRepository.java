@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ScienceDomainRepository extends JpaRepository<ScienceDomain, Float> {
-    List<ScienceDomain> findAllByScienceSchoolId(Integer scienceSchoolId);
+    List<ScienceDomain> findAllByScienceSchoolId(Integer id);
 
     @Query("select count(s.id) from ScienceDomain sd " +
             "join ScienceBranch sb on sd = sb.scienceDomain " +

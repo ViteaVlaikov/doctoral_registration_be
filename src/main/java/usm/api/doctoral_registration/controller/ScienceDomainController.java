@@ -25,6 +25,12 @@ public class ScienceDomainController {
         return ResponseEntity.ok(domainService.findAll());
     }
 
+    @GetMapping("/school/{id}")
+    public ResponseEntity<List<ScienceDomainDto>> findAllBySchoolsId(@PathVariable Integer id) {
+        return ResponseEntity.ok(domainService.findAllByScienceSchoolId(id));
+    }
+
+
     @GetMapping("/schools/{id}/{year}")
     public List<ScienceDomainDto> findAllByScienceSchoolIdAndYear(
             @PathVariable Integer id, @PathVariable Integer year) {

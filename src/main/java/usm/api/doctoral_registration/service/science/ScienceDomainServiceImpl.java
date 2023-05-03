@@ -38,8 +38,10 @@ public class ScienceDomainServiceImpl implements ScienceDomainService {
     }
 
     @Override
-    public List<ScienceDomain> findAllByScienceSchoolId(Integer scienceSchoolId) {
-        return domainRepository.findAllByScienceSchoolId(scienceSchoolId);
+    public List<ScienceDomainDto> findAllByScienceSchoolId(Integer id) {
+        return domainRepository.findAllByScienceSchoolId(id).stream()
+                .map(scienceDomainMapper::toDto)
+                .toList();
     }
 
     @Override
