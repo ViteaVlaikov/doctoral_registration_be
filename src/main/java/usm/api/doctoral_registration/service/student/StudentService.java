@@ -1,5 +1,6 @@
 package usm.api.doctoral_registration.service.student;
 
+import usm.api.doctoral_registration.crosstab.CrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
@@ -19,4 +20,6 @@ public interface StudentService {
     List<StudentDto> findByParams(Map<String, String> params);
 
     StudentDto save(StudentDto studentDto);
+
+    List<CrossTab.Item> createCrossTab(Map<String, String> params);
 }

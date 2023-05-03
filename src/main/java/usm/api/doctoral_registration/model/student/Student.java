@@ -6,12 +6,7 @@ import org.hibernate.Hibernate;
 import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.order.Order;
 import usm.api.doctoral_registration.model.science.Speciality;
-import usm.api.doctoral_registration.model.student.properties.Financing;
-import usm.api.doctoral_registration.model.student.properties.Gender;
-import usm.api.doctoral_registration.model.student.properties.Registration;
-import usm.api.doctoral_registration.model.student.properties.Status;
-import usm.api.doctoral_registration.model.student.properties.StudyType;
-import usm.api.doctoral_registration.model.student.properties.YearStudy;
+import usm.api.doctoral_registration.model.student.properties.*;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 
 import java.time.LocalDate;
@@ -22,7 +17,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "student")
@@ -137,5 +131,25 @@ public class Student {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", patronymicName='" + patronymicName + '\'' +
+                ", yearBirth=" + yearBirth +
+                ", identNumber='" + identNumber + '\'' +
+                ", gender=" + gender +
+                ", diplomaSeries='" + diplomaSeries + '\'' +
+                ", diplomaNumber=" + diplomaNumber +
+                ", personalEmail='" + personalEmail + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", status=" + status +
+                ", registration=" + registration +
+                ", yearStudy=" + yearStudy +
+                '}';
     }
 }

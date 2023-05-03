@@ -9,7 +9,7 @@ import usm.api.doctoral_registration.model.supervisor.Supervisor;
 @Mapper
 @Component
 public interface SupervisorMapper extends EntityMapper<Supervisor, SupervisorDto> {
-//
+    //
 //    @Override
 //    SupervisorDTO toDto(Supervisor entity);
 //
