@@ -18,7 +18,7 @@ public class YearStudyMapperImpl implements YearStudyMapper {
 
     @Override
     public YearStudy mapFromString(String grade) {
-        return null;
+        return YearStudy.toYearStudy(grade);
     }
 
     @Override

@@ -7,7 +7,7 @@ CREATE TABLE student
     corporate_email   VARCHAR(255),
     first_name        VARCHAR(255),
     last_name         VARCHAR(255),
-    patronymic_name   VARCHAR(255),
+    patronymic_name   VARCHAR(255) default '',
     year_birth        INTEGER NOT NULL,
     ident_number      VARCHAR(255),
     gender            VARCHAR(255),
@@ -24,7 +24,7 @@ CREATE TABLE student
     study             VARCHAR(255),
     financing         VARCHAR(255),
     supervisor_id     BIGINT,
-    speciality        REAL,
+    speciality        real,
     science_topic     VARCHAR(255),
     remark            VARCHAR(255),
     CONSTRAINT pk_student PRIMARY KEY (id)

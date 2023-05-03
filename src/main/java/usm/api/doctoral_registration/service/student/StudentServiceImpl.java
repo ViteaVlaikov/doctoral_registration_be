@@ -5,7 +5,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.crosstab.CrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
-import usm.api.doctoral_registration.excel.StudentExcelReader;
+//import usm.api.doctoral_registration.excel.StudentExcelReader;
 import usm.api.doctoral_registration.exception.entity.StudentNotFoundException;
 import usm.api.doctoral_registration.mapper.YearStudyMapper;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
@@ -45,11 +45,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void saveAll(List<Student> students) {
-        for (Student student : students) {
-//            supervisorRepository.save(student.getSupervisor());
-//            specialityRepository.save(student.getSpeciality());
-            studentRepository.save(student);
-        }
+        //            supervisorRepository.save(student.getSupervisor());
+        //            specialityRepository.save(student.getSpeciality());
+        studentRepository.saveAll(students);
     }
 
     @Override
@@ -71,7 +69,6 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentDto> findByParams(Map<String, String> params) {
         Specification<Student> specification = StudentFilter
                 .convertMapToJpaSpecification(params);
-
         return studentRepository.findAll(specification)
                 .stream().map(studentMapper::toDto).toList();
     }
