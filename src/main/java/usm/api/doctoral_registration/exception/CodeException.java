@@ -8,7 +8,13 @@ public enum CodeException {
     SCIENCE_DOMAIN_NOT_FOUND(803),
     SCIENCE_BRANCH_NOT_FOUND(804),
 
-    UPPER_CRITERIA_NOT_FOUND(805);
+    SUPERVISOR_NOT_FOUND(805),
+
+    UPPER_CRITERIA_NOT_FOUND(820),
+
+    UNEXPECTED_ID_FOR_REQUEST(821);
+
+
     final Integer code;
 
     CodeException(int code) {

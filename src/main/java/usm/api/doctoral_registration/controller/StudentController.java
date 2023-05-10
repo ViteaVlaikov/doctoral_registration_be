@@ -2,14 +2,7 @@ package usm.api.doctoral_registration.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import usm.api.doctoral_registration.crosstab.CrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.mapper.YearStudyMapper;
@@ -48,6 +41,7 @@ public class StudentController {
     public ResponseEntity<List<CrossTab.Item>> getCrossTab(@RequestParam Map<String, String> params){
         return ResponseEntity.ok(studentService.createCrossTab(params));
     }
+
     @GetMapping("specialities/{id}/{year}")
     public ResponseEntity<List<StudentDto>> getStudents(@PathVariable Float id, @PathVariable Integer year) {
         return ResponseEntity.ok(studentService.findAllBySpecialityIdAndYear(id, yearStudyMapper.mapFromInteger(year)));
@@ -56,6 +50,11 @@ public class StudentController {
     @PostMapping()
     public ResponseEntity<StudentDto> saveStudent(@RequestBody StudentDto studentDto) {
         return ResponseEntity.ok(studentService.save(studentDto));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id, @RequestBody StudentDto studentDto) {
+        return ResponseEntity.ok(studentService.updateStudent(id, studentDto));
     }
 
 }

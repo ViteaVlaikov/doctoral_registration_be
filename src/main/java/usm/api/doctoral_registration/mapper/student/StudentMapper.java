@@ -3,8 +3,6 @@ package usm.api.doctoral_registration.mapper.student;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
-import usm.api.doctoral_registration.dto.order.OrderDto;
-import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.mapper.EntityMapper;
 import usm.api.doctoral_registration.mapper.country.CountryMapper;
@@ -57,4 +55,5 @@ public interface StudentMapper extends EntityMapper<Student, StudentDto> {
         @Mapping(source = "scienceSchool", target = "scienceProfile.scienceBranch.scienceDomain.scienceSchool.name")
         Speciality toEntity(StudentDto.SpecialityDto specialityDto);
     }
+
 }
