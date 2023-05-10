@@ -4,16 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.crosstab.CrossTab;
+import usm.api.doctoral_registration.crosstab.StudentCrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
-import usm.api.doctoral_registration.excel.StudentExcelReader;
 import usm.api.doctoral_registration.exception.entity.StudentNotFoundException;
-import usm.api.doctoral_registration.mapper.YearStudyMapper;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
-import usm.api.doctoral_registration.repository.science.ScienceBranchRepository;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 import usm.api.doctoral_registration.repository.student.StudentFilter;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
@@ -27,10 +25,10 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
-//    private final StudentExcelReader studentExcelTools;
+    //    private final StudentExcelReader studentExcelTools;
     private final SupervisorRepository supervisorRepository;
     private final SpecialityRepository specialityRepository;
-//    private final static String PATH = "./src/test/java/usm/api/doctoral_registration/excel/";
+    //    private final static String PATH = "./src/test/java/usm/api/doctoral_registration/excel/";
 //    private final ScienceBranchRepository scienceBranchRepository;
     private final StudentRepository studentRepository;
     private final StudentMapper studentMapper;
@@ -45,11 +43,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void saveAll(List<Student> students) {
-        for (Student student : students) {
-//            supervisorRepository.save(student.getSupervisor());
-//            specialityRepository.save(student.getSpeciality());
-            studentRepository.save(student);
-        }
+        //            supervisorRepository.save(student.getSupervisor());
+        //            specialityRepository.save(student.getSpeciality());
+        studentRepository.saveAll(students);
     }
 
     @Override
@@ -71,7 +67,6 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentDto> findByParams(Map<String, String> params) {
         Specification<Student> specification = StudentFilter
                 .convertMapToJpaSpecification(params);
-
         return studentRepository.findAll(specification)
                 .stream().map(studentMapper::toDto).toList();
     }
@@ -89,4 +84,13 @@ public class StudentServiceImpl implements StudentService {
         student.setSteeringCommittee(supervisorSet);
         return studentMapper.toDto(studentRepository.save(student));
     }
+
+    @Override
+    public List<CrossTab.Item> createCrossTab(Map<String, String> params) {
+        CrossTab crossTab = new StudentCrossTab(params);
+        List<Student> all = studentRepository.findAll(StudentRepository.group("yearStudy", null,"gender", "speciality"));
+        all.forEach(System.out::println);
+        return null;
+    }
+
 }

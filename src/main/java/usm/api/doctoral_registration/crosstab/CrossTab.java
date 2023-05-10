@@ -9,7 +9,7 @@ public interface CrossTab {
 
         Cell col;
 
-        Cell  row;
+        Cell row;
 
         Integer value;
     }

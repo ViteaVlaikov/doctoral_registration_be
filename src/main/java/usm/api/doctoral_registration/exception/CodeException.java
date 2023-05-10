@@ -6,7 +6,9 @@ public enum CodeException {
     SPECIALITY_NOT_FOUND(801),
     SCIENCE_SCHOOL_NOT_FOUND(802),
     SCIENCE_DOMAIN_NOT_FOUND(803),
-    SCIENCE_BRANCH_NOT_FOUND(804);
+    SCIENCE_BRANCH_NOT_FOUND(804),
+
+    UPPER_CRITERIA_NOT_FOUND(805);
     final Integer code;
 
     CodeException(int code) {
