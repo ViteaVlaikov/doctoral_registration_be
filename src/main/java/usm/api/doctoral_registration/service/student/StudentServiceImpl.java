@@ -8,6 +8,7 @@ import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.exception.entity.SpecialityNotFoundException;
 import usm.api.doctoral_registration.exception.entity.StudentNotFoundException;
 import usm.api.doctoral_registration.exception.entity.SupervisorNotFoundException;
+import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.exception.request.UnexpectedIdForUpdateRequestException;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.science.Speciality;
@@ -63,6 +64,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> findByParams(Map<String, String> params) {
+        if(params==null){
+            return studentRepository.findAll().stream()
+                    .map(studentMapper::toDto).toList();
+        }
         Specification<Student> specification = StudentFilter
                 .convertMapToJpaSpecification(params);
         return studentRepository.findAll(specification)
@@ -71,17 +76,27 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDto save(StudentDto studentDto) {
+        if (studentDto.getId() != null) {
+            throw new UnExpectedFieldInRequestException("Id: " + studentDto.getId());
+        }
         Speciality speciality = specialityRepository.findById(studentDto.getSpecialityDto().getId())
                 .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpecialityDto().getId()));
         Supervisor supervisor = supervisorRepository.findById(studentDto.getSupervisor().getId())
                 .orElseThrow(() -> new SupervisorNotFoundException(studentDto.getSupervisor().getId()));
+        //TODO: add saving steering committee for supervisors
         Set<Supervisor> supervisorSet = new HashSet<>();
-        studentDto.getSteeringCommittee().forEach(supervisorDto -> supervisorSet.add(supervisorRepository.findById(supervisorDto.getId()).orElseThrow()));
+        studentDto.getSteeringCommittee()
+                .forEach(
+                        supervisorDto -> supervisorSet.add(supervisorRepository.findById(supervisorDto.getId())
+                                .orElseThrow(
+                                        () -> new SupervisorNotFoundException(studentDto.getSupervisor().getId())
+                                )
+                        )
+                );
         Student student = studentMapper.toEntity(studentDto);
         student.setSpeciality(speciality);
         student.setSupervisor(supervisor);
         student.setSteeringCommittee(supervisorSet);
-        System.out.println(student);
         return studentMapper.toDto(studentRepository.save(student));
     }
 

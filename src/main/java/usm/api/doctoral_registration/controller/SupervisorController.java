@@ -32,7 +32,7 @@ public class SupervisorController {
     }
 
     @PostMapping
-    public ResponseEntity<SupervisorDto> saveSupervisor(@RequestBody SupervisorDto supervisorDto) {
+    public ResponseEntity<SupervisorDto> save(@RequestBody SupervisorDto supervisorDto){
         return ResponseEntity.ok(supervisorService.save(supervisorDto));
     }
 }

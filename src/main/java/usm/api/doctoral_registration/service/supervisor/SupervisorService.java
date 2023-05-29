@@ -1,15 +1,48 @@
 package usm.api.doctoral_registration.service.supervisor;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
+import usm.api.doctoral_registration.exception.entity.ScienceSchoolNotFoundException;
+import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
+import usm.api.doctoral_registration.mapper.supervisor.SupervisorMapper;
+import usm.api.doctoral_registration.model.science.ScienceSchool;
+import usm.api.doctoral_registration.model.supervisor.Supervisor;
+import usm.api.doctoral_registration.repository.science.ScienceSchoolRepository;
+import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
 
 import java.util.List;
 
-public interface SupervisorService {
-    List<SupervisorDto> findAllByScienceSchool(Long id);
+@Service
+@RequiredArgsConstructor
+public class SupervisorService {
 
-    SupervisorDto save(SupervisorDto supervisorDto);
+    private final SupervisorRepository supervisorRepository;
 
-    List<SupervisorDto> findAll();
+    private final ScienceSchoolRepository scienceSchoolRepository;
 
-    SupervisorDto findById(Long id);
+    private final SupervisorMapper supervisorMapper;
+
+    public List<SupervisorDto> findAllByScienceSchool(Long id) {
+        return supervisorRepository.findAllByScienceSchoolId(id)
+                .stream().map(supervisorMapper::toDto).toList();
+    }
+
+    public SupervisorDto save(SupervisorDto supervisorDto) {
+        if (supervisorDto.getId() != null) {
+            throw new UnExpectedFieldInRequestException("Id: " + supervisorDto.getId());
+        }
+
+        Supervisor supervisor = supervisorMapper.toEntity(supervisorDto);
+        ScienceSchool scienceSchool = scienceSchoolRepository.findById(supervisorDto.getScienceSchool().getId())
+                .orElseThrow(() -> new ScienceSchoolNotFoundException(supervisorDto.getScienceSchool().getId()));
+        supervisor.setScienceSchool(scienceSchool);
+        return supervisorMapper.toDto(supervisorRepository.save(supervisor));
+    }
+
+    public List<SupervisorDto> findAll() {
+        return supervisorRepository.findAll().stream()
+                .map(supervisorMapper::toDto)
+                .toList();
+    }
 }
