@@ -17,8 +17,8 @@
         <java.version>17</java.version>
         <spring-cloud-azure.version>6.0.0-beta.4</spring-cloud-azure.version>
         <flyway-db.user>super_user</flyway-db.user>
-        <flyway-db.password>user</flyway-db.password>
-        <flyway-db.url>jdbc:postgresql://localhost:5455/doctoral_registration</flyway-db.url>
+        <flyway-db.password>super_user</flyway-db.password>
+        <flyway-db.url>jdbc:postgresql://localhost:5432/doctoral_registration</flyway-db.url>
 <!--        <flyway-db.user>postgres</flyway-db.user>-->
 <!--        <flyway-db.password>postgres</flyway-db.password>-->
 <!--        <flyway-db.url>jdbc:postgresql://localhost:5432/doctoral_registration</flyway-db.url>-->

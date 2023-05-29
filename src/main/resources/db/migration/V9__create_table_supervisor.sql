@@ -1,4 +1,5 @@
-CREATE SEQUENCE IF NOT EXISTS supervisor_sequence START WITH 1 INCREMENT BY 1;
+DROP SEQUENCE IF EXISTS supervisor_sequence;
+CREATE SEQUENCE supervisor_sequence START WITH 1 INCREMENT BY 1;
 CREATE TABLE supervisor
 (
     id                 BIGINT NOT NULL default nextval('supervisor_sequence'),

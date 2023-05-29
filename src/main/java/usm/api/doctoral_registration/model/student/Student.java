@@ -19,6 +19,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "student")
 public class Student {
 
@@ -119,37 +120,4 @@ public class Student {
 
     @Column(name = "remark")
     private String remark;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Student student = (Student) o;
-        return id != null && Objects.equals(id, student.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", patronymicName='" + patronymicName + '\'' +
-                ", yearBirth=" + yearBirth +
-                ", identNumber='" + identNumber + '\'' +
-                ", gender=" + gender +
-                ", diplomaSeries='" + diplomaSeries + '\'' +
-                ", diplomaNumber=" + diplomaNumber +
-                ", personalEmail='" + personalEmail + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", status=" + status +
-                ", registration=" + registration +
-                ", yearStudy=" + yearStudy +
-                '}';
-    }
 }
