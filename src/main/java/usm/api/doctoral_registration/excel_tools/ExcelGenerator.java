@@ -18,7 +18,7 @@ import java.util.Set;
 @Component
 public class ExcelGenerator {
     public byte[] generateStudentReport(List<Student> students) {
-        // Создание экземпляра Workbook (например, Apache POI)
+        // Создание экземпляра Workbook
         Workbook workbook = new XSSFWorkbook();
 
         // Создание нового листа
@@ -26,6 +26,7 @@ public class ExcelGenerator {
 
         // Создание заголовка
         createHeader(sheet);
+
 
         //Создание кнотентной части
         generateContent(sheet, students);
@@ -92,6 +93,10 @@ public class ExcelGenerator {
             row.createCell(27).setCellValue(writeSteeringCommitteeToCell(students.get(i).getSteeringCommittee()));
             row.createCell(28).setCellValue(students.get(i).getScienceTopic());
             row.createCell(29).setCellValue(students.get(i).getRemark());
+
+        }
+        for (int i =0; i <= 29; i++){
+            sheet.autoSizeColumn(i);
         }
     }
 
@@ -136,6 +141,7 @@ public class ExcelGenerator {
         headerRow.createCell(27).setCellValue("steeringCommittee");
         headerRow.createCell(28).setCellValue("scienceTopic");
         headerRow.createCell(29).setCellValue("remark");
+
     }
 
     private String writeOrdersToCell(List<Order> orders) {

@@ -116,86 +116,10 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.findById(id).orElseThrow(
                 () -> new StudentNotFoundException(id)
         );
-        updateStudentFields(student, studentMapper.toEntity(studentDto));
         return studentMapper.toDto(studentRepository.save(student));
     }
 
-    private void updateStudentFields(Student studentForUpdate, Student studentSource) {
-        if (studentSource.getCorporateEmail() != null) {
-            studentForUpdate.setFirstName(studentSource.getFirstName());
-        }
-        if (studentSource.getFirstName() != null) {
-            studentForUpdate.setFirstName(studentSource.getFirstName());
-        }
-        if (studentSource.getLastName() != null) {
-            studentForUpdate.setLastName(studentSource.getLastName());
-        }
-        if (studentSource.getPatronymicName() != null) {
-            studentForUpdate.setPatronymicName(studentSource.getPatronymicName());
-        }
-        if (studentSource.getYearBirth() != 0) {
-            studentForUpdate.setYearBirth(studentSource.getYearBirth());
-        }
-        if (studentSource.getIdentNumber() != null) {
-            studentForUpdate.setIdentNumber(studentSource.getIdentNumber());
-        }
-        if (studentSource.getGender() != null) {
-            studentForUpdate.setGender(studentSource.getGender());
-        }
-        if (studentSource.getCitizenship() != null) {
-            studentForUpdate.setCitizenship(studentSource.getCitizenship());
-        }
-        if (studentSource.getDiplomaSeries() != null) {
-            studentForUpdate.setDiplomaSeries(studentSource.getDiplomaSeries());
-        }
-        if (studentSource.getDiplomaNumber() != 0) {
-            studentForUpdate.setDiplomaNumber(studentSource.getDiplomaNumber());
-        }
-        if (studentSource.getPersonalEmail() != null) {
-            studentForUpdate.setPersonalEmail(studentSource.getPersonalEmail());
-        }
-        if (studentSource.getPhoneNumber() != null) {
-            studentForUpdate.setPhoneNumber(studentSource.getPhoneNumber());
-        }
-        if (studentSource.getStatus() != null) {
-            studentForUpdate.setStatus(studentSource.getStatus());
-        }
-        if (studentSource.getRegistration() != null) {
-            studentForUpdate.setRegistration(studentSource.getRegistration());
-        }
-        if (studentSource.getOrders() != null) {
-            studentForUpdate.setOrders(studentSource.getOrders());
-        }
-        if (studentSource.getYearStudy() != null) {
-            studentForUpdate.setYearStudy(studentSource.getYearStudy());
-        }
-        if (studentSource.getBeginStudies() != null) {
-            studentForUpdate.setBeginStudies(studentSource.getBeginStudies());
-        }
-        if (studentSource.getEndStudies() != null) {
-            studentForUpdate.setEndStudies(studentSource.getEndStudies());
-        }
-        if (studentSource.getStudyType() != null) {
-            studentForUpdate.setStudyType(studentSource.getStudyType());
-        }
-        if (studentSource.getFinancing() != null) {
-            studentForUpdate.setFinancing(studentSource.getFinancing());
-        }
-        if (studentSource.getSupervisor() != null) {
-            studentForUpdate.setSupervisor(studentSource.getSupervisor());
-        }
-        if (studentSource.getSpeciality() != null) {
-            studentForUpdate.setSpeciality(studentSource.getSpeciality());
-        }
-        if (studentSource.getSteeringCommittee() != null) {
-            studentForUpdate.setSteeringCommittee(studentSource.getSteeringCommittee());
-        }
-        if (studentSource.getScienceTopic() != null) {
-            studentForUpdate.setScienceTopic(studentSource.getScienceTopic());
-        }
-        if (studentSource.getRemark() != null) {
-            studentForUpdate.setRemark(studentSource.getRemark());
-        }
-    }
+
+
 
 }
