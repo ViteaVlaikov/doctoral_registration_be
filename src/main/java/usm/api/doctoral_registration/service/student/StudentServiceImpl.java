@@ -79,8 +79,8 @@ public class StudentServiceImpl implements StudentService {
         if (studentDto.getId() != null) {
             throw new UnExpectedFieldInRequestException("Id: " + studentDto.getId());
         }
-        Speciality speciality = specialityRepository.findById(studentDto.getSpecialityDto().getId())
-                .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpecialityDto().getId()));
+        Speciality speciality = specialityRepository.findById(studentDto.getSpeciality().getId())
+                .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpeciality().getId()));
         Supervisor supervisor = supervisorRepository.findById(studentDto.getSupervisor().getId())
                 .orElseThrow(() -> new SupervisorNotFoundException(studentDto.getSupervisor().getId()));
         //TODO: add saving steering committee for supervisors

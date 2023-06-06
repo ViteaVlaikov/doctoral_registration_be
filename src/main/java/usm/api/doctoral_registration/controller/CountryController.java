@@ -1,6 +1,6 @@
 package usm.api.doctoral_registration.controller;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import usm.api.doctoral_registration.service.country.CountryService;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("api/countries")
 @CrossOrigin(origins = {"http://localhost:3000"})
 public class CountryController {

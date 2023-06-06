@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
 import usm.api.doctoral_registration.exception.entity.ScienceSchoolNotFoundException;
+import usm.api.doctoral_registration.exception.entity.SupervisorNotFoundException;
 import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.mapper.supervisor.SupervisorMapper;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
@@ -44,5 +45,10 @@ public class SupervisorService {
         return supervisorRepository.findAll().stream()
                 .map(supervisorMapper::toDto)
                 .toList();
+    }
+
+    public SupervisorDto findById(Long id) {
+        return supervisorMapper.toDto(supervisorRepository.findById(id)
+                .orElseThrow(() -> new SupervisorNotFoundException(id)));
     }
 }

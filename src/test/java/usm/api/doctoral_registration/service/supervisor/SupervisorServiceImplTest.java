@@ -11,11 +11,11 @@ import java.util.List;
 class SupervisorServiceImplTest {
 
     @Autowired
-    private SupervisorServiceImpl supervisorServiceImpl;
+    private SupervisorService supervisorService;
 
     @Test
     void test() {
-        List<SupervisorDto> allByScienceSchool = supervisorServiceImpl.findAllByScienceSchool(1L);
+        List<SupervisorDto> allByScienceSchool = supervisorService.findAllByScienceSchool(1L);
 
         System.out.println(allByScienceSchool);
     }
