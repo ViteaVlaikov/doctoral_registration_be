@@ -44,7 +44,6 @@ class StudentRepositoryTest {
     @Test
     void save() {
         Student student = new Student();
-        student.setId(1L);
         student.setFirstName("Ion");
         student.setLastName("Viteazu");
         student.setPatronymicName("Vladimir");
@@ -77,7 +76,6 @@ class StudentRepositoryTest {
 
         List<Order> orders = new ArrayList<>();
         Order order = new Order();
-        order.setId(1);
         order.setStudent(student);
         order.setDate(LocalDate.now());
         order.setNumber("11-c");
@@ -90,7 +88,6 @@ class StudentRepositoryTest {
         orders.add(order);
 
         order = new Order();
-        order.setId(2);
         order.setStudent(student);
         order.setDate(LocalDate.now());
         order.setNumber("11-d");
@@ -123,7 +120,6 @@ class StudentRepositoryTest {
 
     @Test
     void read() {
-        Student student = studentRepository.findById(1L).orElseThrow();
-
+        Student student = studentRepository.findById(22L).orElseThrow();
     }
 }

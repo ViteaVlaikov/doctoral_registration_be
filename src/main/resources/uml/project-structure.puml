@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+package "Back End" {
+  DAO <.. [Repository]
+  Repository <- [Service]
+  Service <- [Controller]
+  DTO <.. [Controller]
+}
+
+package "Front End" {
+   [Page]
+}
+
+database "PostgreSQL" {
+    [Database]
+
+}
+
+[Repository] --> [Database]
+[Controller] --> [Page]
+@enduml

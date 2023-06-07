@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+'actor:
+:User: as user
+
+'case:
+left to right direction
+rectangle "Система учёта докторантов" {
+'    usecase login as "Авторизаваться по \n почте ...@usm.md"
+    usecase student_view as "Просмотреть данные докторанта"
+    usecase student_list as "Запросить список докторантов"
+    usecase student_filter as "Запросить студентов \n по критериям"
+    usecase excel as "Генерировать excel отчет"
+    usecase search as "Искать по совпадению"
+}
+
+'usecase:
+user --> student_filter
+    student_filter <.. student_list : extend
+        student_list <.. search : extend
+        student_list <.. student_view : extend
+    student_filter <.. excel : extend
+
+
+
+'note right of Admin : This is an example.
+
+'note right of (Use)
+'A note can also
+'be on several lines
+'end note
+
+'note "This note is connected\nto several objects." as N2
+'(Start) .. N2
+'N2 .. (Use)
+@enduml

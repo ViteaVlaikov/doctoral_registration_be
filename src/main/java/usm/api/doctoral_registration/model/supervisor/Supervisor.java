@@ -1,15 +1,18 @@
 package usm.api.doctoral_registration.model.supervisor;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
 import usm.api.doctoral_registration.model.student.Student;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "supervisor")
 public class Supervisor {
     @Id

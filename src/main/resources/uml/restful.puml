@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+left to right direction
+package "front-end" {
+    [Page]
+    [Page] <-> [Browser]
+}
+
+cloud {
+    [Internet]
+}
+
+package "back-end" {
+    [Server]
+    [Server] <-> [Endpoint (Controllers)] : Обработка
+}
+
+database "DBMS" {
+    [Database]
+}
+
+
+[Browser] <--> [Internet] : HTTP запрос/ответ
+[Internet] <--> [Endpoint (Controllers)] : передача HTTP
+[Server] <--> [Database]
+
+@enduml
