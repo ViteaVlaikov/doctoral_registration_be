@@ -70,7 +70,7 @@ public class ExcelGenerator {
             row.createCell(10).setCellValue(students.get(i).getDiplomaNumber());
             row.createCell(11).setCellValue(students.get(i).getPersonalEmail());
             row.createCell(12).setCellValue(students.get(i).getPhoneNumber());
-            row.createCell(13).setCellValue(students.get(i).getStatus().toString());
+            writeStatus(students.get(i),row);
             writeRegistration(students.get(i), row);
             row.createCell(15).setCellValue(writeOrdersToCell(students.get(i).getOrders()));
             row.createCell(16).setCellValue(students.get(i).getYearStudy().toString());
@@ -106,6 +106,14 @@ public class ExcelGenerator {
             row.getCell(14).setCellValue(student.getRegistration().toString());
         else
             row.getCell(14).setCellValue("");
+    }
+
+    private static void writeStatus(Student student, Row row) {
+        row.createCell(13);
+        if(student.getStatus()!=null)
+            row.getCell(13).setCellValue(student.getStatus().toString());
+        else
+            row.getCell(13).setCellValue("");
     }
 
 
