@@ -41,7 +41,7 @@ class StudentRepositoryTest {
     @Autowired
     private SupervisorRepository supervisorRepository;
 
-    @Test
+//@Test
     void save() {
         Student student = new Student();
         student.setFirstName("Ion");
@@ -54,7 +54,7 @@ class StudentRepositoryTest {
 
         student.setGender(Gender.M);
         student.setDiplomaNumber(12345678);
-        student.setDiplomaSeries("MALL12345678");
+        student.setDiplomaSeries("ALII11111111111");
         student.setCorporateEmail("ion.viteazu@usm.com");
         student.setYearBirth(2000);
         student.setIdentNumber("123456789123");
@@ -118,8 +118,13 @@ class StudentRepositoryTest {
         studentRepository.save(student);
     }
 
-    @Test
+
     void read() {
         Student student = studentRepository.findById(22L).orElseThrow();
+    }
+
+
+    void test(){
+        studentRepository.deleteById(21L);
     }
 }

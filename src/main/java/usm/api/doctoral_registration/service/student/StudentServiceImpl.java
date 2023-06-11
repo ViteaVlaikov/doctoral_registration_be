@@ -5,16 +5,20 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.crosstab.CrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
+import usm.api.doctoral_registration.exception.entity.CountryNotFoundException;
 import usm.api.doctoral_registration.exception.entity.SpecialityNotFoundException;
 import usm.api.doctoral_registration.exception.entity.StudentNotFoundException;
 import usm.api.doctoral_registration.exception.entity.SupervisorNotFoundException;
 import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.exception.request.UnexpectedIdForUpdateRequestException;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
+import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
+import usm.api.doctoral_registration.repository.country.CountryRepository;
+import usm.api.doctoral_registration.repository.science.ScienceDomainRepository;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
 import usm.api.doctoral_registration.repository.student.StudentFilter;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
@@ -36,6 +40,8 @@ public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
 
     private final StudentMapper studentMapper;
+    private final CountryRepository countryRepository;
+    private final ScienceDomainRepository scienceDomainRepository;
 
     @Override
     public List<StudentDto> findAll() {
@@ -83,7 +89,8 @@ public class StudentServiceImpl implements StudentService {
                 .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpeciality().getId()));
         Supervisor supervisor = supervisorRepository.findById(studentDto.getSupervisor().getId())
                 .orElseThrow(() -> new SupervisorNotFoundException(studentDto.getSupervisor().getId()));
-        //TODO: add saving steering committee for supervisors
+        Country country = countryRepository.findById(studentDto.getCitizenship().getId())
+                .orElseThrow(() -> new CountryNotFoundException(studentDto.getCitizenship().getId()));
         Set<Supervisor> supervisorSet = new HashSet<>();
         studentDto.getSteeringCommittee()
                 .forEach(
@@ -97,25 +104,18 @@ public class StudentServiceImpl implements StudentService {
         student.setSpeciality(speciality);
         student.setSupervisor(supervisor);
         student.setSteeringCommittee(supervisorSet);
+        student.setCitizenship(country);
         return studentMapper.toDto(studentRepository.save(student));
     }
 
     @Override
-    public List<CrossTab.Item> createCrossTab(Map<String, String> params) {
-//        CrossTab crossTab = new StudentCrossTab(params);
-//        List<Student> all = studentRepository.findAll(StudentRepository.group("yearStudy", null,"gender", "speciality"));
-//        all.forEach(System.out::println);
-        return null;
-    }
-
-    @Override
     public StudentDto updateStudent(Long id, StudentDto studentDto) {
-        if (studentDto.getId() != null) {
-            throw new UnexpectedIdForUpdateRequestException(id);
-        }
-        Student student = studentRepository.findById(id).orElseThrow(
-                () -> new StudentNotFoundException(id)
-        );
+
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException(id));
+
+        student = studentMapper.updateStudentFromDto(studentDto,student);
+
         return studentMapper.toDto(studentRepository.save(student));
     }
 

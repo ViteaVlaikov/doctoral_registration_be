@@ -35,8 +35,8 @@ public class SupervisorService {
         }
 
         Supervisor supervisor = supervisorMapper.toEntity(supervisorDto);
-        ScienceSchool scienceSchool = scienceSchoolRepository.findById(supervisorDto.getScienceSchool().getId())
-                .orElseThrow(() -> new ScienceSchoolNotFoundException(supervisorDto.getScienceSchool().getId()));
+        ScienceSchool scienceSchool = scienceSchoolRepository.findById(supervisorDto.getScienceSchoolId())
+                .orElseThrow(() -> new ScienceSchoolNotFoundException(supervisorDto.getScienceSchoolId()));
         supervisor.setScienceSchool(scienceSchool);
         return supervisorMapper.toDto(supervisorRepository.save(supervisor));
     }
@@ -50,5 +50,15 @@ public class SupervisorService {
     public SupervisorDto findById(Long id) {
         return supervisorMapper.toDto(supervisorRepository.findById(id)
                 .orElseThrow(() -> new SupervisorNotFoundException(id)));
+    }
+
+    public SupervisorDto update(Long id, SupervisorDto supervisorDto) {
+
+        Supervisor supervisor = supervisorRepository.findById(id)
+                .orElseThrow(() -> new SupervisorNotFoundException(id));
+
+        supervisor = supervisorMapper.updateStudentFromDto(supervisorDto, supervisor);
+
+        return supervisorMapper.toDto(supervisorRepository.save(supervisor));
     }
 }

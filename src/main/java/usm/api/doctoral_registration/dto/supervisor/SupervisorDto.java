@@ -22,5 +22,5 @@ public class SupervisorDto {
 
     private String academician;
 
-    private ScienceSchoolDto scienceSchool;
+    private Long scienceSchoolId;
 }

@@ -2,6 +2,7 @@ package usm.api.doctoral_registration.mapper.student;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.mapper.EntityMapper;
@@ -15,6 +16,10 @@ import usm.api.doctoral_registration.model.student.Student;
 @Mapper(uses = {SupervisorMapper.class, CountryMapper.class,
         StudentMapper.OrderMapper.class, StudentMapper.SpecialityMapper.class})
 public interface StudentMapper extends EntityMapper<Student, StudentDto> {
+
+    @Mapping(target = "id", ignore = true) // Игнорировать поле "id" при обновлении
+    Student updateStudentFromDto(StudentDto studentDto, @MappingTarget Student student);
+
 
     @Mapper
     @Component
