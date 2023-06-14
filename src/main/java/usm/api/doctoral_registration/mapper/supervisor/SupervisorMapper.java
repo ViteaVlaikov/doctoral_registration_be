@@ -21,10 +21,10 @@ public interface SupervisorMapper extends EntityMapper<Supervisor, SupervisorDto
 
 
     @Override
-//    @Mapping(source = "scienceSchool", target = "scienceSchoolDto")
+    @Mapping(source = "scienceSchool.id", target = "scienceSchoolId")
     SupervisorDto toDto(Supervisor entity);
 
     @Override
-//    @Mapping(source = "scienceSchoolDto", target = "scienceSchool")
+    @Mapping(source = "scienceSchoolId", target = "scienceSchool.id")
     Supervisor toEntity(SupervisorDto name);
 }

@@ -46,7 +46,7 @@ public enum StudentFilter {
 
     IDENT_NUMBER("ident_number", StudentRepository::byIdentNumber, a -> a),
 
-    CITIZENSHIP("citizenship", StudentRepository::byCitizenship, a -> a),
+    CITIZENSHIP("country", StudentRepository::byCitizenship, a -> a),
 
     DIPLOMA("diploma", StudentRepository::byDiplomas, a -> a),
 
