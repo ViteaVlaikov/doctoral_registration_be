@@ -43,11 +43,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void saveAll(List<Student> students) {
-        studentRepository.saveAll(students);
-    }
-
-    @Override
     public List<StudentDto> findAllBySpecialityIdAndYear(Float speciality_id, YearStudy grade) {
         return studentRepository.findAllBySpecialityIdAndGrade(speciality_id, grade).stream()
                 .map(studentMapper::toDto)
@@ -64,7 +59,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> findByParams(Map<String, String> params) {
-        if(params==null){
+        if (params == null) {
             return studentRepository.findAll().stream()
                     .map(studentMapper::toDto).toList();
         }
@@ -101,6 +96,41 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public StudentDto save1(StudentDto studentDto) {
+        if (studentDto.getId() != null) {
+            throw new UnExpectedFieldInRequestException("Id: " + studentDto.getId());
+        }
+        Speciality speciality = new Speciality();
+        if (studentDto.getSpeciality() != null) {
+            speciality = specialityRepository.findById(studentDto.getSpeciality().getId())
+                    .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpeciality().getId()));
+        }
+        Supervisor supervisor = new Supervisor();
+        if (studentDto.getSupervisor().getId() != null) {
+            supervisor = supervisorRepository.findById(studentDto.getSupervisor().getId())
+                    .orElseThrow(
+                            () -> new SupervisorNotFoundException(studentDto.getSupervisor().getId()));
+        }
+        //TODO: add saving steering committee for supervisors
+        Set<Supervisor> supervisorSet = new HashSet<>();
+        if (studentDto.getSteeringCommittee() != null) {
+            studentDto.getSteeringCommittee()
+                    .forEach(
+                            supervisorDto -> supervisorSet.add(supervisorRepository.findById(supervisorDto.getId())
+                                    .orElseThrow(
+                                            () -> new SupervisorNotFoundException(studentDto.getSupervisor().getId())
+                                    )
+                            )
+                    );
+        }
+        Student student = studentMapper.toEntity(studentDto);
+        student.setSpeciality(speciality);
+        student.setSupervisor(supervisor);
+        student.setSteeringCommittee(supervisorSet);
+        return studentMapper.toDto(studentRepository.save(student));
+    }
+
+    @Override
     public List<CrossTab.Item> createCrossTab(Map<String, String> params) {
 //        CrossTab crossTab = new StudentCrossTab(params);
 //        List<Student> all = studentRepository.findAll(StudentRepository.group("yearStudy", null,"gender", "speciality"));
@@ -118,8 +148,6 @@ public class StudentServiceImpl implements StudentService {
         );
         return studentMapper.toDto(studentRepository.save(student));
     }
-
-
 
 
 }

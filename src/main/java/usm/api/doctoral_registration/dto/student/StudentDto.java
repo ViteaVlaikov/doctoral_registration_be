@@ -48,6 +48,7 @@ public class StudentDto {
     @Getter
     @Setter
     @NoArgsConstructor
+    @ToString
     public static class SpecialityDto {
         private Float id;
 
