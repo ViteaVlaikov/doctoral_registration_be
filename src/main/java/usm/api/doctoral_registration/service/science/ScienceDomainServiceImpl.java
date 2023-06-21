@@ -2,20 +2,13 @@ package usm.api.doctoral_registration.service.science;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import usm.api.doctoral_registration.dto.science.ScienceBranchDto;
 import usm.api.doctoral_registration.dto.science.ScienceDomainDto;
-import usm.api.doctoral_registration.dto.science.ScienceProfileDto;
-import usm.api.doctoral_registration.dto.science.SpecialityDto;
-import usm.api.doctoral_registration.dto.student.StudentDto;
 import usm.api.doctoral_registration.mapper.YearStudyMapper;
 import usm.api.doctoral_registration.mapper.science.ScienceDomainMapper;
-import usm.api.doctoral_registration.model.student.properties.YearStudy;
 import usm.api.doctoral_registration.repository.science.ScienceDomainRepository;
 import usm.api.doctoral_registration.service.student.StudentService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @AllArgsConstructor
