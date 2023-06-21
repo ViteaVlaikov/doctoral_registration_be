@@ -14,7 +14,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static usm.api.doctoral_registration.util.TestUtils.*;
+import static usm.api.doctoral_registration.util.test.TestUtils.*;
 
 @SpringBootTest
 class ScienceSchoolServiceTest {
@@ -31,7 +31,7 @@ class ScienceSchoolServiceTest {
     ScienceSchoolDto schoolDto1 = SCIENCE_SCHOOL_DTO_1_FULL;
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         List<ScienceSchoolDto> expectedSchools = Collections.singletonList(schoolDto1);
 
         when(schoolRepository.findAll()).thenReturn(List.of(new ScienceSchool()));
@@ -43,7 +43,7 @@ class ScienceSchoolServiceTest {
     }
 
     @Test
-    public void testFindAllWithoutDependencies() {
+    void testFindAllWithoutDependencies() {
         List<ScienceSchoolDto> expectedSchools = Collections.singletonList(schoolDto1);
 
         when(schoolRepository.findAll()).thenReturn(List.of(new ScienceSchool()));

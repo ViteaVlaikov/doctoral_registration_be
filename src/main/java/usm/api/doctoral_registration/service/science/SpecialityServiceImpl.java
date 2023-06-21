@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.mapper.science.SpecialityMapper;
-import usm.api.doctoral_registration.model.science.ScienceDomain;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 import usm.api.doctoral_registration.repository.science.ScienceProfileRepository;
@@ -28,8 +27,8 @@ public class SpecialityServiceImpl implements SpecialityService {
     }
 
     @Override
-    public List<SpecialityDto> findAllByScienceProfileIdAndGrade(Integer profile_id, YearStudy grade) {
-        return specialityRepository.findAllByScienceProfileIdAndGrade(profile_id, grade).stream()
+    public List<SpecialityDto> findAllByScienceProfileIdAndGrade(Integer profileId, YearStudy grade) {
+        return specialityRepository.findAllByScienceProfileIdAndGrade(profileId, grade).stream()
                 .map(specialityMapper::toDto)
                 .toList();
     }
@@ -37,7 +36,6 @@ public class SpecialityServiceImpl implements SpecialityService {
     @Override
     public List<SpecialityDto> findAllByScienceSchool(Integer id) {
         return specialityRepository.findAllByScienceSchool(id).stream()
-                .peek(speciality -> speciality.setStudents(null))
                 .map(specialityMapper::toDto).toList();
     }
 

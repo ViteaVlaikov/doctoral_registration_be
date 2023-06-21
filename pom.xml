@@ -15,11 +15,7 @@
     <description>doctoral_registration</description>
     <properties>
         <java.version>17</java.version>
-        <spring-cloud-azure.version>6.0.0-beta.4</spring-cloud-azure.version>
-<!--        <flyway-db.user>super_user</flyway-db.user>-->
-<!--        <flyway-db.password>super_user</flyway-db.password>-->
-<!--        <flyway-db.url>jdbc:postgresql://localhost:5432/doctoral_registration</flyway-db.url>-->
-        <flyway-db.user>postgres</flyway-db.user>
+        <spring-cloud-azure.version>6.0.0-beta.4</spring-cloud-azure.version><flyway-db.user>postgres</flyway-db.user>
         <flyway-db.password>postgres</flyway-db.password>
         <flyway-db.url>jdbc:postgresql://localhost:5432/doctoral_registration</flyway-db.url>
 
@@ -110,6 +106,11 @@
             <artifactId>poi-ooxml</artifactId>
             <version>${org.apache.poi.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.7</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -182,6 +183,25 @@
                         <arg>-Amapstruct.disableBuilders=true</arg>
                     </compilerArgs>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

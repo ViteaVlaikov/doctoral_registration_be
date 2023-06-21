@@ -3,25 +3,18 @@ package usm.api.doctoral_registration.service.student;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.domain.Specification;
 import usm.api.doctoral_registration.dto.student.StudentDto;
-import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
-import usm.api.doctoral_registration.exception.entity.SpecialityNotFoundException;
-import usm.api.doctoral_registration.exception.entity.StudentNotFoundException;
-import usm.api.doctoral_registration.exception.entity.SupervisorNotFoundException;
+import usm.api.doctoral_registration.exception.model.EntityNotFoundException;
 import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
-import usm.api.doctoral_registration.model.supervisor.Supervisor;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
-import usm.api.doctoral_registration.repository.student.StudentFilter;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
 import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
 
@@ -30,11 +23,10 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static usm.api.doctoral_registration.util.TestUtils.*;
+import static usm.api.doctoral_registration.util.test.TestUtils.*;
 
 @SpringBootTest
 class StudentServiceTest {
-
 
 
     private StudentService studentService;
@@ -136,7 +128,7 @@ class StudentServiceTest {
         when(studentRepository.findById(studentId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.findById(studentId));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> studentService.findById(studentId));
         verify(studentRepository, times(1)).findById(studentId);
         verifyNoInteractions(studentMapper);
     }
@@ -217,7 +209,7 @@ class StudentServiceTest {
         when(supervisorRepository.findById(studentDto.getSupervisor().getId())).thenReturn(Optional.empty());
 
         // Act & Assert
-        Assertions.assertThrows(SupervisorNotFoundException.class, () -> studentService.save(studentDto));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> studentService.save(studentDto));
         verify(specialityRepository, times(1)).findById(studentDto.getSpeciality().getId());
         verify(supervisorRepository, times(1)).findById(studentDto.getSupervisor().getId());
         verifyNoInteractions(studentMapper);
@@ -233,7 +225,7 @@ class StudentServiceTest {
         when(specialityRepository.findById(studentDto.getSpeciality().getId())).thenReturn(Optional.empty());
 
         // Act & Assert
-        Assertions.assertThrows(SpecialityNotFoundException.class, () -> studentService.save(studentDto));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> studentService.save(studentDto));
         verify(specialityRepository, times(1)).findById(studentDto.getSpeciality().getId());
         verifyNoInteractions(supervisorRepository);
         verifyNoInteractions(studentMapper);
@@ -245,7 +237,7 @@ class StudentServiceTest {
         // Arrange
         StudentDto studentDto = STUDENT_DTO_1_FULL;
         studentDto.setId(null);
-        when(specialityRepository.findById(studentDto.getSpeciality().getId())).thenReturn(Optional.of(SPECIALITY_FULL));
+        when(specialityRepository.findById(studentDto.getSpeciality().getId())).thenReturn(Optional.of(SPECIALITY_FOR_REPORT));
         when(supervisorRepository.findById(studentDto.getSupervisor().getId())).thenReturn(Optional.of(SUPERVISOR_1_FULL));
         when(supervisorRepository.findById(SUPERVISOR_DTO_2_FULL.getId())).thenReturn(Optional.of(SUPERVISOR_2_FULL));
         when(studentMapper.toEntity(studentDto)).thenReturn(new Student());
@@ -274,7 +266,7 @@ class StudentServiceTest {
         when(studentRepository.findById(id)).thenReturn(Optional.empty());
 
         // Act & Assert
-        Assertions.assertThrows(StudentNotFoundException.class, () -> studentService.updateStudent(id, studentDto));
+        Assertions.assertThrows(EntityNotFoundException.class, () -> studentService.updateStudent(id, studentDto));
         verify(studentRepository, times(1)).findById(id);
         verifyNoInteractions(studentMapper);
     }

@@ -3,8 +3,8 @@ package usm.api.doctoral_registration.service.supervisor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
-import usm.api.doctoral_registration.exception.entity.ScienceSchoolNotFoundException;
-import usm.api.doctoral_registration.exception.entity.SupervisorNotFoundException;
+import usm.api.doctoral_registration.exception.CodeException;
+import usm.api.doctoral_registration.exception.model.EntityNotFoundException;
 import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.mapper.supervisor.SupervisorMapper;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
@@ -36,7 +36,8 @@ public class SupervisorService {
 
         Supervisor supervisor = supervisorMapper.toEntity(supervisorDto);
         ScienceSchool scienceSchool = scienceSchoolRepository.findById(supervisorDto.getScienceSchool().getId())
-                .orElseThrow(() -> new ScienceSchoolNotFoundException(supervisorDto.getScienceSchool().getId()));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        Supervisor.class.getName(),supervisorDto.getScienceSchool().getId(), CodeException.SCIENCE_SCHOOL_NOT_FOUND));
         supervisor.setScienceSchool(scienceSchool);
         return supervisorMapper.toDto(supervisorRepository.save(supervisor));
     }
@@ -49,6 +50,6 @@ public class SupervisorService {
 
     public SupervisorDto findById(Long id) {
         return supervisorMapper.toDto(supervisorRepository.findById(id)
-                .orElseThrow(() -> new SupervisorNotFoundException(id)));
+                .orElseThrow(() -> new EntityNotFoundException(Supervisor.class.getName(),id,CodeException.SUPERVISOR_NOT_FOUND)));
     }
 }

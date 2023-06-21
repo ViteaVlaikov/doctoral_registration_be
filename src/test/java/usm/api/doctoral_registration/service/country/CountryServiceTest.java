@@ -15,11 +15,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static usm.api.doctoral_registration.util.TestUtils.MOLDOVA;
-import static usm.api.doctoral_registration.util.TestUtils.USA;
+import static usm.api.doctoral_registration.util.test.TestUtils.MOLDOVA;
+import static usm.api.doctoral_registration.util.test.TestUtils.USA;
 
 @SpringBootTest
-public class CountryServiceTest {
+class CountryServiceTest {
 
     @Autowired
     private CountryService countryService;
@@ -31,7 +31,7 @@ public class CountryServiceTest {
     private CountryMapper countryMapper;
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
 
         CountryDto countryDto1 = MOLDOVA;
         CountryDto countryDto2 = USA;

@@ -10,7 +10,7 @@ import java.util.Map;
 public interface StudentService {
     List<StudentDto> findAll();
 
-    List<StudentDto> findAllBySpecialityIdAndYear(Float speciality_id, YearStudy grade);
+    List<StudentDto> findAllBySpecialityIdAndYear(Float specialityId, YearStudy grade);
 
     StudentDto findById(Long id);
 

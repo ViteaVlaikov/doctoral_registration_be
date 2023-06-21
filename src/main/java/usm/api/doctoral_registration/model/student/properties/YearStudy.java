@@ -23,7 +23,6 @@ public enum YearStudy {
     }
 
     public static YearStudy toYearStudy(String grade) {
-//        return toYearStudy(Integer.parseInt(code));
         return Arrays.stream(YearStudy.values())
                 .filter(yearStudy -> yearStudy.toString().equals(grade))
                 .findFirst().orElseThrow();

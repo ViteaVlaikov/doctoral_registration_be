@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class SpecialityServiceTest {
+class SpecialityServiceTest {
     private SpecialityServiceImpl specialityService;
 
     @Mock

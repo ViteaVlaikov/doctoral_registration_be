@@ -21,11 +21,6 @@ public class SupervisorController {
         return ResponseEntity.ok(supervisorService.findAll());
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<SupervisorDto> findById(@PathVariable Long id) {
-//        return ResponseEntity.ok(supervisorService.findById(id));
-//    }
-
     @GetMapping("/schools/{id}")
     public ResponseEntity<List<SupervisorDto>> findAllByScienceSchoolId(@PathVariable Integer id) {
         return ResponseEntity.ok(supervisorService.findAllByScienceSchool(id));

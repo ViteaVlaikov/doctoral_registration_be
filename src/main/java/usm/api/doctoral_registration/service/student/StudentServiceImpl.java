@@ -5,9 +5,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import usm.api.doctoral_registration.crosstab.CrossTab;
 import usm.api.doctoral_registration.dto.student.StudentDto;
-import usm.api.doctoral_registration.exception.entity.SpecialityNotFoundException;
-import usm.api.doctoral_registration.exception.entity.StudentNotFoundException;
-import usm.api.doctoral_registration.exception.entity.SupervisorNotFoundException;
+import usm.api.doctoral_registration.exception.CodeException;
+import usm.api.doctoral_registration.exception.model.EntityNotFoundException;
 import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.exception.request.UnexpectedIdForUpdateRequestException;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
@@ -20,10 +19,7 @@ import usm.api.doctoral_registration.repository.student.StudentFilter;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
 import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -43,8 +39,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<StudentDto> findAllBySpecialityIdAndYear(Float speciality_id, YearStudy grade) {
-        return studentRepository.findAllBySpecialityIdAndGrade(speciality_id, grade).stream()
+    public List<StudentDto> findAllBySpecialityIdAndYear(Float specialityId, YearStudy grade) {
+        return studentRepository.findAllBySpecialityIdAndGrade(specialityId, grade).stream()
                 .map(studentMapper::toDto)
                 .toList();
     }
@@ -53,7 +49,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentDto findById(Long id) {
         return studentMapper.toDto(
                 studentRepository.findById(id).orElseThrow(
-                        () -> new StudentNotFoundException(id)
+                        () -> new EntityNotFoundException(Student.class.getName(), id, CodeException.SUPERVISOR_NOT_FOUND)
                 ));
     }
 
@@ -75,16 +71,18 @@ public class StudentServiceImpl implements StudentService {
             throw new UnExpectedFieldInRequestException("Id: " + studentDto.getId());
         }
         Speciality speciality = specialityRepository.findById(studentDto.getSpeciality().getId())
-                .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpeciality().getId()));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        Student.class.getName(), studentDto.getSpeciality().getId(), CodeException.STUDENT_NOT_FOUND));
         Supervisor supervisor = supervisorRepository.findById(studentDto.getSupervisor().getId())
-                .orElseThrow(() -> new SupervisorNotFoundException(studentDto.getSupervisor().getId()));
-        //TODO: add saving steering committee for supervisors
+                .orElseThrow(() -> new EntityNotFoundException(
+                        Supervisor.class.getName(), studentDto.getSupervisor().getId(), CodeException.SUPERVISOR_NOT_FOUND));
         Set<Supervisor> supervisorSet = new HashSet<>();
         studentDto.getSteeringCommittee()
                 .forEach(
                         supervisorDto -> supervisorSet.add(supervisorRepository.findById(supervisorDto.getId())
                                 .orElseThrow(
-                                        () -> new SupervisorNotFoundException(studentDto.getSupervisor().getId())
+                                        () -> new EntityNotFoundException(
+                                                Student.class.getName(), studentDto.getSupervisor().getId(), CodeException.STUDENT_NOT_FOUND)
                                 )
                         )
                 );
@@ -104,22 +102,24 @@ public class StudentServiceImpl implements StudentService {
         Speciality speciality = new Speciality();
         if (studentDto.getSpeciality() != null) {
             speciality = specialityRepository.findById(studentDto.getSpeciality().getId())
-                    .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpeciality().getId()));
+                    .orElseThrow(() -> new EntityNotFoundException(
+                            Speciality.class.getName(), studentDto.getSpeciality().getId(), CodeException.SPECIALITY_NOT_FOUND));
         }
         Supervisor supervisor = null;
         if (studentDto.getSupervisor().getId() != null) {
             supervisor = supervisorRepository.findById(studentDto.getSupervisor().getId())
                     .orElseThrow(
-                            () -> new SupervisorNotFoundException(studentDto.getSupervisor().getId()));
+                            () -> new EntityNotFoundException(
+                                    Supervisor.class.getName(), studentDto.getSupervisor().getId(), CodeException.SUPERVISOR_NOT_FOUND));
         }
-        //TODO: add saving steering committee for supervisors
         Set<Supervisor> supervisorSet = new HashSet<>();
         if (studentDto.getSteeringCommittee() != null) {
             studentDto.getSteeringCommittee()
                     .forEach(
                             supervisorDto -> supervisorSet.add(supervisorRepository.findById(supervisorDto.getId())
                                     .orElseThrow(
-                                            () -> new SupervisorNotFoundException(studentDto.getSupervisor().getId())
+                                            () -> new EntityNotFoundException(
+                                                    Supervisor.class.getName(), studentDto.getSupervisor().getId(), CodeException.SUPERVISOR_NOT_FOUND)
                                     )
                             )
                     );
@@ -136,7 +136,7 @@ public class StudentServiceImpl implements StudentService {
 //        CrossTab crossTab = new StudentCrossTab(params);
 //        List<Student> all = studentRepository.findAll(StudentRepository.group("yearStudy", null,"gender", "speciality"));
 //        all.forEach(System.out::println);
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -145,7 +145,7 @@ public class StudentServiceImpl implements StudentService {
             throw new UnexpectedIdForUpdateRequestException(id);
         }
         Student student = studentRepository.findById(id).orElseThrow(
-                () -> new StudentNotFoundException(id)
+                () -> new EntityNotFoundException(Student.class.getName(), id, CodeException.STUDENT_NOT_FOUND)
         );
         return studentMapper.toDto(studentRepository.save(student));
     }

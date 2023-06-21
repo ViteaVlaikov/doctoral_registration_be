@@ -16,10 +16,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static usm.api.doctoral_registration.util.TestUtils.SCIENCE_BRANCH_DTO_FULL;
+import static usm.api.doctoral_registration.util.test.TestUtils.SCIENCE_BRANCH_DTO_FULL;
 
 @SpringBootTest
-public class ScienceBranchServiceTest {
+class ScienceBranchServiceTest {
     @Autowired
     private ScienceBranchServiceImpl scienceBranchService;
 
@@ -32,7 +32,7 @@ public class ScienceBranchServiceTest {
     ScienceBranchDto branchDto = SCIENCE_BRANCH_DTO_FULL;
 
     @Test
-    public void testFindAllByScienceDomainIdAndYear() {
+    void testFindAllByScienceDomainIdAndYear() {
         Integer domainId = 1;
         YearStudy grade = YearStudy.I;
 
@@ -48,7 +48,7 @@ public class ScienceBranchServiceTest {
     }
 
     @Test
-    public void testGetAll() {
+    void testGetAll() {
         List<ScienceBranchDto> expectedBranches = Collections.singletonList(branchDto);
 
         when(branchRepository.findAll())

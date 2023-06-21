@@ -11,11 +11,7 @@ import java.util.Optional;
 @Repository
 public interface SupervisorRepository extends JpaRepository<Supervisor, Long> {
 
-//    @Query("from Supervisor s " +
-//            "where concat(s.firstName ,' ', s.lastName) like '%:name%'")
-//    Optional<Supervisor> findByFullName(String name);
-
-    List<Supervisor> findAllByScienceSchoolId(Integer scienceSchool_id);
+    List<Supervisor> findAllByScienceSchoolId(Integer scienceSchoolId);
 
     @Query("from Supervisor where firstName = :firstName and lastName = :lastName")
     Optional<Supervisor> findByFirstNameAndLastName(String firstName, String lastName);

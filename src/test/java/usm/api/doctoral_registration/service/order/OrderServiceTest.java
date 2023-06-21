@@ -14,10 +14,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static usm.api.doctoral_registration.util.TestUtils.ORDER_TYPE_DTO_FULL;
+import static usm.api.doctoral_registration.util.test.TestUtils.ORDER_TYPE_DTO_FULL;
 
 @SpringBootTest
-public class OrderServiceTest {
+class OrderServiceTest {
 
     @Autowired
     private OrderService orderService;
@@ -29,7 +29,7 @@ public class OrderServiceTest {
     private OrderTypeMapper orderTypeMapper;
 
     @Test
-    public void testFindAllOrderTypes() {
+    void testFindAllOrderTypes() {
         OrderTypeDto orderTypeDto1 = ORDER_TYPE_DTO_FULL;
         List<OrderTypeDto> expectedOrderTypes = List.of(orderTypeDto1);
 

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static usm.api.doctoral_registration.util.TestUtils.*;
+import static usm.api.doctoral_registration.util.test.TestUtils.*;
 
 @SpringBootTest
 class SupervisorServiceTest {

@@ -16,10 +16,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static usm.api.doctoral_registration.util.TestUtils.SCIENCE_PROFILE_DTO_FULL;
+import static usm.api.doctoral_registration.util.test.TestUtils.SCIENCE_PROFILE_DTO_FULL;
 
 @SpringBootTest
-public class ScienceProfileServiceTest {
+class ScienceProfileServiceTest {
     @Mock
     private ScienceProfileRepository profileRepository;
 
@@ -32,7 +32,7 @@ public class ScienceProfileServiceTest {
     ScienceProfileDto profileDto = SCIENCE_PROFILE_DTO_FULL;
 
     @Test
-    public void testFindAllByScienceBranchIdAndYear() {
+    void testFindAllByScienceBranchIdAndYear() {
         Integer branchId = 1;
         YearStudy grade = YearStudy.I;
 
@@ -47,7 +47,7 @@ public class ScienceProfileServiceTest {
     }
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         List<ScienceProfileDto> expectedProfiles = Collections.singletonList(profileDto);
 
         when(profileRepository.findAll()).thenReturn(List.of(new ScienceProfile()));

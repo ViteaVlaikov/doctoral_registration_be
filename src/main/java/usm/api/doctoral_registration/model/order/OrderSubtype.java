@@ -1,16 +1,18 @@
 package usm.api.doctoral_registration.model.order;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "order_subtype")
-public class OrderSubtype {
+public class OrderSubtype implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

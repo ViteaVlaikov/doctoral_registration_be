@@ -10,6 +10,8 @@ import usm.api.doctoral_registration.model.student.properties.YearStudy;
 
 import java.util.List;
 
+import static usm.api.doctoral_registration.util.string.StringUtils.*;
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpecificationExecutor<Student> {
 
@@ -25,7 +27,7 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                             cb.concat(" ", student.get(name2))
                     ),
                     student.get(name3),
-                    cb.count(student.get("id"))
+                    cb.count(student.get(ID))
             );
             cq.where(student.get(name1).in(list1));
 //            cq.groupBy(student.get(name1), student.get(name2), student.get(name3));
@@ -34,94 +36,94 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
     }
 
     static Specification<Student> byYearStudy(List<?> years) {
-        return (student, cq, cb) -> student.get("yearStudy").in(years);
+        return (student, cq, cb) -> student.get(YEAR_STUDY).in(years);
     }
 
     static Specification<Student> bySchoolsId(List<?> schoolsId) {
         return (student, cq, cb) ->
-                student.get("speciality")
-                        .get("scienceProfile")
-                        .get("scienceBranch")
-                        .get("scienceDomain")
-                        .get("scienceSchool")
-                        .get("id").in(schoolsId);
+                student.get(SPECIALITY)
+                        .get(SCIENCE_PROFILE)
+                        .get(SCIENCE_BRANCH)
+                        .get(SCIENCE_DOMAIN)
+                        .get(SCIENCE_SCHOOL)
+                        .get(ID).in(schoolsId);
     }
 
     static Specification<Student> byDomainsId(List<?> domainsId) {
         return (student, cq, cb) ->
-                student.get("speciality")
-                        .get("scienceProfile")
-                        .get("scienceBranch")
-                        .get("scienceDomain")
-                        .get("id").in(domainsId);
+                student.get(SPECIALITY)
+                        .get(SCIENCE_PROFILE)
+                        .get(SCIENCE_BRANCH)
+                        .get(SCIENCE_DOMAIN)
+                        .get(ID).in(domainsId);
     }
 
     static Specification<Student> byBranchesId(List<?> branchesId) {
         return (student, cq, cb) ->
-                student.get("speciality")
-                        .get("scienceProfile")
-                        .get("scienceBranch")
-                        .get("id").in(branchesId);
+                student.get(SPECIALITY)
+                        .get(SCIENCE_PROFILE)
+                        .get(SCIENCE_BRANCH)
+                        .get(ID).in(branchesId);
     }
 
     static Specification<Student> byProfilesId(List<?> profilesId) {
         return (student, cq, cb) ->
-                student.get("speciality")
-                        .get("scienceProfile")
-                        .get("id").in(profilesId);
+                student.get(SPECIALITY)
+                        .get(SCIENCE_PROFILE)
+                        .get(ID).in(profilesId);
     }
 
     static Specification<Student> bySpecialitiesId(List<?> specialitiesId) {
         return (student, cq, cb) ->
-                student.get("speciality")
-                        .get("id").in(specialitiesId);
+                student.get(SPECIALITY)
+                        .get(ID).in(specialitiesId);
     }
 
     static Specification<Student> byGender(List<?> genders) {
         return (student, cq, cb) ->
-                student.get("gender")
+                student.get(GENDER)
                         .in(genders);
     }
 
     static Specification<Student> byStatus(List<?> status) {
         return (student, cq, cb) ->
-                student.get("status")
+                student.get(STATUS)
                         .in(status);
     }
 
     static Specification<Student> byFinancing(List<?> financing) {
         return (student, cq, cb) ->
-                student.get("financing")
+                student.get(FINANCING)
                         .in(financing);
     }
 
     static Specification<Student> byRegistration(List<?> registration) {
         return (student, cq, cb) ->
-                student.get("registration")
+                student.get(REGISTRATION)
                         .in(registration);
     }
 
     static Specification<Student> byStudyType(List<?> studyType) {
         return (student, cq, cb) ->
-                student.get("studyType")
+                student.get(STYDY_TYPE)
                         .in(studyType);
     }
 
     static Specification<Student> byYearsBirth(List<?> years) {
         return (student, cq, cb) ->
-                student.get("yearBirth")
+                student.get(YEAR_BIRTH)
                         .in(years);
     }
 
     static Specification<Student> byYearsBegin(List<?> years) {
         return (student, cq, cb) ->
-                student.get("beginStudies")
+                student.get(BEGIN_STUDIES)
                         .in(years);
     }
 
     static Specification<Student> byYearsEnd(List<?> years) {
         return (student, cq, cb) ->
-                student.get("endStudies")
+                student.get(END_STUDIES)
                         .in(years);
     }
 
@@ -134,11 +136,11 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                                                 cb.concat(
                                                         cb.concat(
                                                                 cb.concat(
-                                                                        student.get("lastName"), " "),
-                                                                student.get("firstName")),
-                                                        " "),
-                                                student.get("patronymicName")),
-                                        "%" + fullName + "%")
+                                                                        student.get(LAST_NAME), SPACE),
+                                                                student.get(FIRST_NAME)),
+                                                        SPACE),
+                                                student.get(PATRONYMIC_NAME)),
+                                        PROCENT + fullName + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }
 
@@ -150,11 +152,11 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                                         cb.concat(
                                                 cb.concat(
                                                         cb.concat(
-                                                                student.get("corporateEmail"),
-                                                                " "),
-                                                        student.get("personalEmail")),
-                                                ""),
-                                        "%" + email + "%")
+                                                                student.get(CORPORATE_EMAIL),
+                                                                SPACE),
+                                                        student.get(PERSONAL_EMAIL)),
+                                                SPACE),
+                                        PROCENT + email + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }
 
@@ -163,8 +165,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                 numbers.stream().map(
                         number ->
                                 cb.like(
-                                        student.get("identNumber"),
-                                        "%" + number + "%")
+                                        student.get(IDENT_NUMBER),
+                                        PROCENT + number + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }
 
@@ -173,8 +175,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                 citizenship.stream().map(
                         c ->
                                 cb.like(
-                                        student.get("identNumber"),
-                                        "%" + c + "%")
+                                        student.get(IDENT_NUMBER),
+                                        PROCENT + c + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }
 
@@ -186,11 +188,11 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                                         cb.concat(
                                                 cb.concat(
                                                         cb.concat(
-                                                                student.get("diplomaNumber"),
-                                                                " "),
-                                                        student.get("diplomaSeries")),
-                                                ""),
-                                        "%" + diploma + "%")
+                                                                student.get(DIPLOMA_NUMBER),
+                                                                SPACE),
+                                                        student.get(DIPLOMA_SERIES)),
+                                                SPACE),
+                                        PROCENT + diploma + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }
 
@@ -199,23 +201,23 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                 numbers.stream().map(
                         number ->
                                 cb.like(
-                                        student.get("phoneNumber"),
-                                        "%" + number + "%")
+                                        student.get(PHONE_NUMBER),
+                                        PROCENT + number + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }
 
     static Specification<Student> bySupervisors(List<?> supervisors) {
         return (student, cq, cb) ->
-                student.get("supervisor")
-                        .get("id")
+                student.get(SUPERVISOR)
+                        .get(ID)
                         .in(supervisors);
     }
 
-    static Specification<Student> byCommittees(List<?> member_ids) {
+    static Specification<Student> byCommittees(List<?> memberIds) {
         return (student, cq, cb) ->
-                student.get("steeringCommittee")
-                        .get("id")
-                        .in(member_ids);
+                student.get(STEERING_COMMITTEE)
+                        .get(ID)
+                        .in(memberIds);
 
     }
 }
