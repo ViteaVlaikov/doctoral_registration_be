@@ -24,7 +24,7 @@ public class SupervisorService {
 
     private final SupervisorMapper supervisorMapper;
 
-    public List<SupervisorDto> findAllByScienceSchool(Long id) {
+    public List<SupervisorDto> findAllByScienceSchool(Integer id) {
         return supervisorRepository.findAllByScienceSchoolId(id)
                 .stream().map(supervisorMapper::toDto).toList();
     }

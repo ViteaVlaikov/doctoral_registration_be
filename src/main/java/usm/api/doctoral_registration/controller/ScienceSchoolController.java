@@ -31,6 +31,7 @@ public class ScienceSchoolController {
     }
 
     @GetMapping("/years")
+    @SuppressWarnings("unused")
     public ResponseEntity<Map<ScienceSchoolDto, List<Long>>> getScienceSchoolByYears() {
         return ResponseEntity.ok(scienceSchoolService.getScienceSchoolByYears());
     }

@@ -23,11 +23,17 @@ import java.util.Set;
 public class ScienceDomainServiceImpl implements ScienceDomainService {
 
     private final ScienceDomainRepository domainRepository;
+
     private  final ScienceDomainMapper scienceDomainMapper;
+
     private final ScienceBranchService scienceBranchService;
+
     private final ScienceProfileService scienceProfileService;
+
     private final SpecialityService specialityService;
+
     private final StudentService studentService;
+
     private final YearStudyMapper yearStudyMapper;
 
     @Override

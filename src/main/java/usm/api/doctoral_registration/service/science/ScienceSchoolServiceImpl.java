@@ -34,6 +34,7 @@ public class ScienceSchoolServiceImpl implements ScienceSchoolService {
                 .collect(Collectors.toList());
     }
     @Override
+    @SuppressWarnings("unused")
     public Map<ScienceSchoolDto, List<Long>> getScienceSchoolByYears() {
         List<ScienceSchool> scienceSchools = scienceSchoolRepository.findAll();
         Map<ScienceSchoolDto, List<Long>> result = new HashMap<>();
@@ -44,6 +45,7 @@ public class ScienceSchoolServiceImpl implements ScienceSchoolService {
         return result;
     }
 
+    @SuppressWarnings("unused")
     private List<Long> getCountOfStudentsByYearsForScienceSchool(ScienceSchool scienceSchool) {
         List<Long> studentsCount = new ArrayList<>();
         studentsCount.add(scienceSchoolRepository.getCountOfStudentsByIdAndGrade(YearStudy.I,scienceSchool.getId()));

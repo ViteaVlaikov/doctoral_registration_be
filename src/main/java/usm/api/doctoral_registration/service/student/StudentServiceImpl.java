@@ -96,6 +96,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @SuppressWarnings("unused")
     public StudentDto save1(StudentDto studentDto) {
         if (studentDto.getId() != null) {
             throw new UnExpectedFieldInRequestException("Id: " + studentDto.getId());
@@ -105,7 +106,7 @@ public class StudentServiceImpl implements StudentService {
             speciality = specialityRepository.findById(studentDto.getSpeciality().getId())
                     .orElseThrow(() -> new SpecialityNotFoundException(studentDto.getSpeciality().getId()));
         }
-        Supervisor supervisor = new Supervisor();
+        Supervisor supervisor = null;
         if (studentDto.getSupervisor().getId() != null) {
             supervisor = supervisorRepository.findById(studentDto.getSupervisor().getId())
                     .orElseThrow(
@@ -148,6 +149,4 @@ public class StudentServiceImpl implements StudentService {
         );
         return studentMapper.toDto(studentRepository.save(student));
     }
-
-
 }

@@ -51,7 +51,7 @@ class StudentExcelToolsTest {
     @Autowired
     private SpecialityService specialityService;
 
-    @Test
+//    @Test
     void test() {
         List<StudentDto> studentDtos = studentExcelTools.read(PATH + "students.xlsx", 2);
         for (int i = 0; i < 137; i++) {

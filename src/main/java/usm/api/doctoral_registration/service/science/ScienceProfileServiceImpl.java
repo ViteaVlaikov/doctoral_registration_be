@@ -12,8 +12,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ScienceProfileServiceImpl implements ScienceProfileService {
+
     private final ScienceProfileRepository scienceProfileRepository;
+
     private final ScienceProfileMapper scienceProfileMapper;
+
     @Override
     public List<ScienceProfileDto> findAllByScienceBranchIdAndYear(Integer branch_id, YearStudy grade) {
         return scienceProfileRepository.findAllByScienceBranchIdAndYear(branch_id, grade).stream()
