@@ -1,11 +1,3 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Java CI with Maven
 
 on:
@@ -56,3 +48,19 @@ jobs:
         with:
           name: coverage-report
           path: target/site/jacoco/index.html
+
+      - name: Check Test Coverage
+        run: |
+          # Здесь вы можете указать минимальный процент покрытия, который должен быть достигнут
+          MIN_COVERAGE_PERCENT=80
+
+          # Получите отчет о покрытии JaCoCo и извлеките процент покрытия
+          COVERAGE_PERCENT=$(mvn jacoco:report -q -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn | grep -A 2 "Overall coverage" | tail -n 1 | awk '{print $3}' | tr -d '%')
+
+          # Проверьте, достигнуто ли покрытие более или равно минимальному порогу
+          if (( $COVERAGE_PERCENT < $MIN_COVERAGE_PERCENT )); then
+            echo "Test coverage ($COVERAGE_PERCENT%) is below the minimum required coverage ($MIN_COVERAGE_PERCENT%). Commit aborted."
+            exit 1
+          fi
+
+
