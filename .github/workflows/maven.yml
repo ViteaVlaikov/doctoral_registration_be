@@ -47,8 +47,10 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+
       - name: JaCoCo Test Coverage
         run: mvn jacoco:report
+
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v2
         with:
