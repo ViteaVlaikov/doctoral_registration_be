@@ -4,19 +4,49 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
+  branches:
+    include:
+      - "*"
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Maven@3
+  - checkout: self
+
+  - script: |
+      sudo apt-get update
+      sudo apt-get install postgresql
+      sudo service postgresql start
+      sudo -u postgres psql -c "CREATE USER super_user WITH PASSWORD 'super_user'"
+      sudo -u postgres createdb doctoral_registration
+      sudo -u postgres psql -c "ALTER DATABASE doctoral_registration OWNER TO super_user"
+    displayName: 'Set up PostgreSQL'
+
+  - script: |
+      mvn -B flyway:migrate --file pom.xml
+    displayName: 'Apply database migrations'
+
+  - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
+    jdkVersionOption: '17'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+  - script: |
+      mvn jacoco:report
+    displayName: 'JaCoCo Test Coverage'
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: JaCoCo
+      summaryFileLocation: $(System.DefaultWorkingDirectory)/target/site/jacoco/index.html
+      reportDirectory: $(System.DefaultWorkingDirectory)/target/site/jacoco/
+      failIfCoverageEmpty: false
+    displayName: 'Publish Code Coverage Results'
+
