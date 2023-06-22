@@ -28,11 +28,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
       
-    - name: Configure PostgreSQL
-      uses: postgresql/setup-postgres@v1
-      with:
-        postgresql-version: 'latest'
-        postgresql-password: ${{ secrets.DB_PASSWORD }}
+    - name: Set up PostgreSQL
+      run: |
+        sudo apt-get update
+        sudo apt-get install postgresql
+        sudo service postgresql start
+        psql -c "CREATE DATABASE doctoral_registration;" -U postgres
+        # Другие команды для настройки вашей базы данных, если это необходимо
+
+    - name: Apply database migrations
+      run: |
+        mvn -B flyway:migrate --file pom.xml
       
     - name: Build with Maven
       run: mvn -B package --file pom.xml
