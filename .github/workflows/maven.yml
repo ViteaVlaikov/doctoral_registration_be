@@ -27,6 +27,13 @@ jobs:
         java-version: '20'
         distribution: 'temurin'
         cache: maven
+      
+    - name: Configure PostgreSQL
+      uses: postgresql/setup-postgres@v1
+      with:
+        postgresql-version: 'latest'
+        postgresql-password: ${{ secrets.DB_PASSWORD }}
+      
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
