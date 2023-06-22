@@ -32,8 +32,13 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install postgresql
+        # Запуск службы PostgreSQL
         sudo service postgresql start
-        psql -c "CREATE DATABASE doctoral_registration;" -U postgres
+        # Создание пользователя суперпользователя
+        sudo -u postgres createuser --superuser superuser
+        # Создание базы данных и назначение пользователя суперпользователем базы данных
+        sudo -u postgres createdb doctoral_registration
+        sudo -u postgres psql -c "ALTER DATABASE doctoral_registration OWNER TO superuser"
         # Другие команды для настройки вашей базы данных, если это необходимо
 
     - name: Apply database migrations
