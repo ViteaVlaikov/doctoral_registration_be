@@ -35,7 +35,7 @@ jobs:
         # Запуск службы PostgreSQL
         sudo service postgresql start
         # Создание пользователя суперпользователя
-        sudo -u postgres createuser --superuser superuser
+        sudo -u postgres psql -c "CREATE USER super_user WITH PASSWORD 'super_user'"
         # Создание базы данных и назначение пользователя суперпользователем базы данных
         sudo -u postgres createdb doctoral_registration
         sudo -u postgres psql -c "ALTER DATABASE doctoral_registration OWNER TO superuser"
