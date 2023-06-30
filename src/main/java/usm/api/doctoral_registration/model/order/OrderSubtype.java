@@ -19,7 +19,7 @@ public class OrderSubtype implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "order")
+    @Column(name = "\"order\"")
     private String order;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -19,22 +19,6 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
             "where speciality.id = :specialityId and yearStudy = :grade")
     List<Student> findAllBySpecialityIdAndGrade(Float specialityId, YearStudy grade);
 
-    static Specification<Student> group(String name1, List<?> list1, String name2, String name3) {
-        return (student, cq, cb) -> {
-            cq.multiselect(
-                    cb.concat(
-                            student.get(name1),
-                            cb.concat(" ", student.get(name2))
-                    ),
-                    student.get(name3),
-                    cb.count(student.get(ID))
-            );
-            cq.where(student.get(name1).in(list1));
-//            cq.groupBy(student.get(name1), student.get(name2), student.get(name3));
-            return null;
-        };
-    }
-
     static Specification<Student> byYearStudy(List<?> years) {
         return (student, cq, cb) -> student.get(YEAR_STUDY).in(years);
     }
@@ -175,7 +159,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                 citizenship.stream().map(
                         c ->
                                 cb.like(
-                                        student.get(IDENT_NUMBER),
+                                        student.get(CITIZENSHIP)
+                                                .get(NAME),
                                         PROCENT + c + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }
@@ -187,11 +172,9 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
                                 cb.like(
                                         cb.concat(
                                                 cb.concat(
-                                                        cb.concat(
-                                                                student.get(DIPLOMA_NUMBER),
-                                                                SPACE),
-                                                        student.get(DIPLOMA_SERIES)),
-                                                SPACE),
+                                                        student.get(DIPLOMA_SERIES),
+                                                        SPACE),
+                                                student.get(DIPLOMA_NUMBER)),
                                         PROCENT + diploma + PROCENT)
                 ).reduce(cb.or(), cb::or);
     }

@@ -53,4 +53,9 @@ public class StudentController {
         return ResponseEntity.ok(studentService.updateStudent(id, studentDto));
     }
 
+    @GetMapping("/cross_tab")
+    public ResponseEntity<List<CrossTab.Item>> studentCrossTab(@RequestParam Map<String, String> params){
+        return ResponseEntity.ok(studentService.createCrossTab(params));
+    }
+
 }

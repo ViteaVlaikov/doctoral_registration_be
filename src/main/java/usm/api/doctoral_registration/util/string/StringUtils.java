@@ -50,9 +50,12 @@ public class StringUtils {
     public static final String PATRONYMIC_NAME = "patronymicName";
 
     public static final String CORPORATE_EMAIL = "corporateEmail";
+
     public static final String PERSONAL_EMAIL = "personalEmail";
 
     public static final String IDENT_NUMBER = "identNumber";
+
+    public static final String CITIZENSHIP = "citizenship";
 
     public static final String DIPLOMA_NUMBER = "diplomaNumber";
 
@@ -65,6 +68,8 @@ public class StringUtils {
     public static final String STEERING_COMMITTEE = "steeringCommittee";
 
     public static final String ACADEMICIAN = "academician";
+
+    public static final String NAME = "name";
 
     public static final String PROCENT = "%";
 

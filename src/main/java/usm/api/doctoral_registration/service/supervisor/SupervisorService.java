@@ -58,7 +58,7 @@ public class SupervisorService {
         Supervisor supervisor = supervisorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Supervisor.class.getName(),id,CodeException.SUPERVISOR_NOT_FOUND));
 
-        supervisor = supervisorMapper.updateStudentFromDto(supervisorDto, supervisor);
+        supervisor = supervisorMapper.updateSupervisorFromDto(supervisorDto, supervisor);
 
         return supervisorMapper.toDto(supervisorRepository.save(supervisor));
     }

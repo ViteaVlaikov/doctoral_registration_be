@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
 import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.mapper.science.ScienceSchoolMapper;
@@ -18,11 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static usm.api.doctoral_registration.util.test.TestUtils.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class SupervisorServiceTest {
 
     private SupervisorService supervisorService;
@@ -67,7 +70,7 @@ class SupervisorServiceTest {
         List<SupervisorDto> result = supervisorService.findAllByScienceSchool(schoolId);
 
         // Assert
-        Assertions.assertEquals(2, result.size());
+        assertEquals(2, result.size());
         verify(supervisorRepository, times(1)).findAllByScienceSchoolId(schoolId);
         verify(supervisorMapper, times(2)).toDto(any());
     }
@@ -81,7 +84,7 @@ class SupervisorServiceTest {
         Supervisor supervisor = SUPERVISOR_1_FULL;
         when(supervisorMapper.toEntity(supervisorDto)).thenReturn(supervisor);
         when(supervisorMapper.toDto(supervisor)).thenReturn(supervisorDto);
-        when(scienceSchoolRepository.findById(supervisorDto.getScienceSchoolId())).thenReturn(Optional.of(SCIENCE_SCHOOL_FULL));
+        when(scienceSchoolRepository.findById(supervisorDto.getScienceSchoolId())).thenReturn(Optional.of(SCIENCE_SCHOOL_1_FULL));
         when(supervisorRepository.save(supervisor)).thenReturn(supervisor);
 
         // Act
@@ -127,7 +130,7 @@ class SupervisorServiceTest {
         List<SupervisorDto> result = supervisorService.findAll();
 
         // Assert
-        Assertions.assertEquals(2, result.size());
+        assertEquals(2, result.size());
         verify(supervisorRepository, times(1)).findAll();
         verify(supervisorMapper, times(2)).toDto(any());
     }
@@ -149,5 +152,34 @@ class SupervisorServiceTest {
         Assertions.assertNotNull(result);
         verify(supervisorRepository, times(1)).findById(supervisorId);
         verify(supervisorMapper, times(1)).toDto(supervisor);
+    }
+
+    @Test
+    public void testUpgrade_ValidInput_ReturnsUpgradedSupervisor() {
+        Long supervisorId = 1L;
+        SupervisorDto supervisorDto = new SupervisorDto();
+        supervisorDto.setId(supervisorId);
+
+        Supervisor existingSupervisor = new Supervisor();
+        existingSupervisor.setId(supervisorId);
+
+        Supervisor upgradedSupervisor = new Supervisor();
+        upgradedSupervisor.setId(supervisorId);
+
+        // Mock repository and mapper behavior
+        when(supervisorRepository.findById(supervisorId)).thenReturn(Optional.of(existingSupervisor));
+        when(supervisorMapper.updateSupervisorFromDto(supervisorDto, existingSupervisor)).thenReturn(upgradedSupervisor);
+        when(supervisorRepository.save(upgradedSupervisor)).thenReturn(upgradedSupervisor);
+        when(supervisorMapper.toDto(upgradedSupervisor)).thenReturn(supervisorDto);
+
+        // Call the upgrade method
+        SupervisorDto result = supervisorService.update(supervisorId, supervisorDto);
+
+        // Verify the result
+        assertEquals(supervisorDto, result);
+        verify(supervisorRepository, times(1)).findById(supervisorId);
+        verify(supervisorMapper, times(1)).updateSupervisorFromDto(supervisorDto, existingSupervisor);
+        verify(supervisorRepository,times(1)).save(upgradedSupervisor);
+        verify(supervisorMapper, times(1)).toDto(upgradedSupervisor);
     }
 }

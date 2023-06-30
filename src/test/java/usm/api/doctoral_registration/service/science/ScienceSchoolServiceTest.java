@@ -5,6 +5,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.dto.science.ScienceSchoolDto;
 import usm.api.doctoral_registration.mapper.science.ScienceSchoolMapper;
 import usm.api.doctoral_registration.model.science.ScienceSchool;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.when;
 import static usm.api.doctoral_registration.util.test.TestUtils.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class ScienceSchoolServiceTest {
 
     @Mock

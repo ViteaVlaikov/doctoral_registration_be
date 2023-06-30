@@ -18,9 +18,7 @@ public interface StudentService {
 
     StudentDto save(StudentDto studentDto);
 
-    StudentDto save1(StudentDto studentDto);
+    StudentDto updateStudent(Long id, StudentDto studentDto);
 
     List<CrossTab.Item> createCrossTab(Map<String, String> params);
-
-    StudentDto updateStudent(Long id, StudentDto studentDto);
 }

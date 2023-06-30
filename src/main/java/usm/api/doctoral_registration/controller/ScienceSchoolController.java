@@ -30,9 +30,9 @@ public class ScienceSchoolController {
         return ResponseEntity.ok(scienceSchoolService.findAll());
     }
 
-    @GetMapping("/years")
-    @SuppressWarnings("unused")
-    public ResponseEntity<Map<ScienceSchoolDto, List<Long>>> getScienceSchoolByYears() {
-        return ResponseEntity.ok(scienceSchoolService.getScienceSchoolByYears());
-    }
+//    @GetMapping("/years")
+//    @SuppressWarnings("unused")
+//    public ResponseEntity<Map<ScienceSchoolDto, List<Long>>> getScienceSchoolByYears() {
+//        return ResponseEntity.ok(scienceSchoolService.getScienceSchoolByYears());
+//    }
 }

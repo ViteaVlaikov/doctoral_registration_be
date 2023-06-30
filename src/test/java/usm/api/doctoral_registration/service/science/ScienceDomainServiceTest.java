@@ -5,6 +5,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.dto.science.ScienceDomainDto;
 import usm.api.doctoral_registration.mapper.YearStudyMapper;
 import usm.api.doctoral_registration.mapper.science.ScienceDomainMapper;
@@ -20,27 +21,13 @@ import static org.mockito.Mockito.when;
 import static usm.api.doctoral_registration.util.test.TestUtils.SCIENCE_DOMAIN_DTO_FULL;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class ScienceDomainServiceTest {
     @Mock
     private ScienceDomainRepository domainRepository;
 
     @Mock
     private ScienceDomainMapper domainMapper;
-
-    @Mock
-    private ScienceBranchService branchService;
-
-    @Mock
-    private ScienceProfileService profileService;
-
-    @Mock
-    private SpecialityService specialityService;
-
-    @Mock
-    private StudentService studentService;
-
-    @Mock
-    private YearStudyMapper yearStudyMapper;
 
     @InjectMocks
     private ScienceDomainServiceImpl domainService;

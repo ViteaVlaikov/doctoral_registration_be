@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.dto.order.OrderTypeDto;
 import usm.api.doctoral_registration.mapper.order.OrderTypeMapper;
 import usm.api.doctoral_registration.model.order.OrderType;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.when;
 import static usm.api.doctoral_registration.util.test.TestUtils.ORDER_TYPE_DTO_FULL;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class OrderServiceTest {
 
     @Autowired

@@ -10,6 +10,6 @@ public interface ScienceSchoolService {
 
     List<ScienceSchoolDto> findAllWithoutDependencies();
 
-    @SuppressWarnings("unused")
-    Map<ScienceSchoolDto, List<Long>> getScienceSchoolByYears();
+//    @SuppressWarnings("unused")
+//    Map<ScienceSchoolDto, List<Long>> getScienceSchoolByYears();
 }

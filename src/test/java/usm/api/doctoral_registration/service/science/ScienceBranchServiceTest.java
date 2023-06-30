@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.dto.science.ScienceBranchDto;
 import usm.api.doctoral_registration.mapper.science.ScienceBranchMapper;
 import usm.api.doctoral_registration.model.science.ScienceBranch;
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.when;
 import static usm.api.doctoral_registration.util.test.TestUtils.SCIENCE_BRANCH_DTO_FULL;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class ScienceBranchServiceTest {
     @Autowired
     private ScienceBranchServiceImpl scienceBranchService;

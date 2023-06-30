@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.tools.excel.ExcelGenerator;
 
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.*;
 import static usm.api.doctoral_registration.util.test.TestUtils.STUDENT_FOR_REPORT;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class ExcelGeneratorTest {
     @Mock
     private Workbook mockWorkbook;

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.dto.science.SpecialityDto;
 import usm.api.doctoral_registration.mapper.science.SpecialityMapper;
 import usm.api.doctoral_registration.model.science.ScienceProfile;
@@ -21,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class SpecialityServiceTest {
     private SpecialityServiceImpl specialityService;
 

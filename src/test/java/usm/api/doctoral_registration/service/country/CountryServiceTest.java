@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import usm.api.doctoral_registration.dto.country.CountryDto;
 import usm.api.doctoral_registration.mapper.country.CountryMapper;
 import usm.api.doctoral_registration.model.country.Country;
@@ -15,10 +16,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static usm.api.doctoral_registration.util.test.TestUtils.MOLDOVA;
-import static usm.api.doctoral_registration.util.test.TestUtils.USA;
+import static usm.api.doctoral_registration.util.test.TestUtils.MOLDOVA_DTO;
+import static usm.api.doctoral_registration.util.test.TestUtils.USA_DTO;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class CountryServiceTest {
 
     @Autowired
@@ -33,8 +35,8 @@ class CountryServiceTest {
     @Test
     void testFindAll() {
 
-        CountryDto countryDto1 = MOLDOVA;
-        CountryDto countryDto2 = USA;
+        CountryDto countryDto1 = MOLDOVA_DTO;
+        CountryDto countryDto2 = USA_DTO;
         List<CountryDto> expectedCountries = Arrays.asList(countryDto1, countryDto2);
 
         when(countryRepository.findAll()).thenReturn(Arrays.asList(new Country(), new Country()));
