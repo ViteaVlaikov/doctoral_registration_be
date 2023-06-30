@@ -29,11 +29,4 @@ public class ScienceDomainController {
     public ResponseEntity<List<ScienceDomainDto>> findAllBySchoolsId(@PathVariable Integer id) {
         return ResponseEntity.ok(domainService.findAllByScienceSchoolId(id));
     }
-
-
-    @GetMapping("/schools/{id}/{year}")
-    public List<ScienceDomainDto> findAllByScienceSchoolIdAndYear(
-            @PathVariable Integer id, @PathVariable Integer year) {
-        return domainService.findAllByScienceSchoolIdAndYear(id, year);
-    }
 }

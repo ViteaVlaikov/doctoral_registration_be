@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import usm.api.doctoral_registration.dto.science.ScienceProfileDto;
-import usm.api.doctoral_registration.model.science.ScienceProfile;
 import usm.api.doctoral_registration.service.science.ScienceProfileService;
 
 import java.util.List;

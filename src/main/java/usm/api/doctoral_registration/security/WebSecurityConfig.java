@@ -29,12 +29,12 @@ public class WebSecurityConfig {
         http = http
                 .exceptionHandling()
                 .authenticationEntryPoint(
-                        (request, response, ex) -> {
-                            response.sendError(
-                                    HttpServletResponse.SC_UNAUTHORIZED,
-                                    ex.getMessage()
-                            );
-                        }
+                        (request, response, ex) ->
+                                response.sendError(
+                                        HttpServletResponse.SC_UNAUTHORIZED,
+                                        ex.getMessage()
+                                )
+
                 )
                 .and();
 
@@ -43,7 +43,6 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
-        ;
 
         // Add JWT token filter
         http.addFilterBefore(
@@ -52,4 +51,6 @@ public class WebSecurityConfig {
         );
         return http.build();
     }
+
 }
+

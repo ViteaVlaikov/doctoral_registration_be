@@ -1,4 +1,4 @@
-package usm.api.doctoral_registration.excel_tools;
+package usm.api.doctoral_registration.tools.excel;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -65,7 +65,7 @@ public class ExcelGenerator {
             row.createCell(5).setCellValue(students.get(i).getYearBirth());
             row.createCell(6).setCellValue(students.get(i).getIdentNumber());
             row.createCell(7).setCellValue(students.get(i).getGender().toString());
-            row.createCell(8).setCellValue(students.get(i).getCitizenship().getCountry());
+            row.createCell(8).setCellValue(students.get(i).getCitizenship().getName());
             row.createCell(9).setCellValue(students.get(i).getDiplomaSeries());
             row.createCell(10).setCellValue(students.get(i).getDiplomaNumber());
             row.createCell(11).setCellValue(students.get(i).getPersonalEmail());

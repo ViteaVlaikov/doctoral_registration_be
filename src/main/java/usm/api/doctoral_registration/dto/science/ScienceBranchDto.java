@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
-import usm.api.doctoral_registration.model.science.ScienceDomain;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -16,9 +15,13 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class ScienceBranchDto implements Serializable {
+
     private Integer id;
+
     private String name;
+
     private Integer scienceDomainId;
+
     @ToString.Exclude
     private Set<ScienceProfileDto> scienceProfiles;
 }

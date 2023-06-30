@@ -1,24 +1,19 @@
 package usm.api.doctoral_registration.model.country;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import usm.api.doctoral_registration.model.student.Student;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Data
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "country")
-public class Country {
+public class Country implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "country_seq")
@@ -26,8 +21,8 @@ public class Country {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "country")
-    private String country;
+    @Column(name = "name")
+    private String name;
 
     @OneToMany(mappedBy = "citizenship")
     private List<Student> student;

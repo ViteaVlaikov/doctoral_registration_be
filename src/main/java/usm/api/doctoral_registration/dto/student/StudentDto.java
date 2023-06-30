@@ -1,10 +1,6 @@
 package usm.api.doctoral_registration.dto.student;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import usm.api.doctoral_registration.dto.country.CountryDto;
 import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
 import usm.api.doctoral_registration.model.student.properties.Gender;
@@ -18,9 +14,8 @@ import java.util.Set;
  * A DTO for the {@link usm.api.doctoral_registration.model.student.Student} entity
  */
 
-@Getter
-@Setter
-@ToString
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StudentDto {
@@ -47,7 +42,10 @@ public class StudentDto {
 
     @Getter
     @Setter
+    @Builder
+    @ToString
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class SpecialityDto {
         private Float id;
 
