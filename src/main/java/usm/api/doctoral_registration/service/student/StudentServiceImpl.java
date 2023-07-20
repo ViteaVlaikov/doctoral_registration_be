@@ -24,6 +24,8 @@ import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
 
 import java.util.*;
 
+import static usm.api.doctoral_registration.repository.student.StudentRepository.byFieldValues;
+
 @Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
@@ -113,6 +115,10 @@ public class StudentServiceImpl implements StudentService {
         List<Map<String, String>> maps = divideMap(new HashMap<>(parameters));
         System.out.println(maps);
 //        System.out.println(combinations);
+        maps.forEach(m->{
+            System.out.println(studentRepository.findAll(byFieldValues(m)));
+        });
+
         return Collections.emptyList();
     }
 

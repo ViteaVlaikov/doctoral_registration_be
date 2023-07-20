@@ -13,20 +13,18 @@ import usm.api.doctoral_registration.dto.supervisor.SupervisorDto;
 import usm.api.doctoral_registration.exception.request.UnExpectedFieldInRequestException;
 import usm.api.doctoral_registration.exception.request.UnexpectedIdForUpdateRequestException;
 import usm.api.doctoral_registration.mapper.student.StudentMapper;
-import usm.api.doctoral_registration.mapper.student.StudentMapperImpl;
 import usm.api.doctoral_registration.model.country.Country;
 import usm.api.doctoral_registration.model.science.Speciality;
 import usm.api.doctoral_registration.model.student.Student;
 import usm.api.doctoral_registration.model.student.properties.Financing;
+import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.model.student.properties.Status;
 import usm.api.doctoral_registration.model.student.properties.YearStudy;
 import usm.api.doctoral_registration.model.supervisor.Supervisor;
 import usm.api.doctoral_registration.repository.country.CountryRepository;
 import usm.api.doctoral_registration.repository.science.SpecialityRepository;
-import usm.api.doctoral_registration.model.student.properties.Gender;
 import usm.api.doctoral_registration.repository.student.StudentRepository;
 import usm.api.doctoral_registration.repository.supervisor.SupervisorRepository;
-import usm.api.doctoral_registration.util.string.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,9 +32,8 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static usm.api.doctoral_registration.util.string.StringUtils.*;
 import static usm.api.doctoral_registration.util.test.TestUtils.*;
-
+import static usm.api.doctoral_registration.util.string.StringUtils.ClassField;
 @ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 public class StudentServiceTest {
@@ -64,21 +61,21 @@ public class StudentServiceTest {
     private final Student student = STUDENT_FOR_SAVING_1;
     private final StudentDto studentDto = STUDENT_DTO_1_FULL;
 
-    private final List<StudentDto> studentDtos = Arrays.asList(STUDENT_DTO_1_FULL,STUDENT_DTO_2_FULL,STUDENT_DTO_3_FULL);
+    private final List<StudentDto> studentDtoList = Arrays.asList(STUDENT_DTO_1_FULL, STUDENT_DTO_2_FULL, STUDENT_DTO_3_FULL);
 
     @Test
-    public void testGenerateCrossTab(){
+    public void testGenerateCrossTab() {
         Map<String, String> parameters = new HashMap<>();
-        parameters.put(StringUtils.STATUS, Status.ACTIVE.name());
-        parameters.put(StringUtils.FINANCING, Financing.BUDGET.name());
-        parameters.put(StringUtils.GENDER, Gender.M + "," + Gender.F);
+        parameters.put(ClassField.STATUS, Status.ACTIVE.name());
+        parameters.put(ClassField.FINANCING, Financing.BUDGET.name());
+        parameters.put(ClassField.GENDER, Gender.M + "," + Gender.F);
 
         List<StudentDto> expected = Collections.singletonList(studentDto);
 
         when(studentRepository.findAll(any(Specification.class))).thenReturn(students);
-        when(studentMapper.toDto(students.get(0))).thenReturn(studentDtos.get(0));
-        when(studentMapper.toDto(students.get(1))).thenReturn(studentDtos.get(1));
-        when(studentMapper.toDto(students.get(2))).thenReturn(studentDtos.get(2));
+        when(studentMapper.toDto(students.get(0))).thenReturn(studentDtoList.get(0));
+        when(studentMapper.toDto(students.get(1))).thenReturn(studentDtoList.get(1));
+        when(studentMapper.toDto(students.get(2))).thenReturn(studentDtoList.get(2));
 
         List<CrossTab.Item> crossTab = studentService.createCrossTab(parameters);
     }
